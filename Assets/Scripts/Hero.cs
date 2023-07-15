@@ -53,6 +53,7 @@ public class Hero : MonoBehaviour
 
     private bool IsGrounded()
     {
+        if (_groundChecker == null) return true;
         return _groundChecker.IsTouchingGround();
     }
 
