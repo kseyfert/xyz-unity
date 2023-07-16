@@ -131,8 +131,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6165598}
   - component: {fileID: 6165597}
+  - component: {fileID: 6165600}
+  - component: {fileID: 6165599}
   m_Layer: 0
-  m_Name: __floor
+  m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,7 +150,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 3.9183588, y: 0}
@@ -178,6 +180,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6165599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6165596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89a78dde38028456986f9a6de91712b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6165600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6165596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9855af8eea50443f5be01ecfbb863d9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: Player
+  action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6165599}
+        m_MethodName: Reload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9412824
 GameObject:
   m_ObjectHideFlags: 0
@@ -1954,7 +1995,7 @@ GameObject:
   - component: {fileID: 474998450}
   m_Layer: 0
   m_Name: Hero_0
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2018,7 +2059,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474998443}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.359, y: -0.76, z: 0}
+  m_LocalPosition: {x: -3.359, y: -0.82340974, z: 0}
   m_LocalScale: {x: 1.4270111, y: 1.4270111, z: 1.4270111}
   m_Children:
   - {fileID: 1486732987}
@@ -5172,7 +5213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4b8deb9c5f247d5bdc8a067e0ce8e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLayer:
+  layerMask:
     serializedVersion: 2
     m_Bits: 256
 --- !u!1 &1543959941
