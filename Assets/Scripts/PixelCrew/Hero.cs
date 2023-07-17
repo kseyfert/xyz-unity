@@ -13,7 +13,8 @@ namespace PixelCrew
         [SerializeField] private float jumpForce = 1;
         [SerializeField] private float jumpCoolDown = 0.5f;
 
-        [Header("Debug")] [SerializeField] private bool debugEnabled = true;
+        [Header("Debug")] 
+        [SerializeField] private bool debugEnabled = true;
         [SerializeField] private float debugSphereRadius;
         [SerializeField] private Vector3 debugSpherePosition;
 
