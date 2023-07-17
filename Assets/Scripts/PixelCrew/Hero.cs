@@ -6,9 +6,11 @@ namespace PixelCrew
 {
     public class Hero : MonoBehaviour
     {
-        [Header("Movement")] [SerializeField] private float speed = 1;
+        [Header("Movement")] 
+        [SerializeField] private float speed = 1;
 
-        [Header("Jump")] [SerializeField] private float jumpForce = 1;
+        [Header("Jump")] 
+        [SerializeField] private float jumpForce = 1;
         [SerializeField] private float jumpCoolDown = 0.5f;
 
         [Header("Debug")] [SerializeField] private bool debugEnabled = true;
@@ -55,7 +57,7 @@ namespace PixelCrew
         private bool IsGrounded()
         {
             if (_groundChecker == null) return true;
-            return _groundChecker.IsTouchingLayer();
+            return _groundChecker.IsTouchingLayer() && _rb.velocity.y <= 0;
         }
 
         private void OnDrawGizmos()
