@@ -12,10 +12,16 @@ namespace PixelCrew
             _hero = GetComponent<Hero>();
         }
 
-        private void OnMovement(InputValue value)
+        public void OnMovement(InputAction.CallbackContext context)
         {
-            var direction = value.Get<Vector2>();
+            var direction = context.ReadValue<Vector2>();
             _hero.SetDirection(direction);
+        }
+
+        public void OnJump(InputAction.CallbackContext context)
+        {
+            if (context.started || context.performed) _hero.SetJump(true);
+            if (context.canceled) _hero.SetJump(false);
         }
     }
 }

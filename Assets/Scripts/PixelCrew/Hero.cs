@@ -21,15 +21,23 @@ namespace PixelCrew
         private Vector3 _direction;
         private Rigidbody2D _rb;
         private LayerChecker _groundChecker;
+        private bool _doJump;
+        private bool _didJump;
 
         public void SetDirection(float directionX)
         {
-            SetDirection(new Vector2(directionX, 0));
+            _direction = new Vector3(Math.Sign(directionX), 0, 0);
         }
 
         public void SetDirection(Vector2 direction)
         {
-            _direction = new Vector3(Math.Sign(direction.x), Math.Sign(direction.y), 0);
+            SetDirection(direction.x);
+        }
+
+        public void SetJump(bool value)
+        {
+            _doJump = value;
+            if (value) _didJump = false;
         }
 
         private void Awake()
@@ -43,13 +51,12 @@ namespace PixelCrew
             var velocity = _direction * speed;
             _rb.velocity = new Vector2(velocity.x, _rb.velocity.y);
 
-            var isJumpPressed = _direction.y > 0;
-            if (isJumpPressed && IsGrounded())
+            if (_doJump && !_didJump && IsGrounded())
             {
+                _rb.velocity = new Vector2(_rb.velocity.x, 0);
                 _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            }
-
-            if (!isJumpPressed && _rb.velocity.y > 0)
+                _didJump = true;
+            } else if (!_doJump && _didJump && _rb.velocity.y > 0)
             {
                 _rb.velocity = new Vector2(_rb.velocity.x, _rb.velocity.y * jumpCoolDown);
             }
@@ -58,7 +65,7 @@ namespace PixelCrew
         private bool IsGrounded()
         {
             if (_groundChecker == null) return true;
-            return _groundChecker.IsTouchingLayer() && _rb.velocity.y <= 0;
+            return _groundChecker.IsTouchingLayer();
         }
 
         private void OnDrawGizmos()
