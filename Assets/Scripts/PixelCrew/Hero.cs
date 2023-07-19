@@ -1,5 +1,6 @@
 ﻿using System;
 using PixelCrew.Components;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace PixelCrew
@@ -52,6 +53,7 @@ namespace PixelCrew
         {
             var velocity = _direction * speed;
             _rb.velocity = new Vector2(velocity.x, _rb.velocity.y);
+            transform.rotation = Quaternion.Euler(0, velocity.x > 0 ? 0 : 180, 0);
 
             if (_doJump && !_didJump && IsGrounded())
             {
