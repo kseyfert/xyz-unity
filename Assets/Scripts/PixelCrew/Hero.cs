@@ -53,7 +53,8 @@ namespace PixelCrew
         {
             var velocity = _direction * speed;
             _rb.velocity = new Vector2(velocity.x, _rb.velocity.y);
-            transform.rotation = Quaternion.Euler(0, velocity.x > 0 ? 0 : 180, 0);
+            if (velocity.x > 0) transform.rotation = Quaternion.Euler(0, 0, 0);
+            if (velocity.x < 0) transform.rotation = Quaternion.Euler(0, 180, 0);
 
             if (_doJump && !_didJump && IsGrounded())
             {
