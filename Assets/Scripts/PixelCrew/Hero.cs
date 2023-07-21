@@ -1,6 +1,5 @@
 ﻿using System;
 using PixelCrew.Components;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace PixelCrew
@@ -19,9 +18,14 @@ namespace PixelCrew
         [SerializeField] private float debugSphereRadius;
         [SerializeField] private Vector3 debugSpherePosition;
 
+        private static readonly int _keyVelocityX = Animator.StringToHash("velocity-x");
+        private static readonly int _keyVelocityY = Animator.StringToHash("velocity-y");
+        private static readonly int _keyIsGrounded = Animator.StringToHash("is-grounded");
+        
         private Vector3 _direction;
         private Rigidbody2D _rb;
         private LayerChecker _groundChecker;
+        private Animator _animator;
         private bool _doJump;
         private bool _didJump;
 
@@ -47,6 +51,7 @@ namespace PixelCrew
         {
             _rb = GetComponent<Rigidbody2D>();
             _groundChecker = GetComponentInChildren<LayerChecker>();
+            _animator = GetComponent<Animator>();
         }
 
         private void FixedUpdate()
@@ -56,7 +61,8 @@ namespace PixelCrew
             if (velocity.x > 0) transform.rotation = Quaternion.Euler(0, 0, 0);
             if (velocity.x < 0) transform.rotation = Quaternion.Euler(0, 180, 0);
 
-            if (_doJump && !_didJump && IsGrounded())
+            var isGrounded = IsGrounded();
+            if (_doJump && !_didJump && isGrounded)
             {
                 _rb.velocity = new Vector2(_rb.velocity.x, 0);
                 _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -65,6 +71,10 @@ namespace PixelCrew
             {
                 _rb.velocity = new Vector2(_rb.velocity.x, _rb.velocity.y * jumpCoolDown);
             }
+            
+            _animator.SetBool(_keyIsGrounded, isGrounded);
+            _animator.SetFloat(_keyVelocityX, _rb.velocity.x);
+            _animator.SetFloat(_keyVelocityY, _rb.velocity.y);
         }
 
         private bool IsGrounded()
