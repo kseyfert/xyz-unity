@@ -18,9 +18,9 @@ namespace PixelCrew
         [SerializeField] private float debugSphereRadius;
         [SerializeField] private Vector3 debugSpherePosition;
 
-        private static readonly int _keyVelocityX = Animator.StringToHash("velocity-x");
-        private static readonly int _keyVelocityY = Animator.StringToHash("velocity-y");
         private static readonly int _keyIsGrounded = Animator.StringToHash("is-grounded");
+        private static readonly int _keyIsRunning = Animator.StringToHash("is-running");
+        private static readonly int _keyVelocityY = Animator.StringToHash("velocity-y");
         
         private Vector3 _direction;
         private Rigidbody2D _rb;
@@ -73,7 +73,7 @@ namespace PixelCrew
             }
             
             _animator.SetBool(_keyIsGrounded, isGrounded);
-            _animator.SetFloat(_keyVelocityX, _rb.velocity.x);
+            _animator.SetBool(_keyIsRunning, _rb.velocity.x != 0);
             _animator.SetFloat(_keyVelocityY, _rb.velocity.y);
         }
 
