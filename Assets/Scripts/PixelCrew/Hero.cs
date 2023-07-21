@@ -29,8 +29,6 @@ namespace PixelCrew
         private bool _doJump;
         private bool _didJump;
 
-        private int _coins = 0;
-
         public void SetDirection(float directionX)
         {
             _direction = new Vector3(Math.Sign(directionX), 0, 0);
@@ -90,12 +88,6 @@ namespace PixelCrew
                 Gizmos.color = IsGrounded() ? Color.green : Color.red;
                 Gizmos.DrawSphere(transform.position + debugSpherePosition, debugSphereRadius);
             }
-        }
-
-        public void AddCoin(int value=1)
-        {
-            _coins += value;
-            Debug.Log($"Money: {_coins}");
         }
     }
 }
