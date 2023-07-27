@@ -13,6 +13,7 @@ namespace PixelCrew.Hero
         [SerializeField] private float jumpSpeed = 14;
         [SerializeField] private float jumpCooldown = 0.5f;
         [SerializeField] private bool debugEnabled = true;
+        [SerializeField] private bool infiniteJumpAllowed = false;
 
         private Rigidbody2D _rb;
         private Transform _transform;
@@ -73,7 +74,6 @@ namespace PixelCrew.Hero
             var velocityY = _rb.velocity.y;
 
             var isGrounded = IsGrounded();
-            var isFallingDown = velocityY < 0 && !isGrounded;
             var isGoingUp = velocityY > 0 && !isGrounded;
 
             if (isGrounded)
@@ -83,7 +83,7 @@ namespace PixelCrew.Hero
             }
             
             var canJump = isGrounded;
-            var canDoubleJump = !isGrounded && !_isDoubleJumpStarted;
+            var canDoubleJump = infiniteJumpAllowed || !isGrounded && !_isDoubleJumpStarted;
 
             if (_isJumpRequested)
             {
@@ -133,6 +133,11 @@ namespace PixelCrew.Hero
         public bool IsDoubleJumping()
         {
             return _isDoubleJumpStarted;
+        }
+
+        public void AllowInfiniteJump()
+        {
+            infiniteJumpAllowed = true;
         }
         
         private void OnDrawGizmos()
