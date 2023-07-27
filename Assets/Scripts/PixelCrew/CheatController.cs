@@ -7,19 +7,11 @@ namespace PixelCrew
 {
     public class CheatController : MonoBehaviour
     {
-        [Serializable]
-        internal struct Cheat
-        {
-            [SerializeField] public string name;
-            [SerializeField] public string code;
-            [SerializeField] public UnityEvent action;
-        }
-        
         [SerializeField] private float inputLifetime = 2;
         [SerializeField] private Cheat[] cheats;
 
-        private string _currentInput;
-        private float _inputTimer;
+        private string _currentInput = "";
+        private float _inputTimer = 0;
 
         private void Awake()
         {
@@ -46,6 +38,9 @@ namespace PixelCrew
 
             foreach (Cheat cheat in cheats)
             {
+                if (cheat == null) continue;
+                if (cheat.code == "") continue;
+                
                 if (_currentInput.Contains(cheat.code.ToLower()))
                 {
                     cheat.action?.Invoke();
@@ -53,5 +48,13 @@ namespace PixelCrew
                 }
             }
         }
+    }
+
+    [Serializable]
+    public class Cheat
+    {
+        [SerializeField] public string name;
+        [SerializeField] public string code;
+        [SerializeField] public UnityEvent action;
     }
 }
