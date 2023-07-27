@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 
-public class CoinsController : MonoBehaviour
+namespace PixelCrew
 {
-    [SerializeField] private static int amount = 0;
-
-    public void AddAmount(int value)
+    public class CoinsController : MonoBehaviour
     {
-        amount += value;
-        Debug.Log($"Money: {amount}");
+        [SerializeField] private static int amount = 0;
+
+        public void AddAmount(int value)
+        {
+            amount += value;
+            Debug.Log($"Money: {amount}");
+        }
     }
 }
