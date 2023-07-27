@@ -124,6 +124,16 @@ namespace PixelCrew.Hero
         {
             return groundChecker.IsTouchingLayer();
         }
+
+        public bool IsJumping()
+        {
+            return _isJumpStarted;
+        }
+
+        public bool IsDoubleJumping()
+        {
+            return _isDoubleJumpStarted;
+        }
         
         private void OnDrawGizmos()
         {
