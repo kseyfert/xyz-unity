@@ -14,15 +14,23 @@ namespace PixelCrew.Hero
         [SerializeField] private float jumpCooldown = 0.5f;
         [SerializeField] private bool debugEnabled = true;
         [SerializeField] private bool infiniteJumpAllowed = false;
+        [SerializeField] private float kickbackPower = 3;
+        [SerializeField] private float kickbackFrozenTime = 1;
 
         private Rigidbody2D _rb;
         private Transform _transform;
+
+        private int _lookingSide = 1;
 
         private bool _isJumpRequested = false;
         private bool _isJumpCancelled = false;
         
         private bool _isJumpStarted = false;
         private bool _isDoubleJumpStarted = false;
+
+        private bool _isKickbackRequested = false;
+
+        private float _frozenTimer = 0;
 
         private Vector2 _direction;
 
@@ -34,13 +42,31 @@ namespace PixelCrew.Hero
 
         private void FixedUpdate()
         {
+            if (Time.time < _frozenTimer) return;
+            
             var velocityX = CalculateX();
             var velocityY = CalculateY();
-
-            _rb.velocity = new Vector2(velocityX, velocityY);
             
-            if (velocityX > 0) _transform.rotation = Quaternion.Euler(0, 0, 0);
-            if (velocityX < 0) _transform.rotation = Quaternion.Euler(0, 180, 0);
+            _rb.velocity = new Vector2(velocityX, velocityY);
+
+            if (_isKickbackRequested)
+            {
+                _frozenTimer = Time.time + kickbackFrozenTime;
+                _isKickbackRequested = false;
+                return;
+            }
+
+            if (velocityX > 0)
+            {
+                _transform.rotation = Quaternion.Euler(0, 0, 0);
+                _lookingSide = 1;
+            }
+
+            if (velocityX < 0)
+            {
+                _transform.rotation = Quaternion.Euler(0, 180, 0);
+                _lookingSide = -1;
+            }
         }
 
         public void SetDirection(float directionX)
@@ -71,6 +97,10 @@ namespace PixelCrew.Hero
 
         private float CalculateY()
         {
+            if (_isKickbackRequested)
+            {
+                return kickbackPower;
+            }
             var velocityY = _rb.velocity.y;
 
             var isGrounded = IsGrounded();
@@ -117,6 +147,10 @@ namespace PixelCrew.Hero
 
         private float CalculateX()
         {
+            if (_isKickbackRequested)
+            {
+                return -1 * _lookingSide * kickbackPower;
+            }
             return _direction.x * speed;
         }
 
@@ -138,6 +172,11 @@ namespace PixelCrew.Hero
         public void AllowInfiniteJump()
         {
             infiniteJumpAllowed = true;
+        }
+
+        public void Kickback()
+        {
+            _isKickbackRequested = true;
         }
         
         private void OnDrawGizmos()

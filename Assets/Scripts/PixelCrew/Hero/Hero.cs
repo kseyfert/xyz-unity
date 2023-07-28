@@ -1,15 +1,18 @@
-﻿using UnityEngine;
+﻿using PixelCrew.Components;
+using UnityEngine;
 
 namespace PixelCrew.Hero
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(HealthComponent))]
     public class Hero : MonoBehaviour
     {
         private static readonly int KeyIsGrounded = Animator.StringToHash("is-grounded");
         private static readonly int KeyIsRunning = Animator.StringToHash("is-running");
         private static readonly int KeyVelocityY = Animator.StringToHash("velocity-y");
         private static readonly int KeyIsDoubleJumping = Animator.StringToHash("is-double-jumping");
+        private static readonly int KeyHit = Animator.StringToHash("hit");
 
         private MovementController _movementController;
         private Rigidbody2D _rb;
@@ -32,6 +35,12 @@ namespace PixelCrew.Hero
             _animator.SetBool(KeyIsRunning, _rb.velocity.x != 0);
             _animator.SetFloat(KeyVelocityY, _rb.velocity.y);
             _animator.SetBool(KeyIsDoubleJumping, isDoubleJumping);
+        }
+
+        public void OnDamage()
+        {
+            _animator.SetTrigger(KeyHit);
+            _movementController.Kickback();
         }
     }
 }

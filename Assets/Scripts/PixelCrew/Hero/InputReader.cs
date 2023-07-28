@@ -1,22 +1,29 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace PixelCrew.Hero
 {
     public class InputReader : MonoBehaviour
     {
-        [SerializeField] private MovementController controller;
+        [SerializeField] private MovementController movementController;
+        [SerializeField] private InteractionController interactionController;
 
         public void OnMovement(InputAction.CallbackContext context)
         {
             var direction = context.ReadValue<Vector2>();
-            controller.SetDirection(direction);
+            movementController.SetDirection(direction);
         }
 
         public void OnJump(InputAction.CallbackContext context)
         {
-            if (context.started) controller.SetJump(true);
-            if (context.canceled) controller.SetJump(false);
+            if (context.started) movementController.SetJump(true);
+            if (context.canceled) movementController.SetJump(false);
+        }
+
+        public void OnInteract(InputAction.CallbackContext context)
+        {
+            if (context.canceled) interactionController.Interact();
         }
     }
 }

@@ -1,24 +1,24 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace PixelCrew.Components
 {
     [RequireComponent(typeof(Collider2D))]
-    public class EnterTrigger : MonoBehaviour
+    public class EnterCollision : MonoBehaviour
     {
         [SerializeField] private string targetTag;
-        [SerializeField] private TriggerEvent action;
+        [SerializeField] private CollisionEvent action;
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnCollisionEnter2D(Collision2D other)
         {
             if (other.gameObject.CompareTag(targetTag))
             {
                 action?.Invoke(other.gameObject);
             }
         }
-
+        
         [Serializable]
-        private class TriggerEvent : UnityEvent<GameObject> {}
+        private class CollisionEvent : UnityEvent<GameObject> {}
     }
 }

@@ -48,13 +48,13 @@ namespace PixelCrew
                 }
             }
         }
-    }
-
-    [Serializable]
-    public class Cheat
-    {
-        [SerializeField] public string name;
-        [SerializeField] public string code;
-        [SerializeField] public UnityEvent action;
+        
+        [Serializable]
+        private class Cheat
+        {
+            [SerializeField] public string name;
+            [SerializeField] public string code;
+            [SerializeField] public UnityEvent action;
+        }
     }
 }
