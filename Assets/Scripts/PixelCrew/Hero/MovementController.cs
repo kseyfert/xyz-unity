@@ -16,6 +16,8 @@ namespace PixelCrew.Hero
         [SerializeField] private bool infiniteJumpAllowed = false;
         [SerializeField] private float kickbackPower = 3;
         [SerializeField] private float kickbackFrozenTime = 1;
+        [SerializeField] private float longFallVelocity = 15;
+        [SerializeField] private float longFallFrozenTime = 0.3f;
 
         private Rigidbody2D _rb;
         private Transform _transform;
@@ -34,6 +36,8 @@ namespace PixelCrew.Hero
 
         private Vector2 _direction;
 
+        private bool _wasGrounded = true;
+
         private void Awake()
         {
             _rb = hero.GetComponent<Rigidbody2D>();
@@ -43,6 +47,14 @@ namespace PixelCrew.Hero
         private void FixedUpdate()
         {
             if (Time.time < _frozenTimer) return;
+
+            var isGrounded = IsGrounded();
+            if (!_wasGrounded && isGrounded)
+            {
+                OnGrounded();
+            }
+
+            _wasGrounded = isGrounded;
             
             var velocityX = CalculateX();
             var velocityY = CalculateY();
@@ -123,12 +135,12 @@ namespace PixelCrew.Hero
                 {
                     velocityY = jumpSpeed;
                     _isJumpStarted = true;
-                }
-
-                if (canDoubleJump)
+                    OnJumpStarted();
+                } else if (canDoubleJump)
                 {
                     velocityY = jumpSpeed;
                     _isDoubleJumpStarted = true;
+                    OnJumpStarted();
                 }
             }
 
@@ -177,6 +189,21 @@ namespace PixelCrew.Hero
         public void Kickback()
         {
             _isKickbackRequested = true;
+        }
+
+        private void OnJumpStarted()
+        {
+            hero.SpawnJumpDust();
+        }
+
+        private void OnGrounded()
+        {
+            var velocity = _rb.velocity.magnitude;
+            if (velocity >= longFallVelocity)
+            {
+                _frozenTimer = Time.time + longFallFrozenTime;
+                hero.SpawnFallDust();
+            }
         }
         
         private void OnDrawGizmos()

@@ -14,6 +14,10 @@ namespace PixelCrew.Hero
         private static readonly int KeyIsDoubleJumping = Animator.StringToHash("is-double-jumping");
         private static readonly int KeyHit = Animator.StringToHash("hit");
 
+        [SerializeField] private SpawnComponent runDustSpawn;
+        [SerializeField] private SpawnComponent jumpDustSpawn;
+        [SerializeField] private SpawnComponent fallDustSpawn;
+
         private MovementController _movementController;
         private Rigidbody2D _rb;
         private Animator _animator;
@@ -41,6 +45,21 @@ namespace PixelCrew.Hero
         {
             _animator.SetTrigger(KeyHit);
             _movementController.Kickback();
+        }
+
+        public void SpawnRunDust()
+        {
+            runDustSpawn.Spawn();
+        }
+
+        public void SpawnJumpDust()
+        {
+            jumpDustSpawn.Spawn();
+        }
+
+        public void SpawnFallDust()
+        {
+            fallDustSpawn.Spawn();
         }
     }
 }
