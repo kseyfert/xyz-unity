@@ -1,5 +1,7 @@
-﻿using PixelCrew.Components;
+﻿using System;
+using PixelCrew.Components;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PixelCrew.Hero
 {
@@ -36,7 +38,7 @@ namespace PixelCrew.Hero
             var isDoubleJumping = _movementController.IsDoubleJumping();
             
             _animator.SetBool(KeyIsGrounded, isGrounded);
-            _animator.SetBool(KeyIsRunning, _rb.velocity.x != 0);
+            _animator.SetBool(KeyIsRunning, Math.Abs(_rb.velocity.x) > 0.01f);
             _animator.SetFloat(KeyVelocityY, _rb.velocity.y);
             _animator.SetBool(KeyIsDoubleJumping, isDoubleJumping);
         }
@@ -60,6 +62,15 @@ namespace PixelCrew.Hero
         public void SpawnFallDust()
         {
             fallDustSpawn.Spawn();
+        }
+
+        public void Freeze()
+        {
+            _movementController.Freeze(100);
+        }
+        public void Unfreeze()
+        {
+            _movementController.Unfreeze();
         }
     }
 }

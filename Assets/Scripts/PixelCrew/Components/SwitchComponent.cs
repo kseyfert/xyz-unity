@@ -15,6 +15,16 @@ namespace PixelCrew.Components
             if (animator != null && key != null) animator.SetBool(key, state);
         }
 
+        public bool IsSwitched()
+        {
+            return state;
+        }
+
+        public void SetSwitched(bool v)
+        {
+            if (v != state) Switch();
+        }
+
         [ContextMenu("Switch")]
         public void SwitchIt()
         {

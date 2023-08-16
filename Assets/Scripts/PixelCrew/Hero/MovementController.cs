@@ -13,6 +13,7 @@ namespace PixelCrew.Hero
         [SerializeField] private float jumpSpeed = 14;
         [SerializeField] private float jumpCooldown = 0.5f;
         [SerializeField] private bool debugEnabled = true;
+        [SerializeField] private bool doubleJumpAllowed = false;
         [SerializeField] private bool infiniteJumpAllowed = false;
         [SerializeField] private float kickbackPower = 3;
         [SerializeField] private float kickbackFrozenTime = 1;
@@ -23,6 +24,7 @@ namespace PixelCrew.Hero
         private Transform _transform;
 
         private int _lookingSide = 1;
+        private int _normalSide = 1;
 
         private bool _isJumpRequested = false;
         private bool _isJumpCancelled = false;
@@ -31,6 +33,7 @@ namespace PixelCrew.Hero
         private bool _isDoubleJumpStarted = false;
 
         private bool _isKickbackRequested = false;
+        private bool _isKickbackNow = false;
 
         private float _frozenTimer = 0;
 
@@ -47,6 +50,7 @@ namespace PixelCrew.Hero
         private void FixedUpdate()
         {
             if (Time.time < _frozenTimer) return;
+            _isKickbackNow = false;
 
             var isGrounded = IsGrounded();
             if (!_wasGrounded && isGrounded)
@@ -65,20 +69,26 @@ namespace PixelCrew.Hero
             {
                 _frozenTimer = Time.time + kickbackFrozenTime;
                 _isKickbackRequested = false;
+                _isKickbackNow = true;
                 return;
             }
 
             if (velocityX > 0)
             {
-                _transform.rotation = Quaternion.Euler(0, 0, 0);
                 _lookingSide = 1;
             }
 
             if (velocityX < 0)
             {
-                _transform.rotation = Quaternion.Euler(0, 180, 0);
                 _lookingSide = -1;
             }
+
+            var scaleVector = _transform.localScale;
+            
+            scaleVector.x = _lookingSide;
+            scaleVector.y = _normalSide;
+            
+            _transform.localScale = scaleVector;
         }
 
         public void SetDirection(float directionX)
@@ -125,7 +135,7 @@ namespace PixelCrew.Hero
             }
             
             var canJump = isGrounded;
-            var canDoubleJump = infiniteJumpAllowed || !isGrounded && !_isDoubleJumpStarted;
+            var canDoubleJump = infiniteJumpAllowed || doubleJumpAllowed && !isGrounded && !_isDoubleJumpStarted;
 
             if (_isJumpRequested)
             {
@@ -188,7 +198,7 @@ namespace PixelCrew.Hero
 
         public void Kickback()
         {
-            _isKickbackRequested = true;
+            if (!_isKickbackNow) _isKickbackRequested = true;
         }
 
         private void OnJumpStarted()
@@ -204,6 +214,28 @@ namespace PixelCrew.Hero
                 _frozenTimer = Time.time + longFallFrozenTime;
                 hero.SpawnFallDust();
             }
+        }
+
+        public void Freeze(float time = 1)
+        {
+            _frozenTimer = Time.time + time;
+        }
+
+        public void Unfreeze()
+        {
+            _frozenTimer = Time.time - 100;
+        }
+
+        public void AllowDoubleJump()
+        {
+            doubleJumpAllowed = true;
+        }
+
+        public void Inverse()
+        {
+            _normalSide = -_normalSide;
+            _rb.gravityScale = -_rb.gravityScale;
+            jumpSpeed = -jumpSpeed;
         }
         
         private void OnDrawGizmos()
