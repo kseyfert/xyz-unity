@@ -21,6 +21,7 @@ namespace PixelCrew.Hero
         [SerializeField] private SpawnComponent fallDustSpawn;
 
         private MovementController _movementController;
+        private AttackController _attackController;
         private Rigidbody2D _rb;
         private Animator _animator;
 
@@ -29,6 +30,7 @@ namespace PixelCrew.Hero
             _rb = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
             _movementController = GetComponentInChildren<MovementController>();
+            _attackController = GetComponentInChildren<AttackController>();
         }
 
         private void FixedUpdate()
@@ -62,6 +64,11 @@ namespace PixelCrew.Hero
         public void SpawnFallDust()
         {
             fallDustSpawn.Spawn();
+        }
+
+        public void DoAttack()
+        {
+            _attackController.DoAttack();
         }
 
         public void Freeze()

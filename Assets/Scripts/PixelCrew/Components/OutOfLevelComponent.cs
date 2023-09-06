@@ -33,7 +33,6 @@ namespace PixelCrew.Components
             {
                 if (sceneReloadTags.Any(obj.CompareTag))
                 {
-                    Debug.Log("HI");
                     SceneManager.LoadScene(_scene.name);
                     return;
                 }

@@ -11,17 +11,18 @@ namespace PixelCrew
         [SerializeField] public bool loop;
         [SerializeField] public bool allowNext;
         [SerializeField] public Sprite[] sprites;
+        [SerializeField] public UnityEvent onFinish;
     }
     
     [RequireComponent(typeof(SpriteRenderer))]
     public class SpriteAnimation : MonoBehaviour
     {
         [SerializeField] private Clip[] clips;
-        [SerializeField] private int frameRate = 10;
+        [SerializeField] [Range(1, 30)] private int frameRate = 10;
         [SerializeField] private UnityEvent onComplete;
 
         private SpriteRenderer _spriteRenderer;
-        private bool _active = true;
+        private bool _active;
 
         private float _frameSeconds;
         private float _nextFrameTime;
@@ -30,18 +31,20 @@ namespace PixelCrew
 
         private void Awake()
         {
+            SetActive(true);
+            
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _frameSeconds = 1f / frameRate;
             _nextFrameTime = Time.time + _frameSeconds;
 
             var frame = GetCurrentFrame();
-            if (frame == null) _active = false;
+            if (frame == null) SetActive(false);
             else _spriteRenderer.sprite = frame;
         }
 
         private void Update()
         {
-            if (!_active) return;
+            if (!IsActive()) return;
             if (Time.time < _nextFrameTime) return;
 
             while (Time.time >= _nextFrameTime)
@@ -52,7 +55,7 @@ namespace PixelCrew
 
             _spriteRenderer.sprite = GetCurrentFrame();
             
-            if (!_active) onComplete?.Invoke();
+            if (!IsActive()) onComplete?.Invoke();
         }
 
         private Sprite GetCurrentFrame()
@@ -82,14 +85,19 @@ namespace PixelCrew
                 return;
             }
 
+            UnityEvent onFinish = currentClip.onFinish;
+            
             if (!currentClip.allowNext || isLastClip)
             {
-                _active = false;
+                SetActive(false);
+                onFinish?.Invoke();
                 return;
             }
 
             _currentFrameIndex = 0;
             _currentClipIndex++;
+            
+            onFinish?.Invoke();
         }
 
         public int FindClip(string clipName)
@@ -116,6 +124,17 @@ namespace PixelCrew
         public void SetClip(string clipName)
         {
             SetClip(FindClip(clipName));
+            SetActive(true);
+        }
+
+        public void SetActive(bool value = true)
+        {
+            _active = value;
+        }
+
+        public bool IsActive()
+        {
+            return _active;
         }
     }
 }

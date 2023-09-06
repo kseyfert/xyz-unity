@@ -8,6 +8,7 @@ namespace PixelCrew.Hero
     {
         [SerializeField] private MovementController movementController;
         [SerializeField] private InteractionController interactionController;
+        [SerializeField] private AttackController attackController;
 
         public void OnMovement(InputAction.CallbackContext context)
         {
@@ -24,6 +25,11 @@ namespace PixelCrew.Hero
         public void OnInteract(InputAction.CallbackContext context)
         {
             if (context.canceled) interactionController.Interact();
+        }
+
+        public void OnAttack(InputAction.CallbackContext context)
+        {
+            if (context.canceled) attackController.OnAttack();
         }
     }
 }
