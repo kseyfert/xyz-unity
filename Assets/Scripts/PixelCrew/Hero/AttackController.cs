@@ -10,6 +10,7 @@ namespace PixelCrew.Hero
     {
         private static readonly int KeyAttack = Animator.StringToHash("attack");
 
+        [SerializeField] private SpawnComponent attackParticles;
         [SerializeField] private CheckCircleOverlap attackPosition;
         [SerializeField] private int damagePower = 10;
         [SerializeField] private Animator animator;
@@ -41,6 +42,14 @@ namespace PixelCrew.Hero
                 
                 health.ApplyDamage(damagePower);        
             }
+        }
+
+        public void SpawnParticles()
+        {
+            if (attackParticles == null) return;
+            if (!armed) return;
+            
+            attackParticles.Spawn();
         }
 
         public void Arm()

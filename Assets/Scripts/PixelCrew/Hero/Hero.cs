@@ -71,6 +71,11 @@ namespace PixelCrew.Hero
             _attackController.DoAttack();
         }
 
+        public void SpawnAttackParticles()
+        {
+            _attackController.SpawnParticles();
+        }
+
         public void Freeze()
         {
             _movementController.Freeze(100);
