@@ -7,6 +7,7 @@ namespace PixelCrew.Components
     public class ReplaceableParticleSystem : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
+        [SerializeField] private Transform parent;
 
         private ParticleSystem _particleSystem;
         private List<ParticleCollisionEvent> _collisions;
@@ -24,7 +25,8 @@ namespace PixelCrew.Components
             int num = _particleSystem.GetCollisionEvents(other, _collisions);
             for (var i = 0; i < num; i++)
             {
-                Instantiate(prefab, _collisions[i].intersection, Quaternion.identity);
+                var newObject = Instantiate(prefab, _collisions[i].intersection, Quaternion.identity);
+                newObject.transform.SetParent(parent);
             }
         }
     }

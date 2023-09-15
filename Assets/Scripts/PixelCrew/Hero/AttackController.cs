@@ -1,5 +1,6 @@
 using System;
 using PixelCrew.Components;
+using PixelCrew.Model;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -17,6 +18,28 @@ namespace PixelCrew.Hero
         [SerializeField] private AnimatorController armedController;
         [SerializeField] private AnimatorController unarmedController;
         [SerializeField] private bool armed;
+
+        private GameSession _gameSession;
+
+        public void LinkGameSession(GameSession gameSession)
+        {
+            _gameSession = gameSession;
+            LoadFromSession();
+        }
+
+        private void LoadFromSession()
+        {
+            if (_gameSession == null) return;
+
+            armed = _gameSession.Data.isArmed;
+        }
+
+        private void SaveToSession()
+        {
+            if (_gameSession == null) return;
+
+            _gameSession.Data.isArmed = armed;
+        }
 
         private void Update()
         {
@@ -55,11 +78,13 @@ namespace PixelCrew.Hero
         public void Arm()
         {
             armed = true;
+            SaveToSession();
         }
 
         public void Unarm()
         {
             armed = false;
+            SaveToSession();
         }
 
         public bool IsArmed()

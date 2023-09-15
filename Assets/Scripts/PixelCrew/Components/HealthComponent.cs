@@ -1,4 +1,5 @@
 using System;
+using PixelCrew.Model;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,9 +13,31 @@ namespace PixelCrew.Components
         [SerializeField] private UnityEvent onHeal;
         [SerializeField] private UnityEvent onDie;
 
+        private GameSession _gameSession = null;
+        
         private void Awake()
         {
             currentHealth = maxHealth;
+        }
+
+        public void LinkGameSession(GameSession gameSession)
+        {
+            _gameSession = gameSession;
+            LoadFromSession();
+        }
+
+        private void LoadFromSession()
+        {
+            if (_gameSession == null) return;
+
+            currentHealth = _gameSession.Data.hp;
+        }
+
+        private void SaveToSession()
+        {
+            if (_gameSession == null) return;
+
+            _gameSession.Data.hp = currentHealth;
         }
 
         public void ApplyDamage(int value)
@@ -34,6 +57,8 @@ namespace PixelCrew.Components
             currentHealth += value;
             currentHealth = Math.Min(currentHealth, maxHealth);
             currentHealth = Math.Max(currentHealth, 0);
+            
+            SaveToSession();
 
             if (currentHealth == 0)
             {

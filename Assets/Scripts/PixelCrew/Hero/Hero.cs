@@ -1,5 +1,6 @@
 ﻿using System;
 using PixelCrew.Components;
+using PixelCrew.Model;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,17 +21,32 @@ namespace PixelCrew.Hero
         [SerializeField] private SpawnComponent jumpDustSpawn;
         [SerializeField] private SpawnComponent fallDustSpawn;
 
+        private GameSession _gameSession;
+        
         private MovementController _movementController;
         private AttackController _attackController;
         private Rigidbody2D _rb;
         private Animator _animator;
-
+        private HealthComponent _healthComponent;
+        private InteractionController _interactionController;
+        
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
             _movementController = GetComponentInChildren<MovementController>();
             _attackController = GetComponentInChildren<AttackController>();
+            _healthComponent = GetComponent<HealthComponent>();
+            _interactionController = GetComponentInChildren<InteractionController>();
+        }
+
+        private void Start()
+        {
+            _gameSession = FindObjectOfType<GameSession>();
+            _healthComponent.LinkGameSession(_gameSession);
+            _attackController.LinkGameSession(_gameSession);
+            _movementController.LinkGameSession(_gameSession);
+            _interactionController.LinkGameSession(_gameSession);
         }
 
         private void FixedUpdate()

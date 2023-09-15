@@ -1,5 +1,6 @@
 ﻿using System;
 using PixelCrew.Components;
+using PixelCrew.Model;
 using UnityEngine;
 
 namespace PixelCrew.Hero
@@ -19,6 +20,8 @@ namespace PixelCrew.Hero
         [SerializeField] private float kickbackFrozenTime = 1;
         [SerializeField] private float longFallVelocity = 15;
         [SerializeField] private float longFallFrozenTime = 0.3f;
+
+        private GameSession _gameSession;
 
         private Rigidbody2D _rb;
         private Transform _transform;
@@ -41,6 +44,28 @@ namespace PixelCrew.Hero
 
         private bool _wasGrounded = true;
 
+        public void LinkGameSession(GameSession gameSession)
+        {
+            _gameSession = gameSession;
+            LoadFromSession();
+        }
+
+        private void LoadFromSession()
+        {
+            if (_gameSession == null) return;
+
+            doubleJumpAllowed = _gameSession.Data.isDoubleJumpAllowed;
+            infiniteJumpAllowed = _gameSession.Data.isInfiniteJumpAllowed;
+        }
+
+        private void SaveToSession()
+        {
+            if (_gameSession == null) return;
+
+            _gameSession.Data.isDoubleJumpAllowed = doubleJumpAllowed;
+            _gameSession.Data.isInfiniteJumpAllowed = infiniteJumpAllowed;
+        }
+        
         private void Awake()
         {
             _rb = hero.GetComponent<Rigidbody2D>();
@@ -64,6 +89,7 @@ namespace PixelCrew.Hero
             var velocityY = CalculateY();
             
             _rb.velocity = new Vector2(velocityX, velocityY);
+            SaveToSession();
 
             if (_isKickbackRequested)
             {
@@ -194,6 +220,7 @@ namespace PixelCrew.Hero
         public void AllowInfiniteJump()
         {
             infiniteJumpAllowed = true;
+            SaveToSession();
         }
 
         public void Kickback()
@@ -229,6 +256,7 @@ namespace PixelCrew.Hero
         public void AllowDoubleJump()
         {
             doubleJumpAllowed = true;
+            SaveToSession();
         }
 
         public void Inverse()
