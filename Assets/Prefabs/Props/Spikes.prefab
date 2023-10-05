@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 10510837410082156}
   - component: {fileID: 10510837410082147}
   - component: {fileID: 10510837410082146}
-  - component: {fileID: 4652283332229312698}
   - component: {fileID: 2884883825981987922}
+  - component: {fileID: 5662998150705277666}
   m_Layer: 8
   m_Name: Spikes
   m_TagString: Untagged
@@ -110,7 +110,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.47291136}
   m_EdgeRadius: 0
---- !u!114 &4652283332229312698
+--- !u!114 &2884883825981987922
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,7 +119,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 10510837410082145}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7280c5803584d1b8951967b17ae2797, type: 3}
+  m_Script: {fileID: 11500000, guid: 53ddeafd66b142ab8e2e20b53af26768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: -10
+  onApply:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5662998150705277666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10510837410082145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c955cfbfdce343f19d012078b835cb9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Player
@@ -137,19 +153,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2884883825981987922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 10510837410082145}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53ddeafd66b142ab8e2e20b53af26768, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value: -10
-  onApply:
-    m_PersistentCalls:
-      m_Calls: []

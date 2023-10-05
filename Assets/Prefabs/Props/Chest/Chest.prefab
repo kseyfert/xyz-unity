@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6116642800053302325}
   - component: {fileID: 6116642800053302324}
   - component: {fileID: 6116642800053302323}
-  - component: {fileID: 6116642800053302326}
   - component: {fileID: 6116642800053302327}
+  - component: {fileID: 4125379538814198597}
   m_Layer: 9
   m_Name: Chest
   m_TagString: Untagged
@@ -104,46 +104,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6116642800053302326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6116642800053302322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d3e33854552413286d02b74ea08d496, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  action:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6116642800053302326}
-        m_MethodName: Disable
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6116642800413023915}
-        m_MethodName: Open
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  animator: {fileID: 6116642800053302323}
-  animatorTrigger: active
-  active: 1
 --- !u!61 &6116642800053302327
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -170,6 +130,46 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 1.09375}
   m_EdgeRadius: 0
+--- !u!114 &4125379538814198597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6116642800053302322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b76071950644e3ab49fc2ba5051891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4125379538814198597}
+        m_MethodName: Disable
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4459748537769309574}
+        m_MethodName: RunBurst
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  animator: {fileID: 6116642800053302323}
+  animatorTrigger: active
+  active: 1
 --- !u!1 &6116642800413023912
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,8 +181,7 @@ GameObject:
   - component: {fileID: 6116642800413023913}
   - component: {fileID: 6116642800413023917}
   - component: {fileID: 6116642800413023916}
-  - component: {fileID: 6116642800413023914}
-  - component: {fileID: 6116642800413023915}
+  - component: {fileID: 4459748537769309574}
   m_Layer: 0
   m_Name: CoinsParticle
   m_TagString: Untagged
@@ -4990,7 +4989,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &6116642800413023914
+--- !u!114 &4459748537769309574
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4999,22 +4998,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6116642800413023912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aae7d9feab70046089ae3016f553d40f, type: 3}
+  m_Script: {fileID: 11500000, guid: 443d465d682e4004a5751120ac817d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6116642800413023915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6116642800413023912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66a6ddbe4ec240169c0911fbb9b9c8be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinPrefab: {fileID: 4972060704806230084, guid: 53566a5ec0d574d33862e31ca38d0d9e,
-    type: 3}
-  value: 10
   collisionTimeout: 0
+  prefab: {fileID: 4972060704806230084, guid: 53566a5ec0d574d33862e31ca38d0d9e, type: 3}
+  parent: {fileID: 6116642800413023913}

@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 6360594904670125759}
   - component: {fileID: 4451936020553226847}
   - component: {fileID: 3215245474162032996}
-  - component: {fileID: 3726266350309201173}
   - component: {fileID: 7136856486212466263}
+  - component: {fileID: 3553497702455241120}
   m_Layer: 0
   m_Name: GreenPotion
   m_TagString: Untagged
@@ -111,6 +111,9 @@ MonoBehaviour:
     - {fileID: -512142692958456438, guid: 33b7f8acdb0bc4f5e95f8cd4b6456e24, type: 3}
     - {fileID: 8745225756722806956, guid: 33b7f8acdb0bc4f5e95f8cd4b6456e24, type: 3}
     - {fileID: -7481350877133238684, guid: 33b7f8acdb0bc4f5e95f8cd4b6456e24, type: 3}
+    onFinish:
+      m_PersistentCalls:
+        m_Calls: []
   - name: destroy
     loop: 0
     allowNext: 0
@@ -119,6 +122,9 @@ MonoBehaviour:
     - {fileID: 8167133005111728920, guid: 33b7f8acdb0bc4f5e95f8cd4b6456e24, type: 3}
     - {fileID: 2014349484240403859, guid: 33b7f8acdb0bc4f5e95f8cd4b6456e24, type: 3}
     - {fileID: 6326803469982491369, guid: 33b7f8acdb0bc4f5e95f8cd4b6456e24, type: 3}
+    onFinish:
+      m_PersistentCalls:
+        m_Calls: []
   frameRate: 10
   onComplete:
     m_PersistentCalls:
@@ -163,7 +169,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.05}
   serializedVersion: 2
   m_Radius: 0.23990726
---- !u!114 &3726266350309201173
+--- !u!114 &7136856486212466263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,7 +178,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 2461689495411482384}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9855af8eea50443f5be01ecfbb863d9d, type: 3}
+  m_Script: {fileID: 11500000, guid: 53ddeafd66b142ab8e2e20b53af26768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 5
+  onApply:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3553497702455241120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2461689495411482384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b566bec28f47d58964eb9cd4de8fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Player
@@ -201,19 +223,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7136856486212466263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2461689495411482384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53ddeafd66b142ab8e2e20b53af26768, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value: 5
-  onApply:
-    m_PersistentCalls:
-      m_Calls: []

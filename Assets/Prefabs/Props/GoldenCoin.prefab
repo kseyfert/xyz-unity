@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 4972060704806230089}
   - component: {fileID: 4972060704806230086}
   - component: {fileID: 4972060704806230087}
-  - component: {fileID: 4972060704806230091}
   - component: {fileID: 4972060704806230088}
   - component: {fileID: 4972060704806230090}
-  - component: {fileID: 4972060704806230093}
+  - component: {fileID: 2336772302297579115}
+  - component: {fileID: 3852941196441486606}
   m_Layer: 0
   m_Name: GoldenCoin
   m_TagString: Untagged
@@ -103,55 +103,6 @@ CircleCollider2D:
   m_Offset: {x: 0.016599178, y: 0.014939144}
   serializedVersion: 2
   m_Radius: 0.17198443
---- !u!114 &4972060704806230091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4972060704806230084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9855af8eea50443f5be01ecfbb863d9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetTag: Player
-  action:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4972060704806230090}
-        m_MethodName: SetClip
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: destroy
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4972060704806230087}
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4972060704806230093}
-        m_MethodName: AddAmount
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &4972060704806230088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +137,9 @@ MonoBehaviour:
     - {fileID: 1942777921290549423, guid: 0bb2d312e8b6c4f8980d3f855d8f70f8, type: 3}
     - {fileID: 8793606821965667882, guid: 0bb2d312e8b6c4f8980d3f855d8f70f8, type: 3}
     - {fileID: 3444832735345940322, guid: 0bb2d312e8b6c4f8980d3f855d8f70f8, type: 3}
+    onFinish:
+      m_PersistentCalls:
+        m_Calls: []
   - name: destroy
     loop: 0
     allowNext: 0
@@ -194,6 +148,9 @@ MonoBehaviour:
     - {fileID: 6143208460787649835, guid: 0bb2d312e8b6c4f8980d3f855d8f70f8, type: 3}
     - {fileID: 7609282858266732271, guid: 0bb2d312e8b6c4f8980d3f855d8f70f8, type: 3}
     - {fileID: -6288512792030432889, guid: 0bb2d312e8b6c4f8980d3f855d8f70f8, type: 3}
+    onFinish:
+      m_PersistentCalls:
+        m_Calls: []
   frameRate: 10
   onComplete:
     m_PersistentCalls:
@@ -209,7 +166,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4972060704806230093
+--- !u!114 &2336772302297579115
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -218,6 +175,59 @@ MonoBehaviour:
   m_GameObject: {fileID: 4972060704806230084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aae7d9feab70046089ae3016f553d40f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e80f8b4bf524291b8d56d71a156aed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 10
+  onApply:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3852941196441486606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4972060704806230084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b566bec28f47d58964eb9cd4de8fd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: Player
+  action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4972060704806230090}
+        m_MethodName: SetClip
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: destroy
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4972060704806230087}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2336772302297579115}
+        m_MethodName: Apply
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

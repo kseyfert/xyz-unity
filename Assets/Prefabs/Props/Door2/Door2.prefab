@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 8404990113636070175}
   - component: {fileID: 8404990113636070172}
   - component: {fileID: 2120610908435958473}
-  - component: {fileID: 9190363967709819043}
   - component: {fileID: 8599745743457934675}
   - component: {fileID: 2614873889599478234}
+  - component: {fileID: 7347198881599069948}
   m_Layer: 9
   m_Name: Door2
   m_TagString: Untagged
@@ -104,35 +104,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &9190363967709819043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8404990113636070173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d3e33854552413286d02b74ea08d496, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  action:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8599745743457934675}
-        m_MethodName: Switch
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  animator: {fileID: 0}
-  animatorTrigger: 
-  active: 1
 --- !u!114 &8599745743457934675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,3 +151,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1658859, y: 1.5269203}
   m_EdgeRadius: 0
+--- !u!114 &7347198881599069948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8404990113636070173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b76071950644e3ab49fc2ba5051891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8599745743457934675}
+        m_MethodName: Switch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  animator: {fileID: 0}
+  animatorTrigger: 
+  active: 1
