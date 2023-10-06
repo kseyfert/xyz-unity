@@ -13,6 +13,7 @@ namespace PixelCrew.Creatures.Controllers
         public static readonly int BoolIsGrounded = Animator.StringToHash("is-grounded");
         public static readonly int BoolIsRunning = Animator.StringToHash("is-running");
         public static readonly int BoolIsDoubleJumping = Animator.StringToHash("is-double-jumping");
+        public static readonly int BoolIsDead = Animator.StringToHash("is-dead");
 
         public static readonly int FloatVelocityY = Animator.StringToHash("velocity-y");
 

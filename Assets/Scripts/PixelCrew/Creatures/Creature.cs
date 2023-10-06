@@ -85,6 +85,24 @@ namespace PixelCrew.Creatures
                         animationController.SetTrigger(AnimationController.TriggerHit);
                         movementController.Kickback();
                     };
+                healthController.OnDie += (obj, args) => animationController.SetTrigger(AnimationController.TriggerHit);
+                
+                animationController.SetBoolUpdate(AnimationController.BoolIsDead, () => healthController.GetHealthComponent().IsDead());
+            }
+
+            if (healthController != null && movementController != null)
+            {
+                healthController.OnDie += (obj, args) => movementController.enabled = false;
+            }
+
+            if (healthController != null && attackController != null)
+            {
+                healthController.OnDie += (obj, args) => attackController.enabled = false;
+            }
+
+            if (healthController != null && interactionController != null)
+            {
+                healthController.OnDie += (obj, args) => interactionController.enabled = false;
             }
         }
 

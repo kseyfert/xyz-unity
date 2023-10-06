@@ -24788,15 +24788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910d9bcd688743df9ddb0cb5b819f0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creatures:
-  - id: captain
-    model:
-      coins: 10
-      hp: 20
-      isArmed: 0
-      isDoubleJumpAllowed: 0
-      isInfiniteJumpAllowed: 0
-      lastPositions: []
+  creatures: []
 --- !u!1 &1762993554
 GameObject:
   m_ObjectHideFlags: 0
@@ -78284,6 +78276,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero
       objectReference: {fileID: 0}
+    - target: {fileID: 118745399502611739, guid: dd4dbd8812e99451883416a1e89339a0,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f5761b78ba457421792cc33c7e5f8898, type: 2}
     - target: {fileID: 118745399958086880, guid: dd4dbd8812e99451883416a1e89339a0,
         type: 3}
       propertyPath: maxHealth
@@ -78318,6 +78315,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5592680897174825652, guid: ab67f1dba76c048f7a4e334441dd9ae7,
+        type: 3}
+      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5592680897174825652, guid: ab67f1dba76c048f7a4e334441dd9ae7,
+        type: 3}
+      propertyPath: onDamage.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5592680897174825652, guid: ab67f1dba76c048f7a4e334441dd9ae7,
+        type: 3}
+      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5592680897174825652, guid: ab67f1dba76c048f7a4e334441dd9ae7,
+        type: 3}
+      propertyPath: onDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5592680897174825652, guid: ab67f1dba76c048f7a4e334441dd9ae7,
+        type: 3}
+      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5592680897174825652, guid: ab67f1dba76c048f7a4e334441dd9ae7,
+        type: 3}
+      propertyPath: onDamage.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5592680898816432130, guid: ab67f1dba76c048f7a4e334441dd9ae7,
         type: 3}
       propertyPath: m_RootOrder

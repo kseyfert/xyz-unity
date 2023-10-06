@@ -64,5 +64,10 @@ namespace PixelCrew.Components.Game
             currentHealth = Math.Min(currentHealth, maxHealth);
             currentHealth = Math.Max(currentHealth, 0);
         }
+
+        public bool IsDead()
+        {
+            return currentHealth <= 0;
+        }
     }
 }
