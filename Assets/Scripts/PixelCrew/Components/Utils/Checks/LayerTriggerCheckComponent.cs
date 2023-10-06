@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace PixelCrew.Components.Utils.Checks
 {
+    [RequireComponent(typeof(Collider2D))]
     public class LayerTriggerCheckComponent : MonoBehaviour
     {
         [SerializeField] private LayerMask layerMask;

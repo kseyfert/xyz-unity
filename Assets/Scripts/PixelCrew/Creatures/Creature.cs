@@ -1,5 +1,4 @@
 using System;
-using PixelCrew.Components;
 using PixelCrew.Components.Utils;
 using PixelCrew.Creatures.Controllers;
 using UnityEngine;
@@ -9,6 +8,7 @@ namespace PixelCrew.Creatures
     [RequireComponent(typeof(UniqueIDComponent))]
     [RequireComponent(typeof(Transform))]
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Collider2D))]
     [RequireComponent(typeof(Animator))]
     public class Creature : MonoBehaviour
     {

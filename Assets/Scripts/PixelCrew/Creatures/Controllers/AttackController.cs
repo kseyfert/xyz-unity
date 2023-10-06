@@ -56,7 +56,17 @@ namespace PixelCrew.Creatures.Controllers
             var gos = attackPosition.GetObjectsInRange();
             foreach (GameObject item in gos)
             {
+                var otherCreature = item.GetComponent<Creature>();
+                if (otherCreature == creature) continue;
+                
                 var health = item.GetComponent<HealthComponent>();
+
+                if (otherCreature != null)
+                {
+                    var hc = otherCreature.HealthController;
+                    health = hc.GetHealthComponent();
+                }
+                
                 if (health == null) continue;
                 
                 health.ApplyDamage(damagePower);        

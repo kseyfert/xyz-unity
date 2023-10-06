@@ -15,6 +15,7 @@ namespace PixelCrew.Creatures.Controllers
         [SerializeField] private LayerTriggerCheckComponent groundChecker;
 
         [SerializeField] private float speed = 7;
+        [SerializeField] private float upperSpeedMultiplier = 1;
         [SerializeField] private float jumpSpeed = 14;
         [SerializeField] private float jumpCooldown = 0.5f;
         [SerializeField] private bool debugEnabled = true;
@@ -30,6 +31,7 @@ namespace PixelCrew.Creatures.Controllers
         private Rigidbody2D _rb;
         private Transform _transform;
 
+        private Vector3 _initialScale = Vector3.one;
         private int _lookingSide = 1;
         private int _normalSide = 1;
 
@@ -41,6 +43,8 @@ namespace PixelCrew.Creatures.Controllers
 
         private bool _isKickbackRequested = false;
         private bool _isKickbackNow = false;
+
+        private bool _speeding = false;
 
         private float _frozenTimer = 0;
 
@@ -69,6 +73,8 @@ namespace PixelCrew.Creatures.Controllers
             _rb = creature.Rigidbody2D;
             _transform = creature.Transform;
             _sessionController = creature.SessionController;
+
+            _initialScale = _transform.localScale;
             
             LoadFromSession();
         }
@@ -118,8 +124,8 @@ namespace PixelCrew.Creatures.Controllers
 
             var scaleVector = _transform.localScale;
             
-            scaleVector.x = _lookingSide;
-            scaleVector.y = _normalSide;
+            scaleVector.x = _initialScale.x * _lookingSide;
+            scaleVector.y = _initialScale.y * _normalSide;
             
             _transform.localScale = scaleVector;
         }
@@ -132,6 +138,11 @@ namespace PixelCrew.Creatures.Controllers
         public void SetDirection(Vector2 direction)
         {
             SetDirection(direction.x);
+        }
+
+        public int GetDirection()
+        {
+            return Math.Sign(_direction.x);
         }
         
         public void SetJump(bool value)
@@ -249,6 +260,22 @@ namespace PixelCrew.Creatures.Controllers
         {
             doubleJumpAllowed = true;
             SaveToSession();
+        }
+
+        public void SpeedUp()
+        {
+            if (_speeding) return;
+            
+            _speeding = true;
+            speed *= upperSpeedMultiplier;
+        }
+
+        public void SpeedDown()
+        {
+            if (!_speeding) return;
+
+            _speeding = false;
+            speed /= upperSpeedMultiplier;
         }
 
         public void Inverse()

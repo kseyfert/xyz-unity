@@ -23,7 +23,7 @@ namespace PixelCrew.Creatures.Controllers
         {
             public string name;
             public bool isDefault;
-            public AnimatorController controller;
+            public RuntimeAnimatorController controller;
         }
         [SerializeField] private List<AnimationProfile> animationProfiles;
 
