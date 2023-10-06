@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5085497264189938203}
   - component: {fileID: 8966024312510547297}
   - component: {fileID: 3344811720779666668}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DeadBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
