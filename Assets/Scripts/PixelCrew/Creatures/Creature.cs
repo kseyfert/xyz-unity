@@ -35,10 +35,14 @@ namespace PixelCrew.Creatures
         private Transform _transform;
         private Rigidbody2D _rigidbody2D;
         private Animator _animator;
+        private Collider2D _collider2D;
+        private SpriteRenderer _spriteRenderer;
         
         public Transform Transform => _transform;
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
         public Animator Animator => _animator;
+        public Collider2D Collider2D => _collider2D;
+        public SpriteRenderer SpriteRenderer => _spriteRenderer;
 
         private void Awake()
         {
@@ -47,6 +51,8 @@ namespace PixelCrew.Creatures
             _transform = transform;
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
+            _collider2D = GetComponent<Collider2D>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
         
             if (particlesController != null && movementController != null)
             {
@@ -90,19 +96,24 @@ namespace PixelCrew.Creatures
                 animationController.SetBoolUpdate(AnimationController.BoolIsDead, () => healthController.GetHealthComponent().IsDead());
             }
 
-            if (healthController != null && movementController != null)
+            if (healthController != null)
             {
-                healthController.OnDie += (obj, args) => movementController.enabled = false;
-            }
-
-            if (healthController != null && attackController != null)
-            {
-                healthController.OnDie += (obj, args) => attackController.enabled = false;
-            }
-
-            if (healthController != null && interactionController != null)
-            {
-                healthController.OnDie += (obj, args) => interactionController.enabled = false;
+                healthController.OnDie += (obj, args) =>
+                {
+                    if (animationController != null) animationController.Die();
+                    if (attackController != null) attackController.Die();
+                    if (coinsController != null) coinsController.Die();
+                    if (healthController != null) healthController.Die();
+                    if (interactionController != null) interactionController.Die();
+                    if (movementController != null) movementController.Die();
+                    if (particlesController != null) particlesController.Die();
+                    if (sessionController != null) sessionController.Die();
+                    
+                    if (_collider2D != null) _collider2D.enabled = false;
+                    if (_spriteRenderer != null) _spriteRenderer.enabled = false;
+                    
+                    if (particlesController != null) particlesController.Spawn("dead");
+                };
             }
         }
 

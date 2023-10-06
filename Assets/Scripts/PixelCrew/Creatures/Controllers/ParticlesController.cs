@@ -5,8 +5,10 @@ using UnityEngine;
 
 namespace PixelCrew.Creatures.Controllers
 {
-    public class ParticlesController : MonoBehaviour
+    public class ParticlesController : AController
     {
+        [SerializeField] private Creature creature;
+        
         [Serializable]
         private struct SpawnItem
         {
@@ -26,6 +28,15 @@ namespace PixelCrew.Creatures.Controllers
             if (spawnItem.disabled) return;
             
             spawnItem.component.Spawn();
+        }
+
+        protected override Creature GetCreature()
+        {
+            return creature;
+        }
+
+        public override void Die()
+        {
         }
     }
 }

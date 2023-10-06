@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PixelCrew.Creatures.Controllers
 {
-    public class AttackController : MonoBehaviour
+    public class AttackController : AController
     {
         public event EventHandler OnAttackStarted;
         public event EventHandler OnArm;
@@ -90,6 +90,11 @@ namespace PixelCrew.Creatures.Controllers
         public bool IsArmed()
         {
             return armed;
+        }
+
+        protected override Creature GetCreature()
+        {
+            return creature;
         }
     }
 }

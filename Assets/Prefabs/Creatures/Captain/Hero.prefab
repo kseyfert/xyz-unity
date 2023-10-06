@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 118745399502611717}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &118745398315569686
 MonoBehaviour:
@@ -137,6 +137,7 @@ MonoBehaviour:
   creature: {fileID: 118745399502611716}
   groundChecker: {fileID: 6974909495130232794}
   speed: 7
+  upperSpeedMultiplier: 1
   jumpSpeed: 14
   jumpCooldown: 0.5
   debugEnabled: 1
@@ -158,7 +159,7 @@ GameObject:
   - component: {fileID: 118745398735717004}
   - component: {fileID: 118745398735717005}
   m_Layer: 0
-  m_Name: InputReader
+  m_Name: InputController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,7 +177,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 118745399502611717}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &118745398735717004
 MonoBehaviour:
@@ -579,8 +580,8 @@ Transform:
   - {fileID: 118745399958086882}
   - {fileID: 118745399496469350}
   - {fileID: 118745399455134426}
-  - {fileID: 118745398735717006}
   - {fileID: 118745398315569687}
+  - {fileID: 118745398735717006}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -70,16 +70,18 @@ namespace PixelCrew.Controllers
                 {
                     _movementController.SetDirection(0);
                     _attackController.Attack();
+                    yield return new WaitForSeconds(1f);
+                    continue;
                 }
-                else if (_atBase)
+                
+                if (_atBase)
                 {
                     _movementController.SetDirection(_target.transform.position.x - _transform.position.x);
-                }
-                else
-                {
-                    _movementController.SetDirection(0);
+                    yield return null;
+                    continue;
                 }
 
+                _movementController.SetDirection(0);
                 yield return null;
             }
 

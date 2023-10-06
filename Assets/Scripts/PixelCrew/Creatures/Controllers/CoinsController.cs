@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PixelCrew.Creatures.Controllers
 {
-    public class CoinsController : MonoBehaviour
+    public class CoinsController : AController
     {
         [SerializeField] private Creature creature;
         [SerializeField] private int currentAmount = 0;
@@ -61,6 +61,11 @@ namespace PixelCrew.Creatures.Controllers
         public int GetAmount()
         {
             return currentAmount;
+        }
+
+        protected override Creature GetCreature()
+        {
+            return creature;
         }
     }
 }

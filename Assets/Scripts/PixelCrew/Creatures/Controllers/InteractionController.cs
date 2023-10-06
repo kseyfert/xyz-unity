@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace PixelCrew.Creatures.Controllers
 {
-    public class InteractionController : MonoBehaviour
+    public class InteractionController : AController
     {
         [SerializeField] private Creature creature;
         [SerializeField] private CircleOverlapCheckComponent interactionChecker;
@@ -67,6 +67,11 @@ namespace PixelCrew.Creatures.Controllers
                 
                 interactable.Interact(creature.gameObject);
             }
+        }
+
+        protected override Creature GetCreature()
+        {
+            return creature;
         }
     }
 }

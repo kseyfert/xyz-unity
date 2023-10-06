@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PixelCrew.Creatures.Controllers
 {
-    public class SessionController : MonoBehaviour
+    public class SessionController : AController
     {
         [SerializeField] private Creature creature;
         
@@ -18,6 +18,15 @@ namespace PixelCrew.Creatures.Controllers
         public CreatureModel GetModel()
         {
             return _gameSessionComponent.GetCreatureModel(creature.ID);
+        }
+
+        protected override Creature GetCreature()
+        {
+            return creature;
+        }
+
+        public override void Die()
+        {
         }
     }
 }

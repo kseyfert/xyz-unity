@@ -6,7 +6,7 @@ using UnityEngine;
 namespace PixelCrew.Creatures.Controllers
 {
     [RequireComponent(typeof(HealthComponent))]
-    public class HealthController : MonoBehaviour
+    public class HealthController : AController
     {
         public event EventHandler OnDamage;
         public event EventHandler OnHeal;
@@ -47,6 +47,11 @@ namespace PixelCrew.Creatures.Controllers
             if (_sessionController == null) return;
 
             _sessionController.GetModel().hp = _healthComponent.GetCurrentHealth();
+        }
+
+        protected override Creature GetCreature()
+        {
+            return creature;
         }
     }
 }

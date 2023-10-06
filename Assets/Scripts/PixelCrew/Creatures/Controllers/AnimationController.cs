@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace PixelCrew.Creatures.Controllers
 {
-    public class AnimationController : MonoBehaviour
+    public class AnimationController : AController
     {
         public static readonly int TriggerHit = Animator.StringToHash("hit");
         public static readonly int TriggerAttack = Animator.StringToHash("attack");
@@ -92,6 +91,11 @@ namespace PixelCrew.Creatures.Controllers
             if (index < 0) return;
             
             _animator.runtimeAnimatorController = animationProfiles[index].controller;
+        }
+
+        protected override Creature GetCreature()
+        {
+            return creature;
         }
     }
 }

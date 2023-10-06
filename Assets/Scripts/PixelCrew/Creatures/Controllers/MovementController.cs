@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PixelCrew.Creatures.Controllers
 {
-    public class MovementController : MonoBehaviour
+    public class MovementController : AController
     {
         public event EventHandler OnJumpStarted;
         public event EventHandler OnGrounded;
@@ -292,6 +292,11 @@ namespace PixelCrew.Creatures.Controllers
                 Gizmos.color = IsGrounded() ? Color.green : Color.red;
                 Gizmos.DrawSphere(transform.position, 0.5f);
             }
+        }
+
+        protected override Creature GetCreature()
+        {
+            return creature;
         }
     }
 }
