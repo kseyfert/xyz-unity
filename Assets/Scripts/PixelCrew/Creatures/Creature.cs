@@ -67,6 +67,7 @@ namespace PixelCrew.Creatures
             {
                 attackController.OnAttackStarted += (obj, args) => animationController.SetTrigger(AnimationController.TriggerAttack);
                 attackController.OnThrowStarted += (obj, args) => animationController.SetTrigger(AnimationController.TriggerThrow);
+                attackController.OnThrowFinished += (obj, args) => particlesController.Spawn("sword-thrown");
 
                 attackController.OnArm += (obj, args) => animationController.SetProfile("armed");
                 attackController.OnUnarm += (obj, args) => animationController.SetProfile("unarmed");

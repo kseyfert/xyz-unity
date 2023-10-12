@@ -524,6 +524,7 @@ Transform:
   - {fileID: 118745400314361096}
   - {fileID: 118745399549051846}
   - {fileID: 118745400131910328}
+  - {fileID: 5265263151402834921}
   m_Father: {fileID: 118745399502611717}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -556,6 +557,9 @@ MonoBehaviour:
   - name: hit-coins
     disabled: 0
     component: {fileID: 5436716680917423860}
+  - name: sword-thrown
+    disabled: 0
+    component: {fileID: 804519053808961992}
 --- !u!1 &118745399502611719
 GameObject:
   m_ObjectHideFlags: 0
@@ -6007,6 +6011,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 118745400314361096}
   prefab: {fileID: 8131901563945375303, guid: 3bec9656d6ab247e19ec56dfce256d9b, type: 3}
+  parent: {fileID: 0}
+  action:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &5033915794796259962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5265263151402834921}
+  - component: {fileID: 804519053808961992}
+  m_Layer: 0
+  m_Name: SwordThrownParticle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5265263151402834921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5033915794796259962}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.395, y: -0.051, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 118745399496469350}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &804519053808961992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5033915794796259962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eba9857d22b44029e33717bc87e3ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 5265263151402834921}
+  prefab: {fileID: 8321940659698658823, guid: 2a885b92f3ae34cebb54416791b8bdda, type: 3}
   parent: {fileID: 0}
   action:
     m_PersistentCalls:

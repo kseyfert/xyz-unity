@@ -11,6 +11,7 @@ namespace PixelCrew.Creatures.Controllers
         public event EventHandler OnArm;
         public event EventHandler OnUnarm;
         public event EventHandler OnThrowStarted;
+        public event EventHandler OnThrowFinished;
 
         [SerializeField] private Creature creature;
 
@@ -85,6 +86,8 @@ namespace PixelCrew.Creatures.Controllers
         {
             if (!armed) return;
             
+            Unarm();
+            OnThrowFinished?.Invoke(this, EventArgs.Empty);
         }
 
         public void Arm()
