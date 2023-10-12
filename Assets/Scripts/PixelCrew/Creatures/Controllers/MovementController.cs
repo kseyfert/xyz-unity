@@ -1,5 +1,6 @@
 ﻿using System;
 using PixelCrew.Components.Utils.Checks;
+using PixelCrew.Utils;
 using UnityEngine;
 
 namespace PixelCrew.Creatures.Controllers
@@ -46,7 +47,7 @@ namespace PixelCrew.Creatures.Controllers
 
         private bool _speeding = false;
 
-        private float _frozenTimer = 0;
+        private readonly Cooldown _cooldown = new Cooldown();
 
         private Vector2 _direction;
 
@@ -81,7 +82,8 @@ namespace PixelCrew.Creatures.Controllers
 
         private void FixedUpdate()
         {
-            if (Time.time < _frozenTimer) return;
+            if (!_cooldown.IsReady) return;
+            
             _isKickbackNow = false;
 
             var isGrounded = IsGrounded();
@@ -91,7 +93,8 @@ namespace PixelCrew.Creatures.Controllers
                 var velocity = _rb.velocity.magnitude;
                 if (velocity >= longFallVelocity)
                 {
-                    _frozenTimer = Time.time + longFallFrozenTime;
+                    _cooldown.SetMax(longFallFrozenTime);
+                    
                     OnLongFallGrounded?.Invoke(this, EventArgs.Empty);
                 }
             }
@@ -106,7 +109,8 @@ namespace PixelCrew.Creatures.Controllers
 
             if (_isKickbackRequested)
             {
-                _frozenTimer = Time.time + kickbackFrozenTime;
+                _cooldown.SetMax(kickbackFrozenTime);
+                
                 _isKickbackRequested = false;
                 _isKickbackNow = true;
                 return;
@@ -244,16 +248,6 @@ namespace PixelCrew.Creatures.Controllers
         public void Kickback()
         {
             if (!_isKickbackNow) _isKickbackRequested = true;
-        }
-
-        public void Freeze(float time = 1)
-        {
-            _frozenTimer = Time.time + time;
-        }
-
-        public void Unfreeze()
-        {
-            _frozenTimer = Time.time - 100;
         }
 
         public void AllowDoubleJump()

@@ -78249,11 +78249,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero
       objectReference: {fileID: 0}
-    - target: {fileID: 118745399502611739, guid: dd4dbd8812e99451883416a1e89339a0,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: f5761b78ba457421792cc33c7e5f8898, type: 2}
     - target: {fileID: 118745399958086880, guid: dd4dbd8812e99451883416a1e89339a0,
         type: 3}
       propertyPath: maxHealth

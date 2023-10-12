@@ -9,7 +9,7 @@ namespace PixelCrew.Components.Utils.Checks
     public class ExitTriggerComponent : MonoBehaviour
     {
         [SerializeField] private string targetTag;
-        [SerializeField] private LayerMask layerMask;
+        [SerializeField] private LayerMask layerMask = ~0;
         [SerializeField] private TriggerEvent action;
 
         private void OnTriggerExit2D(Collider2D other)

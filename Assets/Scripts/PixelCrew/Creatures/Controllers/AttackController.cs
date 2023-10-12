@@ -1,6 +1,7 @@
 using System;
 using PixelCrew.Components.Game;
 using PixelCrew.Components.Utils.Checks;
+using PixelCrew.Utils;
 using UnityEngine;
 
 namespace PixelCrew.Creatures.Controllers
@@ -18,6 +19,7 @@ namespace PixelCrew.Creatures.Controllers
         [SerializeField] private CircleOverlapCheckComponent attackPosition;
         [SerializeField] private int damagePower = 10;
         [SerializeField] private bool armed;
+        [SerializeField] private Cooldown cooldown;
 
         private SessionController _sessionController;
 
@@ -47,7 +49,9 @@ namespace PixelCrew.Creatures.Controllers
         public void Attack()
         {
             if (!armed) return;
+            if (!cooldown.IsReady) return;
 
+            cooldown.Reset();
             OnAttackStarted?.Invoke(this, EventArgs.Empty);
         }
 
@@ -78,7 +82,9 @@ namespace PixelCrew.Creatures.Controllers
         public void Throw()
         {
             if (!armed) return;
+            if (!cooldown.IsReady) return;
 
+            cooldown.Reset();
             OnThrowStarted?.Invoke(this, EventArgs.Empty);
         }
 

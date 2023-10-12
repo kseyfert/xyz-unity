@@ -9,7 +9,7 @@ namespace PixelCrew.Components.Utils.Checks
     public class EnterCollisionComponent : MonoBehaviour 
     {
         [SerializeField] private string targetTag;
-        [SerializeField] private LayerMask layerMask;
+        [SerializeField] private LayerMask layerMask = ~0;
         [SerializeField] private CollisionEvent action;
 
         private void OnCollisionEnter2D(Collision2D other)

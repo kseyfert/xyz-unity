@@ -395,6 +395,9 @@ MonoBehaviour:
   attackPosition: {fileID: 6982576265391321639}
   damagePower: 10
   armed: 1
+  cooldown:
+    enabled: 1
+    time: 0.5
 --- !u!1 &118745399455134427
 GameObject:
   m_ObjectHideFlags: 0
