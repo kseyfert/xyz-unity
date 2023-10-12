@@ -50,5 +50,12 @@ namespace PixelCrew.Controllers
             
             if (context.canceled) _attackController.Attack();
         }
+
+        public void OnThrow(InputAction.CallbackContext context)
+        {
+            if (_attackController == null) return;
+            
+            if (context.canceled) _attackController.Throw();
+        }
     }
 }

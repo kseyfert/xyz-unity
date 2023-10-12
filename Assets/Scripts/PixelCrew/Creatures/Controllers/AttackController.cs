@@ -10,6 +10,7 @@ namespace PixelCrew.Creatures.Controllers
         public event EventHandler OnAttackStarted;
         public event EventHandler OnArm;
         public event EventHandler OnUnarm;
+        public event EventHandler OnThrowStarted;
 
         [SerializeField] private Creature creature;
 
@@ -71,6 +72,19 @@ namespace PixelCrew.Creatures.Controllers
                 
                 health.ApplyDamage(damagePower);        
             }
+        }
+
+        public void Throw()
+        {
+            if (!armed) return;
+
+            OnThrowStarted?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void DoThrow()
+        {
+            if (!armed) return;
+            
         }
 
         public void Arm()

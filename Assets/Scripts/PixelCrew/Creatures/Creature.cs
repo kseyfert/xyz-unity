@@ -66,6 +66,7 @@ namespace PixelCrew.Creatures
             if (animationController != null && attackController != null)
             {
                 attackController.OnAttackStarted += (obj, args) => animationController.SetTrigger(AnimationController.TriggerAttack);
+                attackController.OnThrowStarted += (obj, args) => animationController.SetTrigger(AnimationController.TriggerThrow);
 
                 attackController.OnArm += (obj, args) => animationController.SetProfile("armed");
                 attackController.OnUnarm += (obj, args) => animationController.SetProfile("unarmed");
@@ -129,6 +130,13 @@ namespace PixelCrew.Creatures
             if (attackController == null) return;
             
             attackController.DoAttack();
+        }
+
+        public void Throw()
+        {
+            if (attackController == null) return;
+            
+            attackController.DoThrow();
         }
     }
 }
