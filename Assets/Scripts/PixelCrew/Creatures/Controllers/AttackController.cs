@@ -13,6 +13,8 @@ namespace PixelCrew.Creatures.Controllers
         public event EventHandler OnUnarm;
         public event EventHandler OnThrowStarted;
         public event EventHandler OnThrowFinished;
+        public event EventHandler OnThrowMaxStarted;
+        public event EventHandler OnThrowMaxFinished;
 
         [SerializeField] private Creature creature;
 
@@ -20,6 +22,8 @@ namespace PixelCrew.Creatures.Controllers
         [SerializeField] private int damagePower = 10;
         [SerializeField] private bool armed;
         [SerializeField] private Cooldown cooldown;
+        [SerializeField] private int throwMaxCount = 3;
+        [SerializeField] private float throwMaxTimeout = 0.2f;
         
         private int _currentStock;
         private SessionController _sessionController;
@@ -100,8 +104,37 @@ namespace PixelCrew.Creatures.Controllers
         {
             if (!armed) return;
             
-            // Unarm();
             OnThrowFinished?.Invoke(this, EventArgs.Empty);
+        }
+        
+        public void ThrowMax()
+        {
+            if (!armed) return;
+            if (!cooldown.IsReady) return;
+            if (_currentStock <= 3)
+            {
+                Throw();
+                return;
+            };
+
+            _currentStock -= 3;
+            Debug.Log($"Current Stock: {_currentStock}");
+
+            cooldown.Reset();
+            OnThrowMaxStarted?.Invoke(this, EventArgs.Empty);
+        }
+        
+        public void DoThrowMax()
+        {
+            if (!armed) return;
+            
+            var args = new ThrowMaxEventArgs
+            {
+                count = throwMaxCount,
+                timeout = throwMaxTimeout
+            };
+
+            OnThrowMaxFinished?.Invoke(this, args);
         }
 
         public void Arm(int stock = 1)
@@ -135,6 +168,12 @@ namespace PixelCrew.Creatures.Controllers
         protected override Creature GetCreature()
         {
             return creature;
+        }
+
+        public class ThrowMaxEventArgs : EventArgs
+        {
+            public int count;
+            public float timeout;
         }
     }
 }

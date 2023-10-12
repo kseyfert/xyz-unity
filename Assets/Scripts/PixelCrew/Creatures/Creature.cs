@@ -66,8 +66,16 @@ namespace PixelCrew.Creatures
             if (animationController != null && attackController != null)
             {
                 attackController.OnAttackStarted += (obj, args) => animationController.SetTrigger(AnimationController.TriggerAttack);
+                
                 attackController.OnThrowStarted += (obj, args) => animationController.SetTrigger(AnimationController.TriggerThrow);
                 attackController.OnThrowFinished += (obj, args) => particlesController.Spawn("sword-thrown");
+                
+                attackController.OnThrowMaxStarted += (obj, args) => animationController.SetTrigger(AnimationController.TriggerThrowMax);
+                attackController.OnThrowMaxFinished += (obj, args) =>
+                {
+                    var a = (AttackController.ThrowMaxEventArgs)args;
+                    particlesController.SpawnSeq("sword-thrown", a.count, a.timeout);
+                };
 
                 attackController.OnArm += (obj, args) => animationController.SetProfile("armed");
                 attackController.OnUnarm += (obj, args) => animationController.SetProfile("unarmed");
@@ -138,6 +146,13 @@ namespace PixelCrew.Creatures
             if (attackController == null) return;
             
             attackController.DoThrow();
+        }
+
+        public void ThrowMax()
+        {
+            if (attackController == null) return;
+            
+            attackController.DoThrowMax();
         }
     }
 }

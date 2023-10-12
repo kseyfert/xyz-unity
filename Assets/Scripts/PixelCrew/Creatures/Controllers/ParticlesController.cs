@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using PixelCrew.Components.Game;
 using UnityEngine;
@@ -28,6 +29,20 @@ namespace PixelCrew.Creatures.Controllers
             if (spawnItem.disabled) return;
             
             spawnItem.component.Spawn();
+        }
+
+        public void SpawnSeq(string particleName, int count, float timeout)
+        {
+            StartCoroutine(SpawnSeqCoroutine(particleName, count, timeout));
+        }
+
+        private IEnumerator SpawnSeqCoroutine(string particleName, int count, float timeout)
+        {
+            for (var i = 0; i < count; i++)
+            {
+                Spawn(particleName);
+                yield return new WaitForSeconds(timeout);
+            }
         }
 
         protected override Creature GetCreature()

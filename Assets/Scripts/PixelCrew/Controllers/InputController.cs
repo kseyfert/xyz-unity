@@ -1,5 +1,6 @@
 ﻿using PixelCrew.Creatures;
 using PixelCrew.Creatures.Controllers;
+using PixelCrew.Utils;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,10 +10,14 @@ namespace PixelCrew.Controllers
     public class InputController : MonoBehaviour
     {
         [SerializeField] private Creature creature;
+        
+        [SerializeField] private float longPress = 1f;
 
         private MovementController _movementController;
         private InteractionController _interactionController;
         private AttackController _attackController;
+
+        private readonly Cooldown _throwLongPress = new Cooldown();
 
         private void Start()
         {
@@ -54,8 +59,11 @@ namespace PixelCrew.Controllers
         public void OnThrow(InputAction.CallbackContext context)
         {
             if (_attackController == null) return;
+
+            if (context.performed) _throwLongPress.Reset(longPress);
             
-            if (context.canceled) _attackController.Throw();
+            if (context.canceled && _throwLongPress.IsReady) _attackController.ThrowMax();
+            if (context.canceled && !_throwLongPress.IsReady) _attackController.Throw();
         }
     }
 }

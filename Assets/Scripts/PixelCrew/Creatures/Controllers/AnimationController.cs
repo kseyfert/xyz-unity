@@ -9,6 +9,7 @@ namespace PixelCrew.Creatures.Controllers
         public static readonly int TriggerHit = Animator.StringToHash("hit");
         public static readonly int TriggerAttack = Animator.StringToHash("attack");
         public static readonly int TriggerThrow = Animator.StringToHash("throw");
+        public static readonly int TriggerThrowMax = Animator.StringToHash("throw-max");
 
         public static readonly int BoolIsGrounded = Animator.StringToHash("is-grounded");
         public static readonly int BoolIsRunning = Animator.StringToHash("is-running");
