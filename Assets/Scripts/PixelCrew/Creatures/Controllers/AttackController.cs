@@ -20,7 +20,8 @@ namespace PixelCrew.Creatures.Controllers
         [SerializeField] private int damagePower = 10;
         [SerializeField] private bool armed;
         [SerializeField] private Cooldown cooldown;
-
+        
+        private int _currentStock;
         private SessionController _sessionController;
 
         private void Start()
@@ -35,7 +36,9 @@ namespace PixelCrew.Creatures.Controllers
             if (_sessionController == null) return;
 
             var isArmed = _sessionController.GetModel().isArmed;
-            if (isArmed) Arm();
+            var stock = _sessionController.GetModel().currentStock;
+            
+            if (isArmed) Arm(stock);
             else Unarm();
         }
 
@@ -44,6 +47,7 @@ namespace PixelCrew.Creatures.Controllers
             if (_sessionController == null) return;
 
             _sessionController.GetModel().isArmed = armed;
+            _sessionController.GetModel().currentStock = _currentStock;
         }
 
         public void Attack()
@@ -83,6 +87,10 @@ namespace PixelCrew.Creatures.Controllers
         {
             if (!armed) return;
             if (!cooldown.IsReady) return;
+            if (_currentStock == 1) return;
+
+            _currentStock--;
+            Debug.Log($"Current Stock: {_currentStock}");
 
             cooldown.Reset();
             OnThrowStarted?.Invoke(this, EventArgs.Empty);
@@ -96,17 +104,26 @@ namespace PixelCrew.Creatures.Controllers
             OnThrowFinished?.Invoke(this, EventArgs.Empty);
         }
 
-        public void Arm()
+        public void Arm(int stock = 1)
         {
+            stock = Math.Max(stock, 1);
+            _currentStock += stock;
             armed = true;
+            
             SaveToSession();
+            
             OnArm?.Invoke(this, EventArgs.Empty);
+            
+            Debug.Log($"Current Stock: {_currentStock}");
         }
 
         public void Unarm()
         {
+            _currentStock = 0;
             armed = false;
+            
             SaveToSession();
+            
             OnUnarm?.Invoke(this, EventArgs.Empty);
         }
 

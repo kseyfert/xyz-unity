@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fa7fbb282384626847560caa173b210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stock: 9
 --- !u!114 &3460177470584802714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +173,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Player
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   action:
     m_PersistentCalls:
       m_Calls:

@@ -10,6 +10,7 @@ namespace PixelCrew.Creatures.Model
         public int coins;
         public int hp = 100;
         public bool isArmed = false;
+        public int currentStock = 0;
         public bool isDoubleJumpAllowed = false;
         public bool isInfiniteJumpAllowed = false;
         public List<LevelPosition> lastPositions = new List<LevelPosition>();
