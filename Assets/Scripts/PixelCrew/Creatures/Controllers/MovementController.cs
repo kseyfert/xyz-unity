@@ -298,5 +298,13 @@ namespace PixelCrew.Creatures.Controllers
         {
             return creature;
         }
+
+        public override void Die()
+        {
+            SetDirection(0);
+            _rb.velocity = Vector2.zero;
+            
+            base.Die();
+        }
     }
 }

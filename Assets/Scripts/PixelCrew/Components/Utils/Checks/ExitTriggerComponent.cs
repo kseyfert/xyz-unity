@@ -1,4 +1,5 @@
 using System;
+using PixelCrew.Utils;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,14 +9,15 @@ namespace PixelCrew.Components.Utils.Checks
     public class ExitTriggerComponent : MonoBehaviour
     {
         [SerializeField] private string targetTag;
+        [SerializeField] private LayerMask layerMask;
         [SerializeField] private TriggerEvent action;
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.gameObject.CompareTag(targetTag))
-            {
-                action?.Invoke(other.gameObject);
-            }
+            if (!other.gameObject.IsInLayer(layerMask)) return;
+            if (!string.IsNullOrEmpty(targetTag) && !other.gameObject.CompareTag(targetTag)) return;
+         
+            action?.Invoke(other.gameObject);
         }
 
         [Serializable]

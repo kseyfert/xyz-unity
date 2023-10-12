@@ -363,6 +363,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Player
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   action:
     m_PersistentCalls:
       m_Calls:
@@ -390,6 +393,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Player
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   action:
     m_PersistentCalls:
       m_Calls:
@@ -449,6 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b3862e714ac4a9aba7dde59885eb190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  creature: {fileID: 0}
   spawns:
   - name: exclamation
     disabled: 0
@@ -544,6 +551,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Player
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   action:
     m_PersistentCalls:
       m_Calls:
@@ -571,6 +581,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Player
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   action:
     m_PersistentCalls:
       m_Calls:
@@ -780,7 +793,7 @@ GameObject:
   - component: {fileID: 5592680898816432132}
   m_Layer: 0
   m_Name: Sharky
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

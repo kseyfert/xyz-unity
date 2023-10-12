@@ -86,7 +86,7 @@ namespace PixelCrew.Creatures.Controllers
         {
             if (!armed) return;
             
-            Unarm();
+            // Unarm();
             OnThrowFinished?.Invoke(this, EventArgs.Empty);
         }
 

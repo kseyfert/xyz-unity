@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using PixelCrew.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -30,7 +31,7 @@ namespace PixelCrew.Controllers
         {
             if (sceneReloadTags != null)
             {
-                if (sceneReloadTags.Any(obj.CompareTag))
+                if (obj.CompareTags(sceneReloadTags))
                 {
                     SceneManager.LoadScene(_scene.name);
                     return;
