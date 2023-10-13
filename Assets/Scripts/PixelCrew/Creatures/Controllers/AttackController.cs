@@ -22,6 +22,7 @@ namespace PixelCrew.Creatures.Controllers
         [SerializeField] private int damagePower = 10;
         [SerializeField] private bool armed;
         [SerializeField] private Cooldown cooldown;
+        [SerializeField] private bool infiniteStock = false;
         [SerializeField] private int throwMaxCount = 3;
         [SerializeField] private float throwMaxTimeout = 0.2f;
         
@@ -91,7 +92,7 @@ namespace PixelCrew.Creatures.Controllers
         {
             if (!armed) return;
             if (!cooldown.IsReady) return;
-            if (_currentStock == 1) return;
+            if (!infiniteStock && _currentStock <= 1) return;
 
             _currentStock--;
             Debug.Log($"Current Stock: {_currentStock}");
@@ -111,7 +112,7 @@ namespace PixelCrew.Creatures.Controllers
         {
             if (!armed) return;
             if (!cooldown.IsReady) return;
-            if (_currentStock <= 3)
+            if (!infiniteStock && _currentStock <= 3)
             {
                 Throw();
                 return;

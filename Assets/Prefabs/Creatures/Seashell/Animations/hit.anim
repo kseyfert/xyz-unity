@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: die
+  m_Name: hit
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,13 +20,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 7c5fbdf88d77f4c829dce7a78220ba59, type: 3}
+      value: {fileID: 21300000, guid: f905b348c2c2045bf91d7098977ae5e2, type: 3}
     - time: 0.1
-      value: {fileID: 21300000, guid: ef165ceee772042c4a2dba69098f90f0, type: 3}
+      value: {fileID: 21300000, guid: 6aa75b3fa95c540baae9defc0b0d92dc, type: 3}
     - time: 0.2
-      value: {fileID: 21300000, guid: 23f36b9ae7d304f678cef9163aeafa9d, type: 3}
+      value: {fileID: 21300000, guid: 8f4e4c938577a4789ad95bb6e9406541, type: 3}
     - time: 0.3
-      value: {fileID: 21300000, guid: 22c0e8f54ea584a02998832ce6a62d02, type: 3}
+      value: {fileID: 21300000, guid: a55113da6367f4cacae70afbc8f0a2b6, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,10 +46,10 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 7c5fbdf88d77f4c829dce7a78220ba59, type: 3}
-    - {fileID: 21300000, guid: ef165ceee772042c4a2dba69098f90f0, type: 3}
-    - {fileID: 21300000, guid: 23f36b9ae7d304f678cef9163aeafa9d, type: 3}
-    - {fileID: 21300000, guid: 22c0e8f54ea584a02998832ce6a62d02, type: 3}
+    - {fileID: 21300000, guid: f905b348c2c2045bf91d7098977ae5e2, type: 3}
+    - {fileID: 21300000, guid: 6aa75b3fa95c540baae9defc0b0d92dc, type: 3}
+    - {fileID: 21300000, guid: 8f4e4c938577a4789ad95bb6e9406541, type: 3}
+    - {fileID: 21300000, guid: a55113da6367f4cacae70afbc8f0a2b6, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -74,11 +74,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 0.3
-    functionName: Die
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []

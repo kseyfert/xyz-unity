@@ -14,11 +14,6 @@ namespace PixelCrew.Components.Game
         [SerializeField] public UnityEvent onHeal;
         [SerializeField] public UnityEvent onDie;
 
-        private void Awake()
-        {
-            currentHealth = maxHealth;
-        }
-
         public void ApplyDamage(int value)
         {
             if (value <= 0) return;

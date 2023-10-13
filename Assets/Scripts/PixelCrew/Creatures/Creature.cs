@@ -2,6 +2,8 @@ using System;
 using PixelCrew.Components.Utils;
 using PixelCrew.Creatures.Controllers;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace PixelCrew.Creatures
 {
@@ -22,6 +24,8 @@ namespace PixelCrew.Creatures
         [SerializeField] private SessionController sessionController;
         [SerializeField] private ParticlesController particlesController;
         [SerializeField] private CoinsController coinsController;
+
+        [SerializeField] private DieEvent onDie;
 
         public MovementController MovementController => movementController;
         public InteractionController InteractionController => interactionController;
@@ -86,9 +90,9 @@ namespace PixelCrew.Creatures
 
             if (animationController != null)
             {
-                animationController.SetBoolUpdate(AnimationController.BoolIsGrounded, () => movementController.IsGrounded());
+                animationController.SetBoolUpdate(AnimationController.BoolIsGrounded, () => movementController == null || movementController.IsGrounded());
                 animationController.SetBoolUpdate(AnimationController.BoolIsRunning, () => Math.Abs(_rigidbody2D.velocity.x) > 0.01f);
-                animationController.SetBoolUpdate(AnimationController.BoolIsDoubleJumping, () => movementController.IsDoubleJumping());
+                animationController.SetBoolUpdate(AnimationController.BoolIsDoubleJumping, () => movementController != null && movementController.IsDoubleJumping());
                 
                 animationController.SetFloatUpdate(AnimationController.FloatVelocityY, () => _rigidbody2D.velocity.y);
             }
@@ -99,31 +103,11 @@ namespace PixelCrew.Creatures
                     (obj, args) =>
                     {
                         animationController.SetTrigger(AnimationController.TriggerHit);
-                        movementController.Kickback();
+                        if (movementController != null) movementController.Kickback();
                     };
                 healthController.OnDie += (obj, args) => animationController.SetTrigger(AnimationController.TriggerHit);
                 
                 animationController.SetBoolUpdate(AnimationController.BoolIsDead, () => healthController.GetHealthComponent().IsDead());
-            }
-
-            if (healthController != null)
-            {
-                healthController.OnDie += (obj, args) =>
-                {
-                    if (animationController != null) animationController.Die();
-                    if (attackController != null) attackController.Die();
-                    if (coinsController != null) coinsController.Die();
-                    if (healthController != null) healthController.Die();
-                    if (interactionController != null) interactionController.Die();
-                    if (movementController != null) movementController.Die();
-                    if (particlesController != null) particlesController.Die();
-                    if (sessionController != null) sessionController.Die();
-                    
-                    if (_collider2D != null) _collider2D.enabled = false;
-                    if (_spriteRenderer != null) _spriteRenderer.enabled = false;
-                    
-                    if (particlesController != null) particlesController.Spawn("dead");
-                };
             }
         }
 
@@ -154,5 +138,27 @@ namespace PixelCrew.Creatures
             
             attackController.DoThrowMax();
         }
+
+        public void Die()
+        {
+            if (animationController != null) animationController.Die();
+            if (attackController != null) attackController.Die();
+            if (coinsController != null) coinsController.Die();
+            if (healthController != null) healthController.Die();
+            if (interactionController != null) interactionController.Die();
+            if (movementController != null) movementController.Die();
+            if (particlesController != null) particlesController.Die();
+            if (sessionController != null) sessionController.Die();
+                    
+            if (_collider2D != null) _collider2D.enabled = false;
+            if (_spriteRenderer != null) _spriteRenderer.enabled = false;
+                    
+            if (particlesController != null) particlesController.Spawn("dead");
+            
+            onDie?.Invoke(gameObject);
+        }
+        
+        [Serializable]
+        private class DieEvent : UnityEvent<GameObject> {}
     }
 }
