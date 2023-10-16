@@ -1,4 +1,3 @@
-using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -24,7 +23,6 @@ namespace PixelCrew.Components.Movings
 
         protected override Vector2 CalcNewPosition()
         {
-            var original = GetOriginal();
             return new Vector2()
             {
                 x = center.x + _radius * Mathf.Cos(_startAngle + GetTime()),
