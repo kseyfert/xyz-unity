@@ -272,3 +272,4 @@ MonoBehaviour:
   speed: 0
   amplitude: 0.1
   frequency: 3
+  randomized: 1
