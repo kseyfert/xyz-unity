@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 1729530628518646619}
   - component: {fileID: 1729530628518646618}
   - component: {fileID: 1729530628518646620}
-  - component: {fileID: 1729530628518646621}
   - component: {fileID: 8342977490013046934}
   - component: {fileID: 5606950631825820406}
   - component: {fileID: 6495537772151746073}
   - component: {fileID: 895280267166415925}
   - component: {fileID: 3370579372913981122}
+  - component: {fileID: 7142842604203603104}
   m_Layer: 0
   m_Name: PearlProjectile
   m_TagString: Untagged
@@ -126,19 +126,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1729530628518646621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1729530628518646617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8fb59e0bb534b53be40eb031619f58a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.1
 --- !u!114 &8342977490013046934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,7 +253,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1729530628518646621}
+      - m_Target: {fileID: 0}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -318,7 +305,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1729530628518646621}
+      - m_Target: {fileID: 0}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -329,3 +316,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7142842604203603104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729530628518646617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e9365d61f947dda911d687f644393d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.07
+  amplitude: 0.15
+  frequency: 20

@@ -502,7 +502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creature: {fileID: 4645422250799026843}
-  maxProbability: 0
+  maxProbability: 0.3
 --- !u!1 &4645422251635966000
 GameObject:
   m_ObjectHideFlags: 0
