@@ -57,7 +57,11 @@ namespace PixelCrew.Creatures
             _animator = GetComponent<Animator>();
             _collider2D = GetComponent<Collider2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
+
+            Init();
+        }
         
+        protected virtual void Init() {
             if (particlesController != null && movementController != null)
             {
                 movementController.OnJumpStarted += (obj, args) =>
