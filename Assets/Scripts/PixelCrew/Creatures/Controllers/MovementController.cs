@@ -301,6 +301,11 @@ namespace PixelCrew.Creatures.Controllers
             SetDirection(0);
             _rb.velocity = Vector2.zero;
             
+            onJumpStarted = delegate {};
+            onDoubleJumpStarted = delegate {};
+            onGrounded = delegate {};
+            onLongFallGrounded = delegate {};
+            
             base.Die();
         }
     }

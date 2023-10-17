@@ -1,4 +1,5 @@
 using UnityEngine;
+using PixelCrew.Utils;
 
 namespace PixelCrew.Creatures.Controllers
 {

@@ -168,5 +168,18 @@ namespace PixelCrew.Creatures.Controllers
         {
             return creature;
         }
+
+        public override void Die()
+        {
+            onAttackStarted = delegate () {};
+            onArm = delegate () {};
+            onUnarm = delegate () {};
+            onThrowStarted = delegate () {};
+            onThrowFinished = delegate () {};
+            onThrowMaxStarted = delegate () {};
+            onThrowMaxFinished = delegate(int _, float __) {};
+            
+            base.Die();
+        } 
     }
 }

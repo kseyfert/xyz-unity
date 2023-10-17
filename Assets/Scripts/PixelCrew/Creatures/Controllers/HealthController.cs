@@ -55,5 +55,14 @@ namespace PixelCrew.Creatures.Controllers
         {
             return creature;
         }
+
+        public override void Die()
+        {
+            onDamage = delegate {};
+            onHeal = delegate {};
+            onDie = delegate {};
+            
+            base.Die();
+        }
     }
 }
