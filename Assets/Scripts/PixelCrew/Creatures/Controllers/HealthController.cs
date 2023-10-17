@@ -8,9 +8,11 @@ namespace PixelCrew.Creatures.Controllers
     [RequireComponent(typeof(HealthComponent))]
     public class HealthController : AController
     {
-        public event EventHandler OnDamage;
-        public event EventHandler OnHeal;
-        public event EventHandler OnDie;
+        public delegate void HealthDelegate();
+
+        public HealthDelegate onDamage;
+        public HealthDelegate onHeal;
+        public HealthDelegate onDie;
         
         [SerializeField] private Creature creature;
 
@@ -22,12 +24,12 @@ namespace PixelCrew.Creatures.Controllers
             _sessionController = creature.SessionController;
             _healthComponent = GetComponent<HealthComponent>();
             
-            _healthComponent.OnChange += (obj, args) => SaveToSession();
+            _healthComponent.onChange += SaveToSession;
             LoadFromSession();
 
-            _healthComponent.onDamage.AddListener(() => OnDamage?.Invoke(this, EventArgs.Empty));
-            _healthComponent.onHeal.AddListener(() => OnHeal?.Invoke(this, EventArgs.Empty));
-            _healthComponent.onDie.AddListener(() => OnDie?.Invoke(this, EventArgs.Empty));
+            _healthComponent.onDamage.AddListener(() => onDamage?.Invoke());
+            _healthComponent.onHeal.AddListener(() => onHeal?.Invoke());
+            _healthComponent.onDie.AddListener(() => onDie?.Invoke());
         }
 
         public HealthComponent GetHealthComponent()

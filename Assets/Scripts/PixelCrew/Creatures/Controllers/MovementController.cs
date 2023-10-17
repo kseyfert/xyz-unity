@@ -7,9 +7,12 @@ namespace PixelCrew.Creatures.Controllers
 {
     public class MovementController : AController
     {
-        public event EventHandler OnJumpStarted;
-        public event EventHandler OnGrounded;
-        public event EventHandler OnLongFallGrounded;
+        public delegate void MovementDelegate();
+
+        public MovementDelegate onJumpStarted;
+        public MovementDelegate onDoubleJumpStarted;
+        public MovementDelegate onGrounded;
+        public MovementDelegate onLongFallGrounded;
         
         [SerializeField] private Creature creature;
         
@@ -89,13 +92,13 @@ namespace PixelCrew.Creatures.Controllers
             var isGrounded = IsGrounded();
             if (!_wasGrounded && isGrounded)
             {
-                OnGrounded?.Invoke(this, EventArgs.Empty);
+                onGrounded?.Invoke();
                 var velocity = _rb.velocity.magnitude;
                 if (velocity >= longFallVelocity)
                 {
                     _cooldown.SetMax(longFallFrozenTime);
                     
-                    OnLongFallGrounded?.Invoke(this, EventArgs.Empty);
+                    onLongFallGrounded?.Invoke();
                 }
             }
 
@@ -193,12 +196,12 @@ namespace PixelCrew.Creatures.Controllers
                 {
                     velocityY = jumpSpeed;
                     _isJumpStarted = true;
-                    OnJumpStarted?.Invoke(this, EventArgs.Empty);
+                    onJumpStarted?.Invoke();
                 } else if (canDoubleJump)
                 {
                     velocityY = jumpSpeed;
                     _isDoubleJumpStarted = true;
-                    OnJumpStarted?.Invoke(this, EventArgs.Empty);
+                    onDoubleJumpStarted?.Invoke();
                 }
             }
 

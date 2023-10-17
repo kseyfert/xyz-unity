@@ -64,29 +64,22 @@ namespace PixelCrew.Creatures
         protected virtual void Init() {
             if (particlesController != null && movementController != null)
             {
-                movementController.OnJumpStarted += (obj, args) =>
-                {
-                    if (movementController.IsGrounded()) SpawnParticle("dust-jump");
-                };
-                movementController.OnLongFallGrounded += (obj, args) => SpawnParticle("dust-fall");
+                movementController.onJumpStarted += () => particlesController.Spawn("dust-jump");
+                movementController.onLongFallGrounded += () => particlesController.Spawn("dust-fall");
             }
 
             if (animationController != null && attackController != null)
             {
-                attackController.OnAttackStarted += (obj, args) => animationController.SetTrigger(AnimationController.TriggerAttack);
+                attackController.onAttackStarted += () => animationController.SetTrigger(AnimationController.TriggerAttack);
                 
-                attackController.OnThrowStarted += (obj, args) => animationController.SetTrigger(AnimationController.TriggerThrow);
-                attackController.OnThrowFinished += (obj, args) => particlesController.Spawn("sword-thrown");
+                attackController.onThrowStarted += () => animationController.SetTrigger(AnimationController.TriggerThrow);
+                attackController.onThrowFinished += () => particlesController.Spawn("sword-thrown");
                 
-                attackController.OnThrowMaxStarted += (obj, args) => animationController.SetTrigger(AnimationController.TriggerThrowMax);
-                attackController.OnThrowMaxFinished += (obj, args) =>
-                {
-                    var a = (AttackController.ThrowMaxEventArgs)args;
-                    particlesController.SpawnSeq("sword-thrown", a.count, a.timeout);
-                };
+                attackController.onThrowMaxStarted += () => animationController.SetTrigger(AnimationController.TriggerThrowMax);
+                attackController.onThrowMaxFinished += (count, timeout) => particlesController.SpawnSeq("sword-thrown", count, timeout);
 
-                attackController.OnArm += (obj, args) => animationController.SetProfile("armed");
-                attackController.OnUnarm += (obj, args) => animationController.SetProfile("unarmed");
+                attackController.onArm += () => animationController.SetProfile("armed");
+                attackController.onUnarm += () => animationController.SetProfile("unarmed");
                 
                 if (attackController.IsArmed()) animationController.SetProfile("armed");
                 else animationController.SetProfile("unarmed");
@@ -103,13 +96,13 @@ namespace PixelCrew.Creatures
 
             if (healthController != null && animationController != null)
             {
-                healthController.OnDamage +=
-                    (obj, args) =>
+                healthController.onDamage +=
+                    () =>
                     {
                         animationController.SetTrigger(AnimationController.TriggerHit);
                         if (movementController != null) movementController.Kickback();
                     };
-                healthController.OnDie += (obj, args) => animationController.SetTrigger(AnimationController.TriggerHit);
+                healthController.onDie += () => animationController.SetTrigger(AnimationController.TriggerHit);
                 
                 animationController.SetBoolUpdate(AnimationController.BoolIsDead, () => healthController.GetHealthComponent().IsDead());
             }

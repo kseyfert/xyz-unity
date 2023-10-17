@@ -8,14 +8,18 @@ namespace PixelCrew.Creatures.Controllers
 {
     public class AttackController : AController
     {
-        public event EventHandler OnAttackStarted;
-        public event EventHandler OnArm;
-        public event EventHandler OnUnarm;
-        public event EventHandler OnThrowStarted;
-        public event EventHandler OnThrowFinished;
-        public event EventHandler OnThrowMaxStarted;
-        public event EventHandler OnThrowMaxFinished;
+        public delegate void AttackDelegate();
 
+        public AttackDelegate onAttackStarted;
+        public AttackDelegate onArm;
+        public AttackDelegate onUnarm;
+        public AttackDelegate onThrowStarted;
+        public AttackDelegate onThrowFinished;
+        public AttackDelegate onThrowMaxStarted;
+
+        public delegate void AttackThrowMaxDelegate(int count, float timeout);
+        public AttackThrowMaxDelegate onThrowMaxFinished;
+        
         [SerializeField] private Creature creature;
 
         [SerializeField] private CircleOverlapCheckComponent attackPosition;
@@ -61,7 +65,7 @@ namespace PixelCrew.Creatures.Controllers
             if (!cooldown.IsReady) return;
 
             cooldown.Reset();
-            OnAttackStarted?.Invoke(this, EventArgs.Empty);
+            onAttackStarted?.Invoke();
         }
 
         public void DoAttack()
@@ -98,14 +102,14 @@ namespace PixelCrew.Creatures.Controllers
             Debug.Log($"Current Stock: {_currentStock}");
 
             cooldown.Reset();
-            OnThrowStarted?.Invoke(this, EventArgs.Empty);
+            onThrowStarted?.Invoke();
         }
 
         public void DoThrow()
         {
             if (!armed) return;
             
-            OnThrowFinished?.Invoke(this, EventArgs.Empty);
+            onThrowFinished?.Invoke();
         }
         
         public void ThrowMax()
@@ -122,20 +126,14 @@ namespace PixelCrew.Creatures.Controllers
             Debug.Log($"Current Stock: {_currentStock}");
 
             cooldown.Reset();
-            OnThrowMaxStarted?.Invoke(this, EventArgs.Empty);
+            onThrowMaxStarted?.Invoke();
         }
         
         public void DoThrowMax()
         {
             if (!armed) return;
             
-            var args = new ThrowMaxEventArgs
-            {
-                count = throwMaxCount,
-                timeout = throwMaxTimeout
-            };
-
-            OnThrowMaxFinished?.Invoke(this, args);
+            onThrowMaxFinished?.Invoke(throwMaxCount, throwMaxTimeout);
         }
 
         public void Arm(int stock = 1)
@@ -146,7 +144,7 @@ namespace PixelCrew.Creatures.Controllers
             
             SaveToSession();
             
-            OnArm?.Invoke(this, EventArgs.Empty);
+            onArm?.Invoke();
             
             Debug.Log($"Current Stock: {_currentStock}");
         }
@@ -158,7 +156,7 @@ namespace PixelCrew.Creatures.Controllers
             
             SaveToSession();
             
-            OnUnarm?.Invoke(this, EventArgs.Empty);
+            onUnarm?.Invoke();
         }
 
         public bool IsArmed()
@@ -169,12 +167,6 @@ namespace PixelCrew.Creatures.Controllers
         protected override Creature GetCreature()
         {
             return creature;
-        }
-
-        public class ThrowMaxEventArgs : EventArgs
-        {
-            public int count;
-            public float timeout;
         }
     }
 }

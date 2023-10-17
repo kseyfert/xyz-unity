@@ -6,7 +6,8 @@ namespace PixelCrew.Components.Game
 {
     public class HealthComponent : MonoBehaviour
     {
-        public event EventHandler OnChange;
+        public delegate void HcDelegate();
+        public HcDelegate onChange;
         
         [SerializeField] private int maxHealth = 100;
         [SerializeField] private int currentHealth;
@@ -31,7 +32,7 @@ namespace PixelCrew.Components.Game
             currentHealth += value;
             AdjustCurrent();
             
-            OnChange?.Invoke(this, EventArgs.Empty);
+            onChange?.Invoke();
 
             if (currentHealth == 0)
             {
