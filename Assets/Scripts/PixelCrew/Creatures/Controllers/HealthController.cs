@@ -1,6 +1,8 @@
 using System;
 using PixelCrew.Components;
 using PixelCrew.Components.Game;
+using PixelCrew.Creatures.Model;
+using PixelCrew.Creatures.Model.Data;
 using UnityEngine;
 
 namespace PixelCrew.Creatures.Controllers
@@ -15,14 +17,18 @@ namespace PixelCrew.Creatures.Controllers
         public HealthDelegate onDie;
         
         [SerializeField] private Creature creature;
+        [SerializeField] private int potionPower;
 
         private SessionController _sessionController;
         private HealthComponent _healthComponent;
+        private InventoryData _inventory;
 
         private void Start()
         {
             _sessionController = creature.SessionController;
             _healthComponent = GetComponent<HealthComponent>();
+
+            if (_sessionController != null) _inventory = _sessionController.GetModel().inventory;
             
             _healthComponent.onChange += SaveToSession;
             LoadFromSession();
@@ -30,6 +36,15 @@ namespace PixelCrew.Creatures.Controllers
             _healthComponent.onDamage.AddListener(() => onDamage?.Invoke());
             _healthComponent.onHeal.AddListener(() => onHeal?.Invoke());
             _healthComponent.onDie.AddListener(() => onDie?.Invoke());
+        }
+
+        public void ApplyPotion()
+        {
+            if (_inventory == null) return;
+            if (!_inventory.Has(CreatureModel.Potions)) return;
+
+            _inventory.Remove(CreatureModel.Potions, 1);
+            _healthComponent.ApplyHeal(potionPower);
         }
 
         public HealthComponent GetHealthComponent()

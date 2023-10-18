@@ -58,9 +58,9 @@ namespace PixelCrew.Creatures.Model.Data
             return !DefsFacade.I.IsExist(id) ? 0 : Remove(id, Count(id));
         }
 
-        public bool Has(string id)
+        public bool Has(string id, int atLeast=1)
         {
-            return Count(id) > 0;
+            return Count(id) >= atLeast;
         }
 
         public int Count(string id)

@@ -156,7 +156,7 @@ namespace PixelCrew.Creatures.Controllers
 
         public bool HasWeapon(int atLeast=1)
         {
-            return _inventory?.Count(CreatureModel.Weapons) >= atLeast;
+            return _inventory?.Has(CreatureModel.Weapons, atLeast) ?? false;
         }
 
         public int CountWeapon()

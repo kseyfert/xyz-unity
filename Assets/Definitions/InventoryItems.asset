@@ -17,4 +17,5 @@ MonoBehaviour:
   - id: Weapons
   - id: DoubleJumper
   - id: InfiniteJumper
-  - id: Inventer
+  - id: Keys
+  - id: Potions

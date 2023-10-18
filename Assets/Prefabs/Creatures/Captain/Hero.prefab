@@ -141,8 +141,6 @@ MonoBehaviour:
   jumpSpeed: 14
   jumpCooldown: 0.5
   debugEnabled: 1
-  doubleJumpAllowed: 0
-  infiniteJumpAllowed: 0
   kickbackPower: 3
   kickbackFrozenTime: 1
   longFallVelocity: 15
@@ -280,6 +278,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d656b43a-c47b-4e81-a542-259e563b2625
     m_ActionName: Hero/Throw[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 118745398735717005}
+        m_MethodName: OnPotion
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1f186ac6-beb5-46d6-9059-f0244df9965d
+    m_ActionName: Hero/Potion[/Keyboard/g]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Hero
@@ -397,6 +410,7 @@ MonoBehaviour:
   meleePower: 10
   meleeTimeout: 0
   rangeTimeout: 1
+  allowRangeLast: 0
   rangeMaxCount: 3
   rangeMaxDelay: 0.3
   rangeMaxTimeout: 1
@@ -938,6 +952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creature: {fileID: 118745399502611716}
+  potionPower: 5
 --- !u!1 &118745399969214614
 GameObject:
   m_ObjectHideFlags: 0
