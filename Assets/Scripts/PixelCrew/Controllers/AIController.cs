@@ -13,7 +13,7 @@ namespace PixelCrew.Controllers
 
         private Transform _transform;
         private MovementController _movementController;
-        private AttackController2 _attackController;
+        private AttackController _attackController;
 
         private Creature _target;
         private bool _canAttack;

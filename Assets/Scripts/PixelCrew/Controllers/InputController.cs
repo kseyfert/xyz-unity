@@ -15,7 +15,7 @@ namespace PixelCrew.Controllers
 
         private MovementController _movementController;
         private InteractionController _interactionController;
-        private AttackController2 _attackController;
+        private AttackController _attackController;
 
         private readonly Cooldown _throwLongPress = new Cooldown();
 

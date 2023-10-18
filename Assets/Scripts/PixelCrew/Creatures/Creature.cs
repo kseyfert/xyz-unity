@@ -17,7 +17,7 @@ namespace PixelCrew.Creatures
         
         [SerializeField] private MovementController movementController; 
         [SerializeField] private InteractionController interactionController;
-        [SerializeField] private AttackController2 attackController;
+        [SerializeField] private AttackController attackController;
         [SerializeField] private HealthController healthController;
         [SerializeField] private AnimationController animationController;
         [SerializeField] private SessionController sessionController;
@@ -28,7 +28,7 @@ namespace PixelCrew.Creatures
 
         public MovementController MovementController => movementController;
         public InteractionController InteractionController => interactionController;
-        public AttackController2 AttackController => attackController;
+        public AttackController AttackController => attackController;
         public HealthController HealthController => healthController;
         public AnimationController AnimationController => animationController;
         public ParticlesController ParticlesController => particlesController;

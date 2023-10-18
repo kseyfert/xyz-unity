@@ -1,78 +1,80 @@
 using System;
 using PixelCrew.Components.Game;
 using PixelCrew.Components.Utils.Checks;
+using PixelCrew.Creatures.Model;
+using PixelCrew.Creatures.Model.Data;
 using PixelCrew.Utils;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace PixelCrew.Creatures.Controllers
 {
     public class AttackController : AController
     {
-        public delegate void AttackDelegate();
+        public static readonly string RangeParticle = "range-projectile";
+        
+        public delegate void AttackEvent();
 
-        public AttackDelegate onAttackStarted;
-        public AttackDelegate onArm;
-        public AttackDelegate onUnarm;
-        public AttackDelegate onThrowStarted;
-        public AttackDelegate onThrowFinished;
-        public AttackDelegate onThrowMaxStarted;
+        public AttackEvent onMeleeRequested;
+        public AttackEvent onMeleeApplied;
 
-        public delegate void AttackThrowMaxDelegate(int count, float timeout);
-        public AttackThrowMaxDelegate onThrowMaxFinished;
+        public AttackEvent onRangeRequested;
+        public AttackEvent onRangeApplied;
+
+        public AttackEvent onRangeMaxRequested;
+        public AttackEvent onRangeMaxApplied;
+
+        public AttackEvent onWeaponsChanged;
         
         [SerializeField] private Creature creature;
-
-        [SerializeField] private CircleOverlapCheckComponent attackPosition;
-        [SerializeField] private int damagePower = 10;
-        [SerializeField] private bool armed;
-        [SerializeField] private Cooldown cooldown;
-        [SerializeField] private bool infiniteStock = false;
-        [SerializeField] private int throwMaxCount = 3;
-        [SerializeField] private float throwMaxTimeout = 0.2f;
         
-        private int _currentStock;
-        private SessionController _sessionController;
+        [SerializeField] private CircleOverlapCheckComponent meleePosition;
+        
+        [SerializeField] private int meleePower = 10;
+        [SerializeField] private float meleeTimeout = 0;
+        
+        [SerializeField] private float rangeTimeout = 1f;
+        [SerializeField] private bool allowRangeLast = false;
+        
+        [SerializeField] private int rangeMaxCount = 3;
+        [SerializeField] private float rangeMaxDelay = 0.3f;
+        [SerializeField] private float rangeMaxTimeout = 1f;
+        
+        [SerializeField] private bool alwaysCanMelee = false;
+        [SerializeField] private bool alwaysCanRange = false;
+        [SerializeField] private bool alwaysCanRangeMax = false;
+
+        private Cooldown _meleeCooldown = new Cooldown();
+        private Cooldown _rangeCooldown = new Cooldown();
+        private Cooldown _rangeMaxCooldown = new Cooldown();
+
+        private ParticlesController _particlesController;
+        private InventoryData _inventory;
 
         private void Start()
         {
-            _sessionController = creature.SessionController;
+            _particlesController = creature.ParticlesController;
             
-            LoadFromSession();
+            var sessionController = creature.SessionController;
+            if (sessionController != null) _inventory = sessionController.GetModel().inventory;
         }
 
-        private void LoadFromSession()
+        public bool CanMelee()
         {
-            if (_sessionController == null) return;
+            if (!_meleeCooldown.IsReady) return false;
 
-            // var isArmed = _sessionController.GetModel().isArmed;
-            var stock = _sessionController.GetModel().currentStock;
+            return alwaysCanMelee || HasWeapon();
+        }
+        public void RequestMelee()
+        {
+            if (!CanMelee()) return;
             
-            // if (isArmed) Arm(stock);
-            // else Unarm();
+            _meleeCooldown.Reset(meleeTimeout);
+            onMeleeRequested?.Invoke();
         }
-
-        private void SaveToSession()
+        public void DoMelee()
         {
-            if (_sessionController == null) return;
-
-            // _sessionController.GetModel().isArmed = armed;
-            _sessionController.GetModel().currentStock = _currentStock;
-        }
-
-        public void Attack()
-        {
-            if (!armed) return;
-            if (!cooldown.IsReady) return;
-
-            cooldown.Reset();
-            onAttackStarted?.Invoke();
-        }
-
-        public void DoAttack()
-        {
-            if (!armed) return;
-
-            var gos = attackPosition.GetObjectsInRange();
+            var gos = meleePosition.GetObjectsInRange();
             foreach (GameObject item in gos)
             {
                 var otherCreature = item.GetComponent<Creature>();
@@ -88,98 +90,87 @@ namespace PixelCrew.Creatures.Controllers
                 
                 if (health == null) continue;
                 
-                health.ApplyDamage(damagePower);        
+                health.ApplyDamage(meleePower);        
             }
+            onMeleeApplied?.Invoke();
         }
 
-        public void Throw()
+        public bool CanRange()
         {
-            if (!armed) return;
-            if (!cooldown.IsReady) return;
-            if (!infiniteStock && _currentStock <= 1) return;
+            if (!_rangeCooldown.IsReady) return false;
+            if (alwaysCanRange) return true;
+            if (allowRangeLast && HasWeapon()) return true;
 
-            _currentStock--;
-            Debug.Log($"Current Stock: {_currentStock}");
+            return HasWeapon(2);
+        }
+        public void RequestRange()
+        {
+            if (!CanRange()) return;
 
-            cooldown.Reset();
-            onThrowStarted?.Invoke();
+            _rangeCooldown.Reset(rangeTimeout);
+            onRangeRequested?.Invoke();
         }
 
-        public void DoThrow()
+        public void DoRange()
         {
-            if (!armed) return;
+            ApplyToInventory(-1);
+            _particlesController.Spawn(AttackController.RangeParticle);
             
-            onThrowFinished?.Invoke();
+            onRangeApplied?.Invoke();
         }
         
-        public void ThrowMax()
+        public bool CanRangeMax()
         {
-            if (!armed) return;
-            if (!cooldown.IsReady) return;
-            if (!infiniteStock && _currentStock <= 3)
-            {
-                Throw();
-                return;
-            };
+            if (!_rangeMaxCooldown.IsReady) return false;
+            if (alwaysCanRangeMax) return true;
+            if (allowRangeLast && HasWeapon(rangeMaxCount)) return true;
 
-            _currentStock -= 3;
-            Debug.Log($"Current Stock: {_currentStock}");
+            return HasWeapon(rangeMaxCount + 1);
+        }
+        public void RequestRangeMax()
+        {
+            if (!CanRangeMax()) return;
+            
+            _rangeMaxCooldown.Reset(rangeMaxTimeout);
+            onRangeMaxRequested?.Invoke();
+        }
+        public void DoRangeMax()
+        {
+            ThrowWeapon(-rangeMaxCount);
+            _particlesController.SpawnSeq(AttackController.RangeParticle, rangeMaxCount, rangeMaxDelay);
+            
+            onRangeMaxApplied?.Invoke();
+        }
 
-            cooldown.Reset();
-            onThrowMaxStarted?.Invoke();
+        public void TakeWeapon(int count = 1)
+        {
+            ApplyToInventory(count);
+        }
+
+        public void ThrowWeapon(int count = 1)
+        {
+            ApplyToInventory(-count);
+        }
+
+        public bool HasWeapon(int atLeast=1)
+        {
+            return _inventory?.Count(CreatureModel.Weapons) >= atLeast;
+        }
+
+        public int CountWeapon()
+        {
+            return _inventory?.Count(CreatureModel.Weapons) ?? 0;
+        }
+
+        private void ApplyToInventory(int value)
+        {
+            _inventory?.Apply(CreatureModel.Weapons, value);
+            onWeaponsChanged?.Invoke();
         }
         
-        public void DoThrowMax()
-        {
-            if (!armed) return;
-            
-            onThrowMaxFinished?.Invoke(throwMaxCount, throwMaxTimeout);
-        }
-
-        public void Arm(int stock = 1)
-        {
-            stock = Math.Max(stock, 1);
-            _currentStock += stock;
-            armed = true;
-            
-            SaveToSession();
-            
-            onArm?.Invoke();
-            
-            Debug.Log($"Current Stock: {_currentStock}");
-        }
-
-        public void Unarm()
-        {
-            _currentStock = 0;
-            armed = false;
-            
-            SaveToSession();
-            
-            onUnarm?.Invoke();
-        }
-
-        public bool IsArmed()
-        {
-            return armed;
-        }
-
         protected override Creature GetCreature()
         {
             return creature;
         }
-
-        public override void Die()
-        {
-            onAttackStarted = delegate () {};
-            onArm = delegate () {};
-            onUnarm = delegate () {};
-            onThrowStarted = delegate () {};
-            onThrowFinished = delegate () {};
-            onThrowMaxStarted = delegate () {};
-            onThrowMaxFinished = delegate(int _, float __) {};
-            
-            base.Die();
-        } 
     }
 }

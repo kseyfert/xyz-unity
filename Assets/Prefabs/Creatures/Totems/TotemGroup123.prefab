@@ -388,6 +388,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7497717930078690673, guid: 6363f88ff2fc9457cb8dfb7f8ba66ce7,
         type: 3}
+      propertyPath: top
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7497717930078690673, guid: 6363f88ff2fc9457cb8dfb7f8ba66ce7,
+        type: 3}
       propertyPath: topTotem
       value: 
       objectReference: {fileID: 590418225686712562}
@@ -527,6 +532,11 @@ PrefabInstance:
     - target: {fileID: 8524676919871811216, guid: c1cb86c6e900a4ac9ac60e6fa704c252,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8524676919871811217, guid: c1cb86c6e900a4ac9ac60e6fa704c252,
+        type: 3}
+      propertyPath: top
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8524676919871811217, guid: c1cb86c6e900a4ac9ac60e6fa704c252,

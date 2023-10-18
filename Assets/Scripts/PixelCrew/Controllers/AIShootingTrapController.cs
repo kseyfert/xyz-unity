@@ -10,7 +10,7 @@ namespace PixelCrew.Controllers
         [SerializeField] private Creature creature;
         [SerializeField] private float maxProbability;
 
-        private AttackController2 _attackController;
+        private AttackController _attackController;
 
         private Creature _target;
 

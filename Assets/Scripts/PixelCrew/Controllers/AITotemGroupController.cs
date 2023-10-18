@@ -14,7 +14,7 @@ namespace PixelCrew.Controllers
 
         private Cooldown _cooldown = new Cooldown();
         private Creature _target;
-        private List<AttackController2> _attackControllers = new List<AttackController2>();
+        private List<AttackController> _attackControllers = new List<AttackController>();
         private List<HealthController> _healthControllers = new List<HealthController>();
 
         private bool _canThrow;
