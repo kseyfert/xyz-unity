@@ -23,8 +23,9 @@ namespace PixelCrew.Components.Utils
             if (!_started) return;
             if (!_cooldown.IsReady) return;
             
+            _started = false;
+            
             action?.Invoke();
-            enabled = false;
         }
 
     }

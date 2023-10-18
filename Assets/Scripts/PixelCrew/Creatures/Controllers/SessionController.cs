@@ -10,9 +10,9 @@ namespace PixelCrew.Creatures.Controllers
         
         private GameSessionComponent _gameSessionComponent;
 
-        private void OnEnable()
+        private void Awake()
         {
-            _gameSessionComponent = FindObjectOfType<GameSessionComponent>();
+            _gameSessionComponent = GameSessionComponent.GetInstance();
         }
 
         public CreatureModel GetModel()

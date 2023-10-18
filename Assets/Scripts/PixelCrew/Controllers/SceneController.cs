@@ -1,4 +1,5 @@
-﻿using PixelCrew.Components.Game;
+﻿using System.Linq;
+using PixelCrew.Components.Game;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,7 +11,7 @@ namespace PixelCrew.Controllers
 
         private void Start()
         {
-            _gameSessionComponent = FindObjectOfType<GameSessionComponent>();
+            _gameSessionComponent = GameSessionComponent.GetInstance();
         }
         
         public void Reload()

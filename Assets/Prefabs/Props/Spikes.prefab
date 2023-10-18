@@ -139,6 +139,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Player
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   action:
     m_PersistentCalls:
       m_Calls:

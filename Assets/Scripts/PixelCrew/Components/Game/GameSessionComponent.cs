@@ -15,10 +15,27 @@ namespace PixelCrew.Components.Game
         }
         [SerializeField] private List<ModelItem> creatures = new List<ModelItem>();
 
-        private readonly List<string> _lastSave = new List<string>();
-    
+        public bool IsInitialized { get; private set; } = false;
+        
+        [SerializeField] public List<string> _lastSave = new List<string>();
+
+        public static GameSessionComponent GetInstance()
+        {
+            var gameSessions = FindObjectsOfType<GameSessionComponent>();
+            foreach (var gs in gameSessions) gs.Init();
+            
+            return FindObjectOfType<GameSessionComponent>();
+        }
+        
         private void Awake()
         {
+            Init();
+        }
+        
+        public void Init()
+        {
+            if (IsInitialized) return;
+            
             var gs = GetExistsSession();
             if (gs != null)
             {
@@ -30,6 +47,8 @@ namespace PixelCrew.Components.Game
                 Save();
                 DontDestroyOnLoad(gameObject);
             }
+
+            IsInitialized = true;
         }
 
         private GameSessionComponent GetExistsSession()

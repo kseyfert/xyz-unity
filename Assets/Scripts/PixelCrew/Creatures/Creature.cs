@@ -56,7 +56,8 @@ namespace PixelCrew.Creatures
             _animator = GetComponent<Animator>();
             _collider2D = GetComponent<Collider2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
-
+        }
+        private void Start() {
             Init();
         }
         

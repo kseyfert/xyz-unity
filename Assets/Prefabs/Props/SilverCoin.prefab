@@ -198,9 +198,9 @@ MonoBehaviour:
           m_StringArgument: destroy
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4972060704806230087}
-        m_MethodName: set_enabled
-        m_Mode: 6
+      - m_Target: {fileID: 5296153157686060561}
+        m_MethodName: Apply
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -209,9 +209,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 5296153157686060561}
-        m_MethodName: Apply
-        m_Mode: 0
+      - m_Target: {fileID: 2120676905601109485}
+        m_MethodName: set_enabled
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
