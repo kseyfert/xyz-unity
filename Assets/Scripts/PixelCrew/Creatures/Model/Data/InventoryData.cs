@@ -20,32 +20,45 @@ namespace PixelCrew.Creatures.Model.Data
             if (!DefsFacade.I.IsExist(id)) return 0;
             if (value <= 0) return 0;
 
-            var item = GetOrCreateItem(id);
-            item.value += value;
+            if (DefsFacade.I.IsStackable(id))
+            {
+                var item = GetOrCreateItem(id);
+                item.value += value;    
+            }
+            else
+            {
+                for (var i = 0; i < value; i++) CreateItem(id, 1);
+            }
 
             onChange?.Invoke(id);
             
             return value;
         }
 
-        public int Remove(string id, int value)
+        public int Remove(string id, int value=1)
         {
             if (!DefsFacade.I.IsExist(id)) return 0;
             if (value <= 0) return 0;
-            
-            var item = GetItem(id);
-            if (item == null) return 0;
 
-            item.value -= value;
-            if (item.value <= 0)
+            var toRemove = value;
+            var removed = 0;
+
+            foreach (var item in items.Where(item => item.id == id))
             {
-                items.Remove(item);
-                value += item.value;
+                var valueToRemove = Math.Min(item.value, toRemove);
+
+                item.value -= valueToRemove;
+                toRemove -= valueToRemove;
+                removed += valueToRemove;
+
+                if (toRemove == 0) break;
             }
 
-            onChange?.Invoke(id);
+            items.RemoveAll(item => item.value == 0);
             
-            return value;
+            onChange?.Invoke(id);
+
+            return removed;
         }
 
         public int Apply(string id, int value)
@@ -55,7 +68,7 @@ namespace PixelCrew.Creatures.Model.Data
 
         public int RemoveAll(string id)
         {
-            return !DefsFacade.I.IsExist(id) ? 0 : Remove(id, Count(id));
+            return !DefsFacade.I.IsExist(id) ? 0 : items.RemoveAll(item => item.id == id);
         }
 
         public bool Has(string id, int atLeast=1)
@@ -70,15 +83,18 @@ namespace PixelCrew.Creatures.Model.Data
                 .Sum(item => item.value);
         }
 
-        private InventoryItemData GetOrCreateItem(string id)
+        private InventoryItemData CreateItem(string id, int value=0)
         {
-            var found = items.Find(item => item.id == id);
-            if (found != null) return found;
-
-            var newItem = new InventoryItemData(id);
+            var newItem = new InventoryItemData(id, value);
             items.Add(newItem);
 
             return newItem;
+        }
+
+        private InventoryItemData GetOrCreateItem(string id)
+        {
+            var found = GetItem(id);
+            return found ?? CreateItem(id);
         }
 
         private InventoryItemData GetItem(string id)

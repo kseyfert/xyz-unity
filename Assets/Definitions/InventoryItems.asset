@@ -14,8 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - id: Coins
+    stackable: 1
   - id: Weapons
+    stackable: 1
   - id: DoubleJumper
+    stackable: 0
   - id: InfiniteJumper
+    stackable: 0
   - id: Keys
+    stackable: 1
   - id: Potions
+    stackable: 0

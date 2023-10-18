@@ -15,6 +15,12 @@ namespace PixelCrew.Creatures.Model.Definitions
             return !def.IsVoid;
         }
 
+        public bool IsStackable(string id)
+        {
+            var def = items.Get(id);
+            return def.Stackable;
+        }
+
         private static DefsFacade _instance;
         public static DefsFacade I => _instance == null ? LoadDefs() : _instance;
 

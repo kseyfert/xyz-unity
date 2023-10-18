@@ -29,7 +29,9 @@ namespace PixelCrew.Creatures.Model.Definitions
     public struct ItemDef
     {
         [SerializeField] private string id;
+        [SerializeField] private bool stackable;
         public string Id => id;
+        public bool Stackable => stackable;
         public bool IsVoid => string.IsNullOrEmpty(id);
     }
 }
