@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2686829769871623171}
   - component: {fileID: 2686829769871623174}
   - component: {fileID: 2686829769871623172}
-  - component: {fileID: 2686829769871623173}
   - component: {fileID: 3460177470584802714}
+  - component: {fileID: 7683646587379441298}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -147,19 +147,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2686829769871623170}
---- !u!114 &2686829769871623173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2686829769871623170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fa7fbb282384626847560caa173b210, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stock: 9
 --- !u!114 &3460177470584802714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,8 +166,8 @@ MonoBehaviour:
   action:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2686829769871623173}
-        m_MethodName: Arm
+      - m_Target: {fileID: 7683646587379441298}
+        m_MethodName: Apply
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -201,3 +188,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7683646587379441298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2686829769871623170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab31c01abd6f4f9692dccebe3335692c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: Weapons
+  defaultCount: 9

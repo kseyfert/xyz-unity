@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using PixelCrew.Creatures.Model.Data;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace PixelCrew.Creatures.Model
 {
@@ -10,15 +9,14 @@ namespace PixelCrew.Creatures.Model
     public class CreatureModel
     {
         public static readonly string Coins = "Coins";
-        public static readonly string Swords = "Swords";
         public static readonly string Weapons = "Weapons";
+        public static readonly string DoubleJumper = "DoubleJumper";
+        public static readonly string InfiniteJumper = "InfiniteJumper";
 
         public InventoryData inventory = new InventoryData();
 
         public int hp = 100;
-        public int currentStock = 0;
-        public bool isDoubleJumpAllowed = false;
-        public bool isInfiniteJumpAllowed = false;
+        
         public List<LevelPosition> lastPositions = new List<LevelPosition>();
     
         [Serializable]

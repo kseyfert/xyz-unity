@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8910259927616799264}
   - component: {fileID: 8910259927616799269}
   - component: {fileID: 8910259927616799268}
-  - component: {fileID: 3276284340066565644}
   - component: {fileID: 6750920576866201474}
+  - component: {fileID: 3809074507475161907}
   m_Layer: 0
   m_Name: GreenDiamond
   m_TagString: Untagged
@@ -165,18 +165,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 8910259927616799265}
---- !u!114 &3276284340066565644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8910259927616799265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4880a45bd24d4177876e010b26529a86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6750920576866201474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +178,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Player
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   action:
     m_PersistentCalls:
       m_Calls:
@@ -204,8 +195,8 @@ MonoBehaviour:
           m_StringArgument: destroy
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3276284340066565644}
-        m_MethodName: Allow
+      - m_Target: {fileID: 3809074507475161907}
+        m_MethodName: Apply
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -215,3 +206,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3809074507475161907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8910259927616799265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab31c01abd6f4f9692dccebe3335692c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: DoubleJumper
+  defaultCount: 1

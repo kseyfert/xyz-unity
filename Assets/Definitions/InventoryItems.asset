@@ -15,3 +15,6 @@ MonoBehaviour:
   items:
   - id: Coins
   - id: Weapons
+  - id: DoubleJumper
+  - id: InfiniteJumper
+  - id: Inventer

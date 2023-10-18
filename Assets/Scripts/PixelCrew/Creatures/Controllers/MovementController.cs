@@ -1,5 +1,7 @@
 ﻿using System;
 using PixelCrew.Components.Utils.Checks;
+using PixelCrew.Creatures.Model;
+using PixelCrew.Creatures.Model.Data;
 using PixelCrew.Utils;
 using UnityEngine;
 
@@ -23,14 +25,12 @@ namespace PixelCrew.Creatures.Controllers
         [SerializeField] private float jumpSpeed = 14;
         [SerializeField] private float jumpCooldown = 0.5f;
         [SerializeField] private bool debugEnabled = true;
-        [SerializeField] private bool doubleJumpAllowed = false;
-        [SerializeField] private bool infiniteJumpAllowed = false;
         [SerializeField] private float kickbackPower = 3;
         [SerializeField] private float kickbackFrozenTime = 1;
         [SerializeField] private float longFallVelocity = 15;
         [SerializeField] private float longFallFrozenTime = 0.3f;
 
-        private SessionController _sessionController;
+        private InventoryData _inventory;
 
         private Rigidbody2D _rb;
         private Transform _transform;
@@ -55,32 +55,16 @@ namespace PixelCrew.Creatures.Controllers
         private Vector2 _direction;
 
         private bool _wasGrounded = true;
-
-        private void LoadFromSession()
-        {
-            if (_sessionController == null) return;
-
-            doubleJumpAllowed = _sessionController.GetModel().isDoubleJumpAllowed;
-            infiniteJumpAllowed = _sessionController.GetModel().isInfiniteJumpAllowed;
-        }
-
-        private void SaveToSession()
-        {
-            if (_sessionController == null) return;
-
-            _sessionController.GetModel().isDoubleJumpAllowed = doubleJumpAllowed;
-            _sessionController.GetModel().isInfiniteJumpAllowed = infiniteJumpAllowed;
-        }
         
         private void Start()
         {
             _rb = creature.Rigidbody2D;
             _transform = creature.Transform;
-            _sessionController = creature.SessionController;
+            
+            var sessionController = creature.SessionController;
+            if (sessionController != null) _inventory = sessionController.GetModel().inventory;
 
             _initialScale = _transform.localScale;
-            
-            LoadFromSession();
         }
 
         private void FixedUpdate()
@@ -108,7 +92,6 @@ namespace PixelCrew.Creatures.Controllers
             var velocityY = CalculateY();
             
             _rb.velocity = new Vector2(velocityX, velocityY);
-            SaveToSession();
 
             if (_isKickbackRequested)
             {
@@ -186,7 +169,7 @@ namespace PixelCrew.Creatures.Controllers
             }
             
             var canJump = isGrounded;
-            var canDoubleJump = infiniteJumpAllowed || doubleJumpAllowed && !isGrounded && !_isDoubleJumpStarted;
+            var canDoubleJump = IsInfiniteJumpAllowed() || IsDoubleJumpAllowed() && !isGrounded && !_isDoubleJumpStarted;
 
             if (_isJumpRequested)
             {
@@ -244,8 +227,7 @@ namespace PixelCrew.Creatures.Controllers
 
         public void AllowInfiniteJump()
         {
-            infiniteJumpAllowed = true;
-            SaveToSession();
+            _inventory?.Add(CreatureModel.InfiniteJumper, 1);
         }
 
         public void Kickback()
@@ -255,8 +237,7 @@ namespace PixelCrew.Creatures.Controllers
 
         public void AllowDoubleJump()
         {
-            doubleJumpAllowed = true;
-            SaveToSession();
+            _inventory?.Add(CreatureModel.DoubleJumper, 1);
         }
 
         public void SpeedUp()
@@ -289,6 +270,16 @@ namespace PixelCrew.Creatures.Controllers
                 Gizmos.color = IsGrounded() ? Color.green : Color.red;
                 Gizmos.DrawSphere(transform.position, 0.5f);
             }
+        }
+
+        private bool IsDoubleJumpAllowed()
+        {
+            return _inventory?.Has(CreatureModel.DoubleJumper) ?? false;
+        }
+
+        private bool IsInfiniteJumpAllowed()
+        {
+            return _inventory?.Has(CreatureModel.InfiniteJumper) ?? false;
         }
 
         protected override Creature GetCreature()

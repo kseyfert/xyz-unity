@@ -57,6 +57,8 @@ namespace PixelCrew.Creatures.Controllers
             
             var sessionController = creature.SessionController;
             if (sessionController != null) _inventory = sessionController.GetModel().inventory;
+
+            if (_inventory != null) _inventory.onChange += OnInventoryChanged;
         }
 
         public bool CanMelee()
@@ -165,12 +167,25 @@ namespace PixelCrew.Creatures.Controllers
         private void ApplyToInventory(int value)
         {
             _inventory?.Apply(CreatureModel.Weapons, value);
+        }
+
+        private void OnInventoryChanged(string id)
+        {
+            if (id != CreatureModel.Weapons) return;
             onWeaponsChanged?.Invoke();
         }
         
         protected override Creature GetCreature()
         {
             return creature;
+        }
+
+        public override void Die()
+        {
+            if (_inventory != null) _inventory.onChange -= OnInventoryChanged;
+            onWeaponsChanged = delegate {};
+            
+            base.Die();
         }
     }
 }

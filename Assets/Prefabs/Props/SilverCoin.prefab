@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 4972060704806230087}
   - component: {fileID: 4972060704806230088}
   - component: {fileID: 4972060704806230090}
-  - component: {fileID: 9124009829037241036}
   - component: {fileID: 2120676905601109485}
   - component: {fileID: 5195141200149449156}
   - component: {fileID: 6665747235130682248}
+  - component: {fileID: 5296153157686060561}
   m_Layer: 0
   m_Name: SilverCoin
   m_TagString: Untagged
@@ -168,22 +168,6 @@ MonoBehaviour:
   onComplete:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &9124009829037241036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4972060704806230084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e80f8b4bf524291b8d56d71a156aed2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value: 1
-  onApply:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &2120676905601109485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +209,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 9124009829037241036}
+      - m_Target: {fileID: 5296153157686060561}
         m_MethodName: Apply
         m_Mode: 0
         m_Arguments:
@@ -273,3 +257,17 @@ MonoBehaviour:
   amplitude: 0.1
   frequency: 3
   randomized: 1
+--- !u!114 &5296153157686060561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4972060704806230084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab31c01abd6f4f9692dccebe3335692c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: Coins
+  defaultCount: 1

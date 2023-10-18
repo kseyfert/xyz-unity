@@ -18,6 +18,11 @@ namespace PixelCrew.Creatures.Model.Definitions
 
             return default;
         }
+
+#if UNITY_EDITOR
+        public ItemDef[] ItemsForEditor => items;
+#endif
+
     }
 
     [Serializable]

@@ -3,46 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using PixelCrew.Creatures.Model.Definitions;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace PixelCrew.Creatures.Model.Data
 {
     [Serializable]
     public class InventoryData
     {
+        public delegate void InventoryEvent(string id);
+
+        public InventoryEvent onChange;
+        
         [SerializeField] private List<InventoryItemData> items = new List<InventoryItemData>();
 
         public int Add(string id, int value)
         {
-            Debug.Log($"IADD: {id}-{value}");
             if (!DefsFacade.I.IsExist(id)) return 0;
             if (value <= 0) return 0;
 
             var item = GetOrCreateItem(id);
             item.value += value;
 
+            onChange?.Invoke(id);
+            
             return value;
         }
 
         public int Remove(string id, int value)
         {
-            Debug.Log($"IREM {id}-{value}");
             if (!DefsFacade.I.IsExist(id)) return 0;
             if (value <= 0) return 0;
             
             var item = GetItem(id);
             if (item == null) return 0;
 
-            if (item.value <= value)
+            item.value -= value;
+            if (item.value <= 0)
             {
-                Debug.Log($"COUNT: {items.Count}");
                 items.Remove(item);
-                Debug.Log($"COUNT: {items.Count}");
-                return item.value;
+                value += item.value;
             }
 
-            item.value -= value;
-
+            onChange?.Invoke(id);
+            
             return value;
         }
 
@@ -51,14 +53,9 @@ namespace PixelCrew.Creatures.Model.Data
             return value >= 0 ? Add(id, value) : Remove(id, -value);
         }
 
-        public void RemoveAll(string id)
+        public int RemoveAll(string id)
         {
-            if (!DefsFacade.I.IsExist(id)) return;
-            
-            var item = GetItem(id);
-            if (item == null) return;
-
-            items.Remove(item);
+            return !DefsFacade.I.IsExist(id) ? 0 : Remove(id, Count(id));
         }
 
         public bool Has(string id)
@@ -93,6 +90,7 @@ namespace PixelCrew.Creatures.Model.Data
     [Serializable]
     public class InventoryItemData
     {
+        [InventoryId] 
         public string id;
         public int value;
 
