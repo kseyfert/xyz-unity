@@ -1,15 +1,21 @@
 using System;
 using System.Collections.Generic;
+using PixelCrew.Creatures.Model.Data;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace PixelCrew.Creatures.Model
 {
     [Serializable]
     public class CreatureModel
     {
-        public int coins;
+        public static readonly string Coins = "Coins";
+        public static readonly string Swords = "Swords";
+        public static readonly string Weapons = "Weapons";
+
+        public InventoryData inventory = new InventoryData();
+
         public int hp = 100;
-        public bool isArmed = false;
         public int currentStock = 0;
         public bool isDoubleJumpAllowed = false;
         public bool isInfiniteJumpAllowed = false;

@@ -655,7 +655,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5592680898252621393}
-  - component: {fileID: 5592680898252621392}
+  - component: {fileID: 3521254211479579520}
   m_Layer: 0
   m_Name: AttackController
   m_TagString: Untagged
@@ -678,7 +678,7 @@ Transform:
   m_Father: {fileID: 5592680898816432130}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5592680898252621392
+--- !u!114 &3521254211479579520
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -687,13 +687,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 5592680898252621358}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a14dda64e9b44c0b750f1a4bcc76835, type: 3}
+  m_Script: {fileID: 11500000, guid: f1623d3cbf8b4379b7e9b85232ece463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   creature: {fileID: 5592680898816432158}
-  attackPosition: {fileID: 5592680897228220229}
-  damagePower: 10
-  armed: 1
+  meleePosition: {fileID: 5592680897228220229}
+  meleePower: 10
+  meleeTimeout: 0
+  rangeTimeout: 1
+  rangeMaxCount: 3
+  rangeMaxDelay: 0.3
+  rangeMaxTimeout: 1
+  alwaysCanMelee: 1
+  alwaysCanRange: 0
+  alwaysCanRangeMax: 0
 --- !u!1 &5592680898721503893
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,12 +892,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementController: {fileID: 5592680898887935763}
   interactionController: {fileID: 0}
-  attackController: {fileID: 5592680898252621392}
+  attackController: {fileID: 3521254211479579520}
   healthController: {fileID: 5592680897174825653}
   animationController: {fileID: 5592680898819382576}
   sessionController: {fileID: 0}
   particlesController: {fileID: 5592680897954198385}
   coinsController: {fileID: 0}
+  onDie:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!212 &5592680898816432133
 SpriteRenderer:
   m_ObjectHideFlags: 0

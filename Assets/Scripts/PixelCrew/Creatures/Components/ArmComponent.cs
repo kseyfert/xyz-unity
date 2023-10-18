@@ -11,7 +11,7 @@ namespace PixelCrew.Creatures.Components
             if (creature == null) return;
 
             var ac = creature.AttackController;
-            ac.Arm(stock);
+            ac.TakeWeapon(stock);
         }
     }
 }

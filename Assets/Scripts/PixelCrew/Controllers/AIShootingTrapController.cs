@@ -10,7 +10,7 @@ namespace PixelCrew.Controllers
         [SerializeField] private Creature creature;
         [SerializeField] private float maxProbability;
 
-        private AttackController _attackController;
+        private AttackController2 _attackController;
 
         private Creature _target;
 
@@ -27,12 +27,12 @@ namespace PixelCrew.Controllers
 
         private void Update()
         {
-            if (_canAttack) _attackController.Attack();
+            if (_canAttack) _attackController.RequestMelee();
             else if (_canThrow)
             {
                 var x = _rnd.NextDouble();
-                if (x <= maxProbability) _attackController.ThrowMax();
-                else _attackController.Throw();
+                if (x <= maxProbability) _attackController.RequestRangeMax();
+                else _attackController.RequestRange();
             }
         }
 

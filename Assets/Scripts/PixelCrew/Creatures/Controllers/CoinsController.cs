@@ -1,4 +1,6 @@
 using System;
+using PixelCrew.Creatures.Model;
+using PixelCrew.Creatures.Model.Data;
 using UnityEngine;
 
 namespace PixelCrew.Creatures.Controllers
@@ -6,61 +8,40 @@ namespace PixelCrew.Creatures.Controllers
     public class CoinsController : AController
     {
         [SerializeField] private Creature creature;
-        [SerializeField] private int currentAmount = 0;
 
-        private SessionController _sessionController;
+        private InventoryData _inventory;
 
         private void Start()
         {
-            _sessionController = creature.SessionController;
-            LoadFromSession();
-        }
-
-        private void SaveToSession()
-        {
-            if (_sessionController == null) return;
+            var sessionController = creature.SessionController;
+            if (sessionController == null) return;
             
-            _sessionController.GetModel().coins = currentAmount;
+            _inventory = sessionController.GetModel().inventory;
         }
-
-        private void LoadFromSession()
+        
+        private int ApplyToInventory(int value)
         {
-            if (_sessionController == null) return;
-
-            currentAmount = _sessionController.GetModel().coins;
+            return _inventory?.Apply(CreatureModel.Coins, value) ?? 0;
         }
 
         public int AddAmount(int value)
         {
-            value = Math.Max(0, value);
-            currentAmount += value;
-            Debug.Log($"Money: {currentAmount}");
-            
-            SaveToSession();
-            
-            return value;
+            return ApplyAmount(value);
         }
 
         public int SubAmount(int value)
         {
-            value = Math.Max(0, value);
-            value = Math.Min(currentAmount, value);
-            currentAmount -= value;
-            Debug.Log($"Money: {currentAmount}");
-            
-            SaveToSession();
-
-            return value;
+            return ApplyAmount(-value);
         }
 
         public int ApplyAmount(int value)
         {
-            return value > 0 ? AddAmount(value) : SubAmount(-value);
+            return ApplyToInventory(value);
         }
 
         public int GetAmount()
         {
-            return currentAmount;
+            return _inventory.Count(CreatureModel.Coins);
         }
 
         protected override Creature GetCreature()

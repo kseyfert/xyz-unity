@@ -13,7 +13,7 @@ namespace PixelCrew.Controllers
 
         private Transform _transform;
         private MovementController _movementController;
-        private AttackController _attackController;
+        private AttackController2 _attackController;
 
         private Creature _target;
         private bool _canAttack;
@@ -69,7 +69,7 @@ namespace PixelCrew.Controllers
                 if (_canAttack)
                 {
                     _movementController.SetDirection(0);
-                    _attackController.Attack();
+                    _attackController.RequestMelee();
                     yield return new WaitForSeconds(1f);
                     continue;
                 }

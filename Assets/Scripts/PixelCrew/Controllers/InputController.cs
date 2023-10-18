@@ -15,7 +15,7 @@ namespace PixelCrew.Controllers
 
         private MovementController _movementController;
         private InteractionController _interactionController;
-        private AttackController _attackController;
+        private AttackController2 _attackController;
 
         private readonly Cooldown _throwLongPress = new Cooldown();
 
@@ -53,7 +53,7 @@ namespace PixelCrew.Controllers
         {
             if (_attackController == null) return;
             
-            if (context.canceled) _attackController.Attack();
+            if (context.canceled) _attackController.RequestMelee();
         }
 
         public void OnThrow(InputAction.CallbackContext context)
@@ -62,8 +62,8 @@ namespace PixelCrew.Controllers
 
             if (context.performed) _throwLongPress.Reset(longPress);
             
-            if (context.canceled && _throwLongPress.IsReady) _attackController.ThrowMax();
-            if (context.canceled && !_throwLongPress.IsReady) _attackController.Throw();
+            if (context.canceled && _throwLongPress.IsReady) _attackController.RequestRangeMax();
+            if (context.canceled && !_throwLongPress.IsReady) _attackController.RequestRange();
         }
     }
 }

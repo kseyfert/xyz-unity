@@ -40,7 +40,7 @@ namespace PixelCrew.Components.Game
             collisionModule.enabled = true;
         }
 
-        public void RunBurst(int count)
+        public virtual void RunBurst(int count)
         {
             var burst = _particleSystem.emission.GetBurst(0);
             burst.count = count;

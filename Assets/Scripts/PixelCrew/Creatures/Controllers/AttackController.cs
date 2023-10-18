@@ -44,18 +44,18 @@ namespace PixelCrew.Creatures.Controllers
         {
             if (_sessionController == null) return;
 
-            var isArmed = _sessionController.GetModel().isArmed;
+            // var isArmed = _sessionController.GetModel().isArmed;
             var stock = _sessionController.GetModel().currentStock;
             
-            if (isArmed) Arm(stock);
-            else Unarm();
+            // if (isArmed) Arm(stock);
+            // else Unarm();
         }
 
         private void SaveToSession()
         {
             if (_sessionController == null) return;
 
-            _sessionController.GetModel().isArmed = armed;
+            // _sessionController.GetModel().isArmed = armed;
             _sessionController.GetModel().currentStock = _currentStock;
         }
 

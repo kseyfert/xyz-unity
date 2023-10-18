@@ -357,7 +357,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 118745399172124513}
-  - component: {fileID: 118745399172124512}
+  - component: {fileID: 2975734390769426219}
   m_Layer: 0
   m_Name: AttackController
   m_TagString: Untagged
@@ -380,7 +380,7 @@ Transform:
   m_Father: {fileID: 118745399502611717}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &118745399172124512
+--- !u!114 &2975734390769426219
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -389,19 +389,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 118745399172124514}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a14dda64e9b44c0b750f1a4bcc76835, type: 3}
+  m_Script: {fileID: 11500000, guid: f1623d3cbf8b4379b7e9b85232ece463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   creature: {fileID: 118745399502611716}
-  attackPosition: {fileID: 6982576265391321639}
-  damagePower: 10
-  armed: 1
-  cooldown:
-    enabled: 1
-    time: 0.5
-  infiniteStock: 0
-  throwMaxCount: 3
-  throwMaxTimeout: 0.2
+  meleePosition: {fileID: 6982576265391321639}
+  meleePower: 10
+  meleeTimeout: 0
+  rangeTimeout: 1
+  rangeMaxCount: 3
+  rangeMaxDelay: 0.3
+  rangeMaxTimeout: 1
+  alwaysCanMelee: 0
+  alwaysCanRange: 0
+  alwaysCanRangeMax: 0
 --- !u!1 &118745399455134427
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +447,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creature: {fileID: 118745399502611716}
-  currentAmount: 0
 --- !u!1 &118745399470014277
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +565,7 @@ MonoBehaviour:
   - name: hit-coins
     disabled: 0
     component: {fileID: 5436716680917423860}
-  - name: sword-thrown
+  - name: range-projectile
     disabled: 0
     component: {fileID: 804519053808961992}
   - name: dead
@@ -699,7 +699,7 @@ Animator:
   m_GameObject: {fileID: 118745399502611719}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dbe29340bbbb94109ba1389073eb3f1c, type: 2}
+  m_Controller: {fileID: 9100000, guid: f5761b78ba457421792cc33c7e5f8898, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -735,7 +735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementController: {fileID: 118745398694181804}
   interactionController: {fileID: 118745398562103956}
-  attackController: {fileID: 118745399172124512}
+  attackController: {fileID: 2975734390769426219}
   healthController: {fileID: 118745399958086881}
   animationController: {fileID: 118745399470014299}
   sessionController: {fileID: 118745398315569686}
@@ -1155,8 +1155,8 @@ GameObject:
   - component: {fileID: 118745400131910328}
   - component: {fileID: 118745400131910332}
   - component: {fileID: 118745400131910333}
-  - component: {fileID: 1871862503427057919}
   - component: {fileID: 5436716680917423860}
+  - component: {fileID: 4360310113575770242}
   m_Layer: 0
   m_Name: HitCoinsParticle
   m_TagString: Untagged
@@ -5964,21 +5964,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &1871862503427057919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 118745400131910329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 443d465d682e4004a5751120ac817d0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collisionTimeout: 1.5
-  prefab: {fileID: 4972060704806230084, guid: 53566a5ec0d574d33862e31ca38d0d9e, type: 3}
-  parent: {fileID: 0}
 --- !u!114 &5436716680917423860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5992,12 +5977,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 118745400131910328}
-  prefab: {fileID: 4972060704806230084, guid: 53566a5ec0d574d33862e31ca38d0d9e, type: 3}
+  prefab: {fileID: 0}
   parent: {fileID: 0}
   action:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1871862503427057919}
+      - m_Target: {fileID: 4360310113575770242}
         m_MethodName: RunBurst
         m_Mode: 3
         m_Arguments:
@@ -6008,6 +5993,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4360310113575770242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118745400131910329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3320e0a03e4a401cacc22c594e0713f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionTimeout: 1.5
+  prefab: {fileID: 4972060704806230084, guid: 53566a5ec0d574d33862e31ca38d0d9e, type: 3}
+  parent: {fileID: 0}
+  creature: {fileID: 118745399502611716}
 --- !u!1 &118745400314361097
 GameObject:
   m_ObjectHideFlags: 0

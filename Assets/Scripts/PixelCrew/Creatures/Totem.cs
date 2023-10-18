@@ -5,27 +5,22 @@ namespace PixelCrew.Creatures
 {
     public class Totem : Creature
     {
-        [SerializeField] private Totem topTotem;
+        [SerializeField] private bool top = true;
         protected override void Init()
         {
             var animationController = base.AnimationController;
             var attackController = base.AttackController;
-            var particlesController = base.ParticlesController;
             var healthController = base.HealthController;
             
-            attackController.onThrowStarted += () => animationController.SetTrigger(AnimationController.TriggerThrow);
-            attackController.onThrowFinished += () => particlesController.Spawn("sword-thrown");
-            
-            attackController.onThrowMaxStarted += () => animationController.SetTrigger(AnimationController.TriggerThrowMax);
-            attackController.onThrowMaxFinished += (count, timeout) => particlesController.SpawnSeq("sword-thrown", count, timeout);
+            attackController.onRangeRequested += () => animationController.SetTrigger(AnimationController.TriggerThrow);
+            attackController.onRangeMaxRequested += () => animationController.SetTrigger(AnimationController.TriggerThrowMax);
 
             healthController.onDamage += () => animationController.SetTrigger(AnimationController.TriggerHit);
             healthController.onDie += () => animationController.SetTrigger(AnimationController.TriggerHit);
             
             animationController.SetBoolUpdate(AnimationController.BoolIsDead, () => healthController.GetHealthComponent().IsDead());
-            
-            if (topTotem != null) animationController.SetProfile("middle");
-            else animationController.SetProfile("top");
+
+            animationController.SetProfile(top ? "top" : "middle");
         }
     }
 }

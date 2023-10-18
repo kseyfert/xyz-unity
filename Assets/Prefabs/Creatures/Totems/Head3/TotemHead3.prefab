@@ -303,7 +303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementController: {fileID: 0}
   interactionController: {fileID: 0}
-  attackController: {fileID: 7497717930089481856}
+  attackController: {fileID: 7039189853260114824}
   healthController: {fileID: 7497717930905628861}
   animationController: {fileID: 7497717930144039468}
   sessionController: {fileID: 0}
@@ -312,7 +312,7 @@ MonoBehaviour:
   onDie:
     m_PersistentCalls:
       m_Calls: []
-  topTotem: {fileID: 0}
+  top: 1
 --- !u!1 &7497717930089481858
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,7 +322,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7497717930089481859}
-  - component: {fileID: 7497717930089481856}
+  - component: {fileID: 7039189853260114824}
   m_Layer: 0
   m_Name: AttackController
   m_TagString: Untagged
@@ -345,7 +345,7 @@ Transform:
   m_Father: {fileID: 7497717930078690672}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7497717930089481856
+--- !u!114 &7039189853260114824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -354,19 +354,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 7497717930089481858}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a14dda64e9b44c0b750f1a4bcc76835, type: 3}
+  m_Script: {fileID: 11500000, guid: f1623d3cbf8b4379b7e9b85232ece463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   creature: {fileID: 7497717930078690673}
-  attackPosition: {fileID: 7497717930156228535}
-  damagePower: 10
-  armed: 1
-  cooldown:
-    enabled: 1
-    time: 1.5
-  infiniteStock: 1
-  throwMaxCount: 3
-  throwMaxTimeout: 0.2
+  meleePosition: {fileID: 7497717930156228535}
+  meleePower: 10
+  meleeTimeout: 0
+  rangeTimeout: 1
+  rangeMaxCount: 3
+  rangeMaxDelay: 0.3
+  rangeMaxTimeout: 1
+  alwaysCanMelee: 0
+  alwaysCanRange: 1
+  alwaysCanRangeMax: 1
 --- !u!1 &7497717930144039470
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,7 +513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   creature: {fileID: 7497717930078690673}
   spawns:
-  - name: sword-thrown
+  - name: range-projectile
     disabled: 0
     component: {fileID: 7497717931472280224}
   - name: dead

@@ -3,7 +3,6 @@ using PixelCrew.Components.Utils;
 using PixelCrew.Creatures.Controllers;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace PixelCrew.Creatures
 {
@@ -18,7 +17,7 @@ namespace PixelCrew.Creatures
         
         [SerializeField] private MovementController movementController; 
         [SerializeField] private InteractionController interactionController;
-        [SerializeField] private AttackController attackController;
+        [SerializeField] private AttackController2 attackController;
         [SerializeField] private HealthController healthController;
         [SerializeField] private AnimationController animationController;
         [SerializeField] private SessionController sessionController;
@@ -29,7 +28,7 @@ namespace PixelCrew.Creatures
 
         public MovementController MovementController => movementController;
         public InteractionController InteractionController => interactionController;
-        public AttackController AttackController => attackController;
+        public AttackController2 AttackController => attackController;
         public HealthController HealthController => healthController;
         public AnimationController AnimationController => animationController;
         public ParticlesController ParticlesController => particlesController;
@@ -70,19 +69,12 @@ namespace PixelCrew.Creatures
 
             if (animationController != null && attackController != null)
             {
-                attackController.onAttackStarted += () => animationController.SetTrigger(AnimationController.TriggerAttack);
-                
-                attackController.onThrowStarted += () => animationController.SetTrigger(AnimationController.TriggerThrow);
-                attackController.onThrowFinished += () => particlesController.Spawn("sword-thrown");
-                
-                attackController.onThrowMaxStarted += () => animationController.SetTrigger(AnimationController.TriggerThrowMax);
-                attackController.onThrowMaxFinished += (count, timeout) => particlesController.SpawnSeq("sword-thrown", count, timeout);
+                attackController.onMeleeRequested += () => animationController.SetTrigger(AnimationController.TriggerAttack);
+                attackController.onRangeRequested += () => animationController.SetTrigger(AnimationController.TriggerThrow);
+                attackController.onRangeMaxRequested += () => animationController.SetTrigger(AnimationController.TriggerThrowMax);
 
-                attackController.onArm += () => animationController.SetProfile("armed");
-                attackController.onUnarm += () => animationController.SetProfile("unarmed");
-                
-                if (attackController.IsArmed()) animationController.SetProfile("armed");
-                else animationController.SetProfile("unarmed");
+                attackController.onWeaponsChanged += () => animationController.SetProfile(attackController.HasWeapon() ? "armed" : "unarmed");
+                animationController.SetProfile(attackController.HasWeapon() ? "armed" : "unarmed");
             }
 
             if (animationController != null)
@@ -115,25 +107,25 @@ namespace PixelCrew.Creatures
             particlesController.Spawn(particleName);
         }
 
-        public void Attack()
+        public void AnimationEventMelee()
         {
             if (attackController == null) return;
             
-            attackController.DoAttack();
+            attackController.DoMelee();
         }
 
-        public void Throw()
+        public void AnimationEventRange()
         {
             if (attackController == null) return;
             
-            attackController.DoThrow();
+            attackController.DoRange();
         }
 
-        public void ThrowMax()
+        public void AnimationEventRangeMax()
         {
             if (attackController == null) return;
             
-            attackController.DoThrowMax();
+            attackController.DoRangeMax();
         }
 
         public void Die()
