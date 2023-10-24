@@ -11,6 +11,7 @@ namespace PixelCrew.Creatures
             var animationController = base.AnimationController;
             var attackController = base.AttackController;
             var healthController = base.HealthController;
+            var soundController = base.SoundController;
             
             attackController.onRangeRequested += () => animationController.SetTrigger(AnimationController.TriggerThrow);
             attackController.onRangeMaxRequested += () => animationController.SetTrigger(AnimationController.TriggerThrowMax);
@@ -21,6 +22,13 @@ namespace PixelCrew.Creatures
             animationController.SetBoolUpdate(AnimationController.BoolIsDead, () => healthController.GetHealthComponent().IsDead());
 
             animationController.SetProfile(top ? "top" : "middle");
+
+            if (soundController != null)
+            {
+                healthController.onDamage += () => soundController.Play("hit");
+                healthController.onDie += () => soundController.Play("die");
+                attackController.onRangeRequested += () => soundController.Play("range");
+            }
         }
     }
 }

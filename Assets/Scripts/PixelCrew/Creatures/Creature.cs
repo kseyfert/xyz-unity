@@ -23,6 +23,7 @@ namespace PixelCrew.Creatures
         [SerializeField] private SessionController sessionController;
         [SerializeField] private ParticlesController particlesController;
         [SerializeField] private CoinsController coinsController;
+        [SerializeField] private SoundController soundController;
 
         [SerializeField] private DieEvent onDie;
 
@@ -34,6 +35,7 @@ namespace PixelCrew.Creatures
         public ParticlesController ParticlesController => particlesController;
         public SessionController SessionController => sessionController;
         public CoinsController CoinsController => coinsController;
+        public SoundController SoundController => soundController;
 
         private Transform _transform;
         private Rigidbody2D _rigidbody2D;
@@ -98,6 +100,27 @@ namespace PixelCrew.Creatures
                 healthController.onDie += () => animationController.SetTrigger(AnimationController.TriggerHit);
                 
                 animationController.SetBoolUpdate(AnimationController.BoolIsDead, () => healthController.GetHealthComponent().IsDead());
+            }
+
+            if (soundController != null)
+            {
+                if (healthController != null)
+                {
+                    healthController.onDamage += () => soundController.Play("hit");
+                    healthController.onDie += () => soundController.Play("die");
+                }
+
+                if (attackController != null)
+                {
+                    attackController.onMeleeRequested += () => soundController.Play("melee");
+                    attackController.onRangeRequested += () => soundController.Play("range");
+                }
+
+                if (movementController != null)
+                {
+                    movementController.onJumpStarted += () => soundController.Play("jump");
+                    movementController.onDoubleJumpStarted += () => soundController.Play("jump");
+                }
             }
         }
 
