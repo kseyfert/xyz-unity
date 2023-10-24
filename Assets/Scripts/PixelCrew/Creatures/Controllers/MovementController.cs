@@ -16,8 +16,6 @@ namespace PixelCrew.Creatures.Controllers
         public MovementDelegate onGrounded;
         public MovementDelegate onLongFallGrounded;
         
-        [SerializeField] private Creature creature;
-        
         [SerializeField] private LayerTriggerCheckComponent groundChecker;
 
         [SerializeField] private float speed = 7;
@@ -58,10 +56,10 @@ namespace PixelCrew.Creatures.Controllers
         
         private void Start()
         {
-            _rb = creature.Rigidbody2D;
-            _transform = creature.Transform;
+            _rb = Creature.Rigidbody2D;
+            _transform = Creature.Transform;
             
-            var sessionController = creature.SessionController;
+            var sessionController = Creature.SessionController;
             if (sessionController != null) _inventory = sessionController.GetModel().inventory;
 
             _initialScale = _transform.localScale;
@@ -280,11 +278,6 @@ namespace PixelCrew.Creatures.Controllers
         private bool IsInfiniteJumpAllowed()
         {
             return _inventory?.Has(CreatureModel.InfiniteJumper) ?? false;
-        }
-
-        protected override Creature GetCreature()
-        {
-            return creature;
         }
 
         public override void Die()

@@ -17,8 +17,6 @@ namespace PixelCrew.Creatures.Controllers
         public static readonly int BoolIsDead = Animator.StringToHash("is-dead");
 
         public static readonly int FloatVelocityY = Animator.StringToHash("velocity-y");
-
-        [SerializeField] private Creature creature;
         
         [Serializable]
         public struct AnimationProfile
@@ -37,7 +35,7 @@ namespace PixelCrew.Creatures.Controllers
 
         private void Start()
         {
-            _animator = creature.Animator;
+            _animator = Creature.Animator;
 
             if (_currentProfileName == "")
             {
@@ -93,11 +91,6 @@ namespace PixelCrew.Creatures.Controllers
             if (index < 0) return;
             
             _animator.runtimeAnimatorController = animationProfiles[index].controller;
-        }
-
-        protected override Creature GetCreature()
-        {
-            return creature;
         }
     }
 }

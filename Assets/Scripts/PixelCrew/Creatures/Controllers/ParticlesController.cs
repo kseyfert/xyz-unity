@@ -8,8 +8,6 @@ namespace PixelCrew.Creatures.Controllers
 {
     public class ParticlesController : AController
     {
-        [SerializeField] private Creature creature;
-        
         [Serializable]
         private struct SpawnItem
         {
@@ -43,11 +41,6 @@ namespace PixelCrew.Creatures.Controllers
                 Spawn(particleName);
                 yield return new WaitForSeconds(timeout);
             }
-        }
-
-        protected override Creature GetCreature()
-        {
-            return creature;
         }
 
         public override void Die()

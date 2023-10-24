@@ -1,15 +1,16 @@
 using UnityEngine;
-using PixelCrew.Utils;
 
 namespace PixelCrew.Creatures.Controllers
 {
     public abstract class AController : MonoBehaviour
     {
-        protected abstract Creature GetCreature();
+        [SerializeField] private Creature creature;
+
+        public Creature Creature => creature;
         
         public virtual void Die()
         {
-            if (GetCreature().gameObject != gameObject) gameObject.SetActive(false);
+            if (creature.gameObject != gameObject) gameObject.SetActive(false);
             else enabled = false;
         }
     }

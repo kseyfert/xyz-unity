@@ -4,6 +4,7 @@ using PixelCrew.Components.Game;
 using PixelCrew.Creatures.Model;
 using PixelCrew.Creatures.Model.Data;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace PixelCrew.Creatures.Controllers
 {
@@ -16,7 +17,6 @@ namespace PixelCrew.Creatures.Controllers
         public HealthDelegate onHeal;
         public HealthDelegate onDie;
         
-        [SerializeField] private Creature creature;
         [SerializeField] private int potionPower;
 
         private SessionController _sessionController;
@@ -25,7 +25,7 @@ namespace PixelCrew.Creatures.Controllers
 
         private void Start()
         {
-            _sessionController = creature.SessionController;
+            _sessionController = Creature.SessionController;
             _healthComponent = GetComponent<HealthComponent>();
 
             if (_sessionController != null) _inventory = _sessionController.GetModel().inventory;
@@ -64,11 +64,6 @@ namespace PixelCrew.Creatures.Controllers
             if (_sessionController == null) return;
 
             _sessionController.GetModel().hp = _healthComponent.GetCurrentHealth();
-        }
-
-        protected override Creature GetCreature()
-        {
-            return creature;
         }
 
         public override void Die()

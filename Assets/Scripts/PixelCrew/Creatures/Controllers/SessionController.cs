@@ -6,8 +6,6 @@ namespace PixelCrew.Creatures.Controllers
 {
     public class SessionController : AController
     {
-        [SerializeField] private Creature creature;
-        
         private GameSessionComponent _gameSessionComponent;
 
         private void Awake()
@@ -17,14 +15,9 @@ namespace PixelCrew.Creatures.Controllers
 
         public CreatureModel GetModel()
         {
-            return _gameSessionComponent.GetCreatureModel(creature.ID);
+            return _gameSessionComponent.GetCreatureModel(Creature.ID);
         }
-
-        protected override Creature GetCreature()
-        {
-            return creature;
-        }
-
+        
         public override void Die()
         {
         }

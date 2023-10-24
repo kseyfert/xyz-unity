@@ -26,8 +26,6 @@ namespace PixelCrew.Creatures.Controllers
 
         public AttackEvent onWeaponsChanged;
         
-        [SerializeField] private Creature creature;
-        
         [SerializeField] private CircleOverlapCheckComponent meleePosition;
         
         [SerializeField] private int meleePower = 10;
@@ -53,9 +51,9 @@ namespace PixelCrew.Creatures.Controllers
 
         private void Start()
         {
-            _particlesController = creature.ParticlesController;
+            _particlesController = Creature.ParticlesController;
             
-            var sessionController = creature.SessionController;
+            var sessionController = Creature.SessionController;
             if (sessionController != null) _inventory = sessionController.GetModel().inventory;
 
             if (_inventory != null) _inventory.onChange += OnInventoryChanged;
@@ -80,7 +78,7 @@ namespace PixelCrew.Creatures.Controllers
             foreach (GameObject item in gos)
             {
                 var otherCreature = item.GetComponent<Creature>();
-                if (otherCreature == creature) continue;
+                if (otherCreature == Creature) continue;
                 
                 var health = item.GetComponent<HealthComponent>();
 
@@ -175,11 +173,6 @@ namespace PixelCrew.Creatures.Controllers
             onWeaponsChanged?.Invoke();
         }
         
-        protected override Creature GetCreature()
-        {
-            return creature;
-        }
-
         public override void Die()
         {
             if (_inventory != null) _inventory.onChange -= OnInventoryChanged;

@@ -1,4 +1,3 @@
-using System;
 using PixelCrew.Components.Utils;
 using UnityEngine;
 
@@ -8,8 +7,6 @@ namespace PixelCrew.Creatures.Controllers
     [RequireComponent(typeof(PlaySoundComponent))]
     public class SoundController : AController
     {
-        [SerializeField] private Creature creature;
-
         private PlaySoundComponent _playSoundComponent;
 
         private void Start()
@@ -20,11 +17,6 @@ namespace PixelCrew.Creatures.Controllers
         public void Play(string id)
         {
             _playSoundComponent.Play(id);
-        }
-
-        protected override Creature GetCreature()
-        {
-            return creature;
         }
     }
 }

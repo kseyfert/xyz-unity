@@ -7,13 +7,11 @@ namespace PixelCrew.Creatures.Controllers
 {
     public class CoinsController : AController
     {
-        [SerializeField] private Creature creature;
-
         private InventoryData _inventory;
 
         private void Start()
         {
-            var sessionController = creature.SessionController;
+            var sessionController = Creature.SessionController;
             if (sessionController == null) return;
             
             _inventory = sessionController.GetModel().inventory;
@@ -42,11 +40,6 @@ namespace PixelCrew.Creatures.Controllers
         public int GetAmount()
         {
             return _inventory.Count(CreatureModel.Coins);
-        }
-
-        protected override Creature GetCreature()
-        {
-            return creature;
         }
     }
 }

@@ -8,7 +8,6 @@ namespace PixelCrew.Creatures.Controllers
 {
     public class InteractionController : AController
     {
-        [SerializeField] private Creature creature;
         [SerializeField] private CircleOverlapCheckComponent interactionChecker;
         
         private SessionController _sessionController;
@@ -18,7 +17,7 @@ namespace PixelCrew.Creatures.Controllers
         {
             _currentLevel = SceneManager.GetActiveScene().name;
 
-            _sessionController = creature.SessionController;
+            _sessionController = Creature.SessionController;
             if (_sessionController == null) return;
             
             var lps = _sessionController.GetModel().lastPositions;
@@ -27,7 +26,7 @@ namespace PixelCrew.Creatures.Controllers
             {
                 CreatureModel.LevelPosition levelPosition;
                 levelPosition.levelName = _currentLevel;
-                levelPosition.levelPosition = creature.Transform.position;
+                levelPosition.levelPosition = Creature.Transform.position;
                 lps.Add(levelPosition);
             }
 
@@ -39,7 +38,7 @@ namespace PixelCrew.Creatures.Controllers
             if (_sessionController == null) return;
             
             var lp = _sessionController.GetModel().lastPositions.Find(item => item.levelName == _currentLevel);
-            creature.Transform.position = lp.levelPosition;
+            Creature.Transform.position = lp.levelPosition;
         }
 
         private void SaveToSession()
@@ -49,7 +48,7 @@ namespace PixelCrew.Creatures.Controllers
             var index = _sessionController.GetModel().lastPositions.FindIndex(item => item.levelName == _currentLevel);
             CreatureModel.LevelPosition lp;
             lp.levelName = _currentLevel;
-            lp.levelPosition = creature.Transform.position;
+            lp.levelPosition = Creature.Transform.position;
             _sessionController.GetModel().lastPositions[index] = lp;
         }
         
@@ -65,13 +64,8 @@ namespace PixelCrew.Creatures.Controllers
                 
                 SaveToSession();
                 
-                interactable.Interact(creature.gameObject);
+                interactable.Interact(Creature.gameObject);
             }
-        }
-
-        protected override Creature GetCreature()
-        {
-            return creature;
         }
     }
 }
