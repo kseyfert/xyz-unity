@@ -1,7 +1,7 @@
 using PixelCrew.Creatures;
 using PixelCrew.Creatures.Controllers;
 using UnityEngine;
-using Random = System.Random;
+using Random = UnityEngine.Random;
 
 namespace PixelCrew.Controllers
 {
@@ -14,15 +14,12 @@ namespace PixelCrew.Controllers
 
         private Creature _target;
 
-        private Random _rnd;
-
         private bool _canThrow;
         private bool _canAttack;
 
         private void Start()
         {
             _attackController = creature.AttackController;
-            _rnd = new Random();
         }
 
         private void Update()
@@ -30,7 +27,7 @@ namespace PixelCrew.Controllers
             if (_canAttack) _attackController.RequestMelee();
             else if (_canThrow)
             {
-                var x = _rnd.NextDouble();
+                var x = Random.value;
                 if (x <= maxProbability) _attackController.RequestRangeMax();
                 else _attackController.RequestRange();
             }
