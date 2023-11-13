@@ -29,9 +29,26 @@ namespace PixelCrew.Creatures.Controllers
             spawnItem.component.Spawn();
         }
 
+        public void SpawnAt(string particleName, Vector3 position)
+        {
+            var index = spawns.FindIndex(item => item.name == particleName);
+            if (index < 0) return;
+
+            SpawnItem spawnItem = spawns[index];
+            if (spawnItem.disabled) return;
+            
+            spawnItem.component.SpawnAt(position);
+        }
+
         public void SpawnSeq(string particleName, int count, float timeout)
         {
             StartCoroutine(SpawnSeqCoroutine(particleName, count, timeout));
+        }
+
+        public SpawnComponent GetSpawnComponent(string particleName)
+        {
+            var index = spawns.FindIndex(item => item.name == particleName);
+            return index < 0 ? null : spawns[index].component;
         }
 
         private IEnumerator SpawnSeqCoroutine(string particleName, int count, float timeout)

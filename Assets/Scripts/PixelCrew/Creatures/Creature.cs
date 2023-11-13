@@ -131,21 +131,21 @@ namespace PixelCrew.Creatures
             particlesController.Spawn(particleName);
         }
 
-        public void AnimationEventMelee()
+        public virtual void AnimationEventMelee()
         {
             if (attackController == null) return;
             
             attackController.DoMelee();
         }
 
-        public void AnimationEventRange()
+        public virtual void AnimationEventRange()
         {
             if (attackController == null) return;
             
             attackController.DoRange();
         }
 
-        public void AnimationEventRangeMax()
+        public virtual void AnimationEventRangeMax()
         {
             if (attackController == null) return;
             

@@ -85,7 +85,7 @@ namespace PixelCrew.Creatures.Controllers
                 if (otherCreature != null)
                 {
                     var hc = otherCreature.HealthController;
-                    health = hc.GetHealthComponent();
+                    if (hc != null) health = hc.GetHealthComponent();
                 }
                 
                 if (health == null) continue;

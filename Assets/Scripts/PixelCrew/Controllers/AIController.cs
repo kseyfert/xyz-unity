@@ -73,6 +73,14 @@ namespace PixelCrew.Controllers
                     yield return new WaitForSeconds(1f);
                     continue;
                 }
+
+                if (_attackController.CanRange())
+                {
+                    _movementController.SetDirection(0);
+                    _attackController.RequestRange();
+                    yield return new WaitForSeconds(1f);
+                    continue;
+                }
                 
                 if (_atBase)
                 {
@@ -133,6 +141,11 @@ namespace PixelCrew.Controllers
             if (hero != _target) return;
 
             _canAttack = false;
+        }
+        
+        public Creature GetTarget()
+        {
+            return _target;
         }
     }
 }

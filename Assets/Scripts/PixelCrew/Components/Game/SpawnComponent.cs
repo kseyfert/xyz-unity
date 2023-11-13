@@ -22,5 +22,14 @@ namespace PixelCrew.Components.Game
             action?.Invoke();
         }
 
+        public void SpawnAt(Vector3 position)
+        {
+            if (prefab == null) return;
+
+            var spawned = Instantiate(prefab, position, target.rotation);
+            spawned.transform.localScale = target.lossyScale;
+            if (parent != null) spawned.transform.SetParent(parent.transform);
+        }
+
     }
 }
