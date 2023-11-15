@@ -9,7 +9,7 @@ namespace PixelCrew.Components.Utils.Checks
         [SerializeField] private float radius = 1f;
         [SerializeField] private LayerMask layers;
 
-        private readonly Collider2D[] _overlapResult = new Collider2D[5];
+        private readonly Collider2D[] _overlapResult = new Collider2D[100];
         
         public GameObject[] GetObjectsInRange()
         {

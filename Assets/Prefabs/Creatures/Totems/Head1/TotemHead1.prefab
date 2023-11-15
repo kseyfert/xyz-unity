@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creature: {fileID: 4826820852876020585}
+  potionPower: 0
 --- !u!1 &4826820851981687970
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,7 +475,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1164988167
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 6ef478a3484244c7e93519627676dbb0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -585,6 +586,7 @@ MonoBehaviour:
   sessionController: {fileID: 0}
   particlesController: {fileID: 4826820851981687968}
   coinsController: {fileID: 0}
+  soundController: {fileID: 0}
   onDie:
     m_PersistentCalls:
       m_Calls: []
@@ -638,6 +640,7 @@ MonoBehaviour:
   meleePower: 10
   meleeTimeout: 0
   rangeTimeout: 1
+  allowRangeLast: 0
   rangeMaxCount: 3
   rangeMaxDelay: 0.3
   rangeMaxTimeout: 1
