@@ -31,7 +31,9 @@ namespace PixelCrew.Creatures.Controllers
             if (_sessionController != null) _inventory = _sessionController.GetModel().inventory;
             
             _healthComponent.onChange += SaveToSession;
+            
             LoadFromSession();
+            if (_healthComponent.GetCurrentHealth() == 0) _healthComponent.SetCurrentHealth(_healthComponent.GetMaxHealth());
 
             _healthComponent.onDamage.AddListener(() => onDamage?.Invoke());
             _healthComponent.onHeal.AddListener(() => onHeal?.Invoke());
