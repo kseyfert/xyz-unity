@@ -55,6 +55,11 @@ namespace PixelCrew.Components.Game
             return currentHealth;
         }
 
+        public int GetMaxHealth()
+        {
+            return maxHealth;
+        }
+
         private void AdjustCurrent()
         {
             currentHealth = Math.Min(currentHealth, maxHealth);

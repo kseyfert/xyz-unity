@@ -826,6 +826,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startImmediate: 0
+  randomizedAmplitude: 0
 --- !u!1 &118745399549051847
 GameObject:
   m_ObjectHideFlags: 0
