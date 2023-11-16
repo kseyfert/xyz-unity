@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4219090204874717255}
   - component: {fileID: 4219090204874717252}
-  - component: {fileID: 4219090204874717253}
+  - component: {fileID: 910274354}
   m_Layer: 5
-  m_Name: MainMenuWindow
+  m_Name: PauseMenuWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4219090204874717253
+--- !u!114 &910274354
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4219090204874717254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5941ca5b738e427aa764d60f1b0449f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 0be91deff98e417c9133ff80f51568c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4219090205248777131
@@ -146,7 +146,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Main Menu
+  m_Text: Pause
 --- !u!1 &4219090205291472280
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4219090204874717253}
+      - m_Target: {fileID: 910274354}
         m_MethodName: OnSettings
         m_Mode: 1
         m_Arguments:
@@ -725,7 +725,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4219090204874717253}
+      - m_Target: {fileID: 910274354}
         m_MethodName: OnExit
         m_Mode: 1
         m_Arguments:
@@ -815,7 +815,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Start
+  m_Text: Restart
 --- !u!1 &4219090206395597565
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,7 +829,7 @@ GameObject:
   - component: {fileID: 4219090206395597560}
   - component: {fileID: 4219090206395597563}
   m_Layer: 5
-  m_Name: ButtonStart
+  m_Name: ButtonRestart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -937,8 +937,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4219090204874717253}
-        m_MethodName: OnStart
+      - m_Target: {fileID: 910274354}
+        m_MethodName: OnRestart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1091,7 +1091,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Start
+  m_Text: Restart
 --- !u!1 &4219090206773795552
 GameObject:
   m_ObjectHideFlags: 0

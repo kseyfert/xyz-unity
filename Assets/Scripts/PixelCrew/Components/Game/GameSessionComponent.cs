@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using PixelCrew.Creatures.Model;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PixelCrew.Components.Game
 {
@@ -35,6 +36,8 @@ namespace PixelCrew.Components.Game
         public void Init()
         {
             if (IsInitialized) return;
+
+            LoadHud();
             
             var gs = GetExistsSession();
             if (gs != null)
@@ -49,6 +52,11 @@ namespace PixelCrew.Components.Game
             }
 
             IsInitialized = true;
+        }
+
+        private void LoadHud()
+        {
+            SceneManager.LoadScene("Hud", LoadSceneMode.Additive);
         }
 
         private GameSessionComponent GetExistsSession()

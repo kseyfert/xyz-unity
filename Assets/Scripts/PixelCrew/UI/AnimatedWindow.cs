@@ -8,10 +8,13 @@ namespace PixelCrew.UI
     {
         private static readonly int ShowTrigger = Animator.StringToHash("show");
         private static readonly int HideTrigger = Animator.StringToHash("hide");
+
+        public delegate void AnimatedWindowDelegate(AnimatedWindow window);
+        public AnimatedWindowDelegate onClosed;
         
         private Animator _animator;
 
-        private void Start()
+        protected virtual void Start()
         {
             _animator = GetComponent<Animator>();
             _animator.SetTrigger(ShowTrigger);
@@ -24,7 +27,20 @@ namespace PixelCrew.UI
 
         public virtual void AnimationEventClose()
         {
+            onClosed?.Invoke(this);
             Destroy(gameObject);
+        }
+
+        public static AnimatedWindow Open(string path)
+        {
+            var window = Resources.Load<GameObject>(path);
+            if (window == null) return null;
+
+            var canvas = FindObjectOfType<Canvas>();
+            if (canvas == null) return null;
+
+            var go = Instantiate(window, canvas.transform);
+            return go.GetComponent<AnimatedWindow>();
         }
     }
 }

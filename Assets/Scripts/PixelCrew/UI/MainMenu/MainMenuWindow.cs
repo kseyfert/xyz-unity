@@ -10,20 +10,12 @@ namespace PixelCrew.UI.MainMenu
         
         public void OnSettings()
         {
-            var window = Resources.Load<GameObject>("UI/SettingsWindow");
-            if (window == null) return;
-
-            var canvas = FindObjectOfType<Canvas>();
-            if (canvas == null) return;
-
-            Instantiate(window, canvas.transform);
+            Open("UI/SettingsWindow");
         }
 
         public void OnStart()
         {
-            var scene = SceneManager.GetActiveScene();
-            // _action = () => SceneManager.LoadScene("Level1");
-            _action = () => SceneManager.LoadScene(scene.name);
+            _action = () => SceneManager.LoadScene("Level1");
             Close();
         }
 
