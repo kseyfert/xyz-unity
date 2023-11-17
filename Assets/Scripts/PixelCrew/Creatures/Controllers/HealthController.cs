@@ -3,6 +3,7 @@ using PixelCrew.Components;
 using PixelCrew.Components.Game;
 using PixelCrew.Creatures.Model;
 using PixelCrew.Creatures.Model.Data;
+using PixelCrew.UI.Widgets;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -18,6 +19,7 @@ namespace PixelCrew.Creatures.Controllers
         public HealthDelegate onDie;
         
         [SerializeField] private int potionPower;
+        [SerializeField] private ProgressBarWidget widget;
 
         private SessionController _sessionController;
         private HealthComponent _healthComponent;
@@ -38,6 +40,18 @@ namespace PixelCrew.Creatures.Controllers
             _healthComponent.onDamage.AddListener(() => onDamage?.Invoke());
             _healthComponent.onHeal.AddListener(() => onHeal?.Invoke());
             _healthComponent.onDie.AddListener(() => onDie?.Invoke());
+
+            if (widget != null)
+            {
+                _healthComponent.onDamage.AddListener(UpdateWidget);
+                _healthComponent.onHeal.AddListener(UpdateWidget);
+            }
+        }
+
+        private void UpdateWidget()
+        {
+            var value = (float) _healthComponent.GetCurrentHealth() / _healthComponent.GetMaxHealth();
+            widget.SetProgress(value);
         }
 
         public void ApplyPotion()

@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace PixelCrew.UI.Hud
 {
+    [RequireComponent(typeof(Canvas))]
     public class HudController : MonoBehaviour
     {
         [SerializeField] private ProgressBarWidget healthBar;

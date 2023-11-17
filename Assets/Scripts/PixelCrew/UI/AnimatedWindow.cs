@@ -1,4 +1,5 @@
 using System;
+using PixelCrew.UI.Hud;
 using UnityEngine;
 
 namespace PixelCrew.UI
@@ -36,7 +37,10 @@ namespace PixelCrew.UI
             var window = Resources.Load<GameObject>(path);
             if (window == null) return null;
 
-            var canvas = FindObjectOfType<Canvas>();
+            var hudController = FindObjectOfType<HudController>();
+            if (hudController == null) return null;
+            
+            var canvas = hudController.GetComponent<Canvas>();
             if (canvas == null) return null;
 
             var go = Instantiate(window, canvas.transform);
