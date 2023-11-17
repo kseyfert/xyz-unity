@@ -30,8 +30,10 @@ namespace PixelCrew.Creatures.Model.Definitions
     {
         [SerializeField] private string id;
         [SerializeField] private bool stackable;
+        [SerializeField] private Sprite icon;
         public string Id => id;
         public bool Stackable => stackable;
+        public Sprite Icon => icon;
         public bool IsVoid => string.IsNullOrEmpty(id);
     }
 }

@@ -83,6 +83,11 @@ namespace PixelCrew.Creatures.Model.Data
                 .Sum(item => item.value);
         }
 
+        public InventoryItemData[] GetAll()
+        {
+            return items.ToArray();
+        }
+
         private InventoryItemData CreateItem(string id, int value=0)
         {
             var newItem = new InventoryItemData(id, value);

@@ -49,6 +49,9 @@ namespace PixelCrew.Creatures
         public Collider2D Collider2D => _collider2D;
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
 
+        private bool _dead = false;
+        public bool IsDead => _dead;
+
         private void Awake()
         {
             ID = GetComponent<UniqueIDComponent>().GetID();
@@ -155,6 +158,9 @@ namespace PixelCrew.Creatures
 
         public void Die()
         {
+            if (_dead) return;
+            _dead = true;
+            
             if (animationController != null) animationController.Die();
             if (attackController != null) attackController.Die();
             if (coinsController != null) coinsController.Die();

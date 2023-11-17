@@ -1,4 +1,5 @@
 using System;
+using PixelCrew.Utils.Disposables;
 using UnityEngine;
 
 namespace PixelCrew.Model.Data.Properties.Persistent
@@ -13,6 +14,12 @@ namespace PixelCrew.Model.Data.Properties.Persistent
 
         public delegate void PropertyDelegate(TPropertyType oldValue, TPropertyType newValue);
         public event PropertyDelegate OnChanged;
+
+        public IDisposable Subscribe(PropertyDelegate call)
+        {
+            OnChanged += call;
+            return new ActionDisposable(() => OnChanged -= call);
+        }
 
         public TPropertyType Value
         {

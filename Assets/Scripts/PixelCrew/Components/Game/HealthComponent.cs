@@ -29,6 +29,8 @@ namespace PixelCrew.Components.Game
 
         public void Add(int value)
         {
+            if (IsDead()) return;
+            
             currentHealth += value;
             AdjustCurrent();
             
@@ -46,6 +48,8 @@ namespace PixelCrew.Components.Game
 
         public void SetCurrentHealth(int value)
         {
+            if (IsDead()) return;
+            
             currentHealth = value;
             AdjustCurrent();
         }

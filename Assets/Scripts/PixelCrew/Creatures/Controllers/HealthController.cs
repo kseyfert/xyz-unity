@@ -1,11 +1,8 @@
-using System;
-using PixelCrew.Components;
 using PixelCrew.Components.Game;
 using PixelCrew.Creatures.Model;
 using PixelCrew.Creatures.Model.Data;
 using PixelCrew.UI.Widgets;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace PixelCrew.Creatures.Controllers
 {
