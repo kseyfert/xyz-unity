@@ -1,5 +1,4 @@
 using PixelCrew.UI.PauseMenu;
-using PixelCrew.Utils;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,11 +7,6 @@ namespace PixelCrew.UI.Hud
     public class HudController : MonoBehaviour
     {
         private PauseMenuWindow _activePauseMenu;
-        
-        private void Start()
-        {
-            
-        }
 
         public void OnPauseRequested(InputAction.CallbackContext context)
         {
@@ -24,8 +18,8 @@ namespace PixelCrew.UI.Hud
                 return;
             }
 
-            _activePauseMenu.Close();
-            _activePauseMenu.onClosed += (window) => _activePauseMenu = null; 
+            _activePauseMenu.onClosed += (window) => _activePauseMenu = null;
+            AnimatedWindow.CloseAll();
         }
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Destructable
   - Enemy
+  - SfxAudio
   layers:
   - Default
   - TransparentFX

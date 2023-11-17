@@ -28,16 +28,18 @@ namespace PixelCrew.Model.Data
             sfxVolume = new FloatPersistentProperty(1, SoundSetting.Sfx.ToString());
         }
         
+#if UNITY_EDITOR
         private void OnValidate()
         {
-            #if UNITY_EDITOR
+            
             EditorApplication.delayCall += () =>
             {
                 musicVolume.Validate();
                 sfxVolume.Validate();
             };
-            #endif
         }
+#endif
+        
     }
 
     public enum SoundSetting

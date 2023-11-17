@@ -42,5 +42,14 @@ namespace PixelCrew.UI
             var go = Instantiate(window, canvas.transform);
             return go.GetComponent<AnimatedWindow>();
         }
+
+        public static void CloseAll()
+        {
+            var windows = FindObjectsOfType<AnimatedWindow>();
+            foreach (var window in windows)
+            {
+                window.Close();
+            }
+        }
     }
 }

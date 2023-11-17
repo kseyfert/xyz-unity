@@ -1,19 +1,25 @@
 using System;
 using UnityEngine;
 
-namespace PixelCrew.Components.Utils
+namespace PixelCrew.Components.Game
 {
     public class PlaySoundComponent : MonoBehaviour
     {
-        [SerializeField] private AudioSource source;
         [SerializeField] private AudioData[] sounds;
+
+        private AudioSource _source;
+
+        private void Start()
+        {
+            _source = SfxComponent.I.Source;
+        }
 
         public void Play(string id)
         {
             var sound = Array.Find(sounds, item => item.Id == id);
             if (sound == null) return;
             
-            source.PlayOneShot(sound.Clip);
+            _source.PlayOneShot(sound.Clip);
         }
 
         [Serializable]

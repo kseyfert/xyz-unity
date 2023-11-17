@@ -1,9 +1,8 @@
-using PixelCrew.Components.Utils;
+using PixelCrew.Components.Game;
 using UnityEngine;
 
 namespace PixelCrew.Creatures.Controllers
 {
-    [RequireComponent(typeof(AudioSource))]
     [RequireComponent(typeof(PlaySoundComponent))]
     public class SoundController : AController
     {
