@@ -401,6 +401,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1077983854}
+  - component: {fileID: 696789359}
   m_Layer: 5
   m_Name: SFX
   m_TagString: Untagged
@@ -430,6 +431,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 29.333334}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &696789359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077983853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d0a1a5e3ed467287e1c76b1d6d575a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 15101534}
+  value: {fileID: 151910812}
 --- !u!1 &1467167360
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,6 +1030,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf5633505aa4f2d944e1492eda59875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicVolume: {fileID: 696789353}
+  sfxVolume: {fileID: 696789359}
 --- !u!1 &617183731546563831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1295,6 +1312,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8384179119085496858}
+  - component: {fileID: 696789353}
   m_Layer: 5
   m_Name: Music
   m_TagString: Untagged
@@ -1324,6 +1342,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 29.333334}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &696789353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4619113734859620241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d0a1a5e3ed467287e1c76b1d6d575a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 2291623338503957860}
+  value: {fileID: 1467167362}
 --- !u!1 &7912831055949572038
 GameObject:
   m_ObjectHideFlags: 0
