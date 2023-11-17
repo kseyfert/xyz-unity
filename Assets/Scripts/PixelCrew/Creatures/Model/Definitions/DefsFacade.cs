@@ -6,8 +6,10 @@ namespace PixelCrew.Creatures.Model.Definitions
     public class DefsFacade : ScriptableObject
     {
         [SerializeField] private InventoryItemsDef items;
+        [SerializeField] private PlayerDef player;
 
         public InventoryItemsDef Items => items;
+        public PlayerDef Player => player;
 
         public bool IsExist(string id)
         {

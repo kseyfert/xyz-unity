@@ -27,7 +27,7 @@ namespace PixelCrew.Creatures.Controllers
         {
             _sessionController = Creature.SessionController;
             _healthComponent = GetComponent<HealthComponent>();
-
+            
             if (_sessionController != null) _inventory = _sessionController.GetModel().inventory;
             
             _healthComponent.onChange += SaveToSession;
@@ -58,14 +58,14 @@ namespace PixelCrew.Creatures.Controllers
         {
             if (_sessionController == null) return;
 
-            _healthComponent.SetCurrentHealth(_sessionController.GetModel().hp);
+            _healthComponent.SetCurrentHealth(_sessionController.GetModel().hp.Value);
         }
 
         private void SaveToSession()
         {
             if (_sessionController == null) return;
 
-            _sessionController.GetModel().hp = _healthComponent.GetCurrentHealth();
+            _sessionController.GetModel().hp.Value = _healthComponent.GetCurrentHealth();
         }
 
         public override void Die()

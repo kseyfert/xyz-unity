@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using PixelCrew.Creatures.Model.Data;
+using PixelCrew.Model.Data.Properties.Observable;
 using UnityEngine;
 
 namespace PixelCrew.Creatures.Model
@@ -17,7 +18,7 @@ namespace PixelCrew.Creatures.Model
 
         public InventoryData inventory = new InventoryData();
 
-        public int hp = 100;
+        public IntObservableProperty hp = new IntObservableProperty();
         
         public List<LevelPosition> lastPositions = new List<LevelPosition>();
     

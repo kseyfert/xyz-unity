@@ -18,7 +18,7 @@ namespace PixelCrew.Components.Game
 
         public bool IsInitialized { get; private set; } = false;
         
-        [SerializeField] public List<string> _lastSave = new List<string>();
+        private readonly List<string> _lastSave = new List<string>();
 
         public static GameSessionComponent GetInstance()
         {

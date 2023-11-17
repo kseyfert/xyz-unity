@@ -55,6 +55,11 @@ namespace PixelCrew.Components.Game
             return currentHealth;
         }
 
+        public void SetMaxHealth(int value)
+        {
+            maxHealth = value;
+        }
+
         public int GetMaxHealth()
         {
             return maxHealth;
