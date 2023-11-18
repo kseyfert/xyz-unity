@@ -1,8 +1,8 @@
 using PixelCrew.Components.Game;
 using PixelCrew.Components.Utils.Checks;
-using PixelCrew.Creatures.Model.Data;
 using PixelCrew.Model.Data;
 using PixelCrew.Utils;
+using PixelCrew.Utils.Disposables;
 using UnityEngine;
 
 namespace PixelCrew.Creatures.Controllers
@@ -47,6 +47,8 @@ namespace PixelCrew.Creatures.Controllers
         private ParticlesController _particlesController;
         private InventoryData _inventory;
 
+        private readonly CompositeDisposable _trash = new CompositeDisposable();
+
         private void Start()
         {
             _particlesController = Creature.ParticlesController;
@@ -54,7 +56,7 @@ namespace PixelCrew.Creatures.Controllers
             var sessionController = Creature.SessionController;
             if (sessionController != null) _inventory = sessionController.GetModel().inventory;
 
-            if (_inventory != null) _inventory.onChange += OnInventoryChanged;
+            if (_inventory != null) _trash.Retain(_inventory.Subscribe(OnInventoryChanged));
         }
 
         public bool CanMelee()
@@ -173,7 +175,7 @@ namespace PixelCrew.Creatures.Controllers
         
         public override void Die()
         {
-            if (_inventory != null) _inventory.onChange -= OnInventoryChanged;
+            _trash.Dispose();
             onWeaponsChanged = delegate {};
             
             base.Die();

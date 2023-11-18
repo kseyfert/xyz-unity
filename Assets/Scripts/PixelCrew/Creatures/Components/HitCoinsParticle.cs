@@ -1,7 +1,6 @@
 using PixelCrew.Components.Game;
 using PixelCrew.Creatures.Controllers;
 using PixelCrew.Creatures.Model;
-using PixelCrew.Creatures.Model.Data;
 using UnityEngine;
 
 namespace PixelCrew.Creatures.Components

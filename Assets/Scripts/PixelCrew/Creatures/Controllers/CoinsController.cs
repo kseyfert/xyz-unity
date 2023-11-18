@@ -1,4 +1,3 @@
-using PixelCrew.Creatures.Model.Data;
 using PixelCrew.Model.Data;
 
 namespace PixelCrew.Creatures.Controllers

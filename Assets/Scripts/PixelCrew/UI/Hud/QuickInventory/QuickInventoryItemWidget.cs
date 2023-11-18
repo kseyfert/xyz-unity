@@ -1,5 +1,7 @@
-using PixelCrew.Creatures.Model.Data;
+using PixelCrew.Components.Singletons;
 using PixelCrew.Creatures.Model.Definitions;
+using PixelCrew.Model.Data;
+using PixelCrew.Utils;
 using PixelCrew.Utils.Disposables;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +25,19 @@ namespace PixelCrew.UI.Hud.QuickInventory
             icon.sprite = def.Icon;
             value.text = def.Stackable ? $"x{item.value}" : string.Empty;
             
+            var session = SingletonMonoBehaviour.GetInstance<GameSessionSingleton>();
+            var quickInventoryModel = session.QuickInventoryModel;
+            _trash.Retain(quickInventoryModel.SelectedIndex.SubscribeAndInvoke(OnIndexChanged));
+        }
+
+        private void OnIndexChanged(int oldValue, int newValue)
+        {
+            selection.SetActive(newValue == _index);
+        }
+
+        private void OnDestroy()
+        {
+            _trash.Dispose();
         }
     }
 }

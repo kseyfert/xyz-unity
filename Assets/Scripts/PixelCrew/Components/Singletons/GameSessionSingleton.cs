@@ -10,6 +10,8 @@ namespace PixelCrew.Components.Singletons
     {
         [SerializeField] private PlayerData model;
         public PlayerData Model => model;
+        
+        public QuickInventoryModel QuickInventoryModel { get; private set; }
 
         private string _lastSave;
 
@@ -22,6 +24,7 @@ namespace PixelCrew.Components.Singletons
             if (GetInstance<GameSessionSingleton>() != this) return;
             
             Save();
+            QuickInventoryModel = new QuickInventoryModel(model);
             DontDestroyOnLoad(gameObject);
         }
 

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using PixelCrew.Creatures.Model.Data;
 using PixelCrew.Model.Data.Properties.Observable;
 using UnityEngine;
 

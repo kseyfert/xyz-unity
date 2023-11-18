@@ -1,6 +1,5 @@
 using PixelCrew.Components.Game;
 using PixelCrew.Creatures.Model;
-using PixelCrew.Creatures.Model.Data;
 using PixelCrew.Model.Data;
 using PixelCrew.UI.Widgets;
 using UnityEngine;

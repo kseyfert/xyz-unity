@@ -1,6 +1,5 @@
 ﻿using System;
 using PixelCrew.Components.Utils.Checks;
-using PixelCrew.Creatures.Model.Data;
 using PixelCrew.Model.Data;
 using PixelCrew.Utils;
 using UnityEngine;

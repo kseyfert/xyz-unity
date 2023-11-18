@@ -2,16 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using PixelCrew.Creatures.Model.Definitions;
+using PixelCrew.Utils.Disposables;
 using UnityEngine;
 
-namespace PixelCrew.Creatures.Model.Data
+namespace PixelCrew.Model.Data
 {
     [Serializable]
     public class InventoryData
     {
-        public delegate void InventoryEvent(string id);
-
-        public InventoryEvent onChange;
+        private Action<string> _onChange;
         
         [SerializeField] private List<InventoryItemData> items = new List<InventoryItemData>();
 
@@ -30,7 +29,7 @@ namespace PixelCrew.Creatures.Model.Data
                 for (var i = 0; i < value; i++) CreateItem(id, 1);
             }
 
-            onChange?.Invoke(id);
+            _onChange?.Invoke(id);
             
             return value;
         }
@@ -56,7 +55,7 @@ namespace PixelCrew.Creatures.Model.Data
 
             items.RemoveAll(item => item.value == 0);
             
-            onChange?.Invoke(id);
+            _onChange?.Invoke(id);
 
             return removed;
         }
@@ -105,6 +104,18 @@ namespace PixelCrew.Creatures.Model.Data
         private InventoryItemData GetItem(string id)
         {
             return items.Find(item => item.id == id);
+        }
+
+        public ActionDisposable Subscribe(Action<string> call)
+        {
+            _onChange += call;
+            return new ActionDisposable(() => _onChange -= call);
+        }
+
+        public ActionDisposable SubscribeAndInvoke(Action<string> call)
+        {
+            call?.Invoke("");
+            return Subscribe(call);
         }
     }
 
