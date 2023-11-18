@@ -1,4 +1,5 @@
 using System;
+using PixelCrew.Utils.Disposables;
 using UnityEngine;
 
 namespace PixelCrew.Model.Data.Properties.Observable
@@ -8,9 +9,8 @@ namespace PixelCrew.Model.Data.Properties.Observable
     {
         [SerializeField] private TPropertyType value;
 
-        public delegate void PropertyDelegate(TPropertyType oldValue, TPropertyType newValue);
-        public event PropertyDelegate OnChanged;
-
+        private Action<TPropertyType, TPropertyType> OnChanged = (a, b) => { };
+        
         public TPropertyType Value
         {
             get => value;
@@ -23,6 +23,18 @@ namespace PixelCrew.Model.Data.Properties.Observable
                 this.value = value;
                 OnChanged?.Invoke(oldValue, this.value);
             }
+        }
+
+        public ActionDisposable Subscribe(Action<TPropertyType, TPropertyType> call)
+        {
+            OnChanged += call;
+            return new ActionDisposable(() => OnChanged -= call);
+        }
+
+        public ActionDisposable SubscribeAndInvoke(Action<TPropertyType, TPropertyType> call)
+        {
+            call?.Invoke(value, value);
+            return Subscribe(call);
         }
     }
 }

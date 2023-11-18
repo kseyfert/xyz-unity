@@ -1,107 +1,40 @@
-using System;
-using System.Collections.Generic;
 using PixelCrew.Creatures.Model;
+using PixelCrew.Model.Data;
+using PixelCrew.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace PixelCrew.Components.Singletons
 {
-    public class GameSessionSingleton : MonoBehaviour
+    public class GameSessionSingleton : SingletonMonoBehaviour
     {
-        [Serializable]
-        public struct ModelItem
-        {
-            public string id;
-            public CreatureModel model;
-        }
-        [SerializeField] private List<ModelItem> creatures = new List<ModelItem>();
+        [SerializeField] private PlayerData model;
+        public PlayerData Model => model;
 
-        public bool IsInitialized { get; private set; } = false;
-        
-        private readonly List<string> _lastSave = new List<string>();
+        private string _lastSave;
 
-        public static GameSessionSingleton GetInstance()
-        {
-            var gameSessions = FindObjectsOfType<GameSessionSingleton>();
-            foreach (var gs in gameSessions) gs.Init();
-            
-            return FindObjectOfType<GameSessionSingleton>();
-        }
-        
         private void Awake()
         {
-            Init();
-        }
-        
-        public void Init()
-        {
-            if (IsInitialized) return;
-
-            LoadHud();
+            Load<GameSessionSingleton>();
             
-            var gs = GetExistsSession();
-            if (gs != null)
-            {
-                gs.Save();
-                Destroy(gameObject);
-            }
-            else
-            {
-                Save();
-                DontDestroyOnLoad(gameObject);
-            }
-
-            IsInitialized = true;
-        }
-
-        private void LoadHud()
-        {
             SceneManager.LoadScene("Hud", LoadSceneMode.Additive);
-        }
 
-        private GameSessionSingleton GetExistsSession()
-        {
-            var sessions = FindObjectsOfType<GameSessionSingleton>();
-            foreach (GameSessionSingleton gameSession in sessions)
-            {
-                if (gameSession != this) return gameSession;
-            }
-
-            return null;
-        }
-
-        public CreatureModel GetCreatureModel(string id)
-        {
-            var index = creatures.FindIndex(item => item.id == id);
-            if (index >= 0) return creatures[index].model;
+            if (GetInstance<GameSessionSingleton>() != this) return;
             
-            ModelItem newItem;
-            newItem.id = id;
-            newItem.model = new CreatureModel();
-            creatures.Add(newItem);
-
-            return newItem.model;
+            Save();
+            DontDestroyOnLoad(gameObject);
         }
 
         public void Save()
         {
-            _lastSave.RemoveAll(item => true);
-            foreach (var item in creatures)
-            {
-                _lastSave.Add(JsonUtility.ToJson(item));
-            }
+            _lastSave = JsonUtility.ToJson(model);
         }
 
         public void Load()
         {
-            if (_lastSave.Count == 0) return;
-            
-            creatures.RemoveAll(item => true);
-            foreach (var item in _lastSave)
-            {
-                var modelItem = JsonUtility.FromJson<ModelItem>(item);
-                creatures.Add(modelItem);
-            }
+            if (string.IsNullOrEmpty(_lastSave)) return;
+
+            model = JsonUtility.FromJson<PlayerData>(_lastSave);
         }
     }
 }

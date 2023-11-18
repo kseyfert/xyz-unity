@@ -4,10 +4,10 @@ using PixelCrew.Creatures.Model.Data;
 using PixelCrew.Model.Data.Properties.Observable;
 using UnityEngine;
 
-namespace PixelCrew.Creatures.Model
+namespace PixelCrew.Model.Data
 {
     [Serializable]
-    public class CreatureModel
+    public class PlayerData
     {
         public static readonly string Coins = "Coins";
         public static readonly string Weapons = "Weapons";

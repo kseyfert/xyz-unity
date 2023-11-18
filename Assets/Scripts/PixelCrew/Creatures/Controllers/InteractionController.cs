@@ -1,6 +1,6 @@
 using PixelCrew.Components.Game;
 using PixelCrew.Components.Utils.Checks;
-using PixelCrew.Creatures.Model;
+using PixelCrew.Model.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,7 +24,7 @@ namespace PixelCrew.Creatures.Controllers
             var index = lps.FindIndex(item => item.levelName == _currentLevel);
             if (index < 0)
             {
-                CreatureModel.LevelPosition levelPosition;
+                PlayerData.LevelPosition levelPosition;
                 levelPosition.levelName = _currentLevel;
                 levelPosition.levelPosition = Creature.Transform.position;
                 lps.Add(levelPosition);
@@ -46,7 +46,7 @@ namespace PixelCrew.Creatures.Controllers
             if (_sessionController == null) return;
             
             var index = _sessionController.GetModel().lastPositions.FindIndex(item => item.levelName == _currentLevel);
-            CreatureModel.LevelPosition lp;
+            PlayerData.LevelPosition lp;
             lp.levelName = _currentLevel;
             lp.levelPosition = Creature.Transform.position;
             _sessionController.GetModel().lastPositions[index] = lp;

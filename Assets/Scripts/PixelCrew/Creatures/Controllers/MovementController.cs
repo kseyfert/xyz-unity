@@ -1,7 +1,7 @@
 ﻿using System;
 using PixelCrew.Components.Utils.Checks;
-using PixelCrew.Creatures.Model;
 using PixelCrew.Creatures.Model.Data;
+using PixelCrew.Model.Data;
 using PixelCrew.Utils;
 using UnityEngine;
 
@@ -225,7 +225,7 @@ namespace PixelCrew.Creatures.Controllers
 
         public void AllowInfiniteJump()
         {
-            _inventory?.Add(CreatureModel.InfiniteJumper, 1);
+            _inventory?.Add(PlayerData.InfiniteJumper, 1);
         }
 
         public void Kickback()
@@ -235,7 +235,7 @@ namespace PixelCrew.Creatures.Controllers
 
         public void AllowDoubleJump()
         {
-            _inventory?.Add(CreatureModel.DoubleJumper, 1);
+            _inventory?.Add(PlayerData.DoubleJumper, 1);
         }
 
         public void SpeedUp()
@@ -272,12 +272,12 @@ namespace PixelCrew.Creatures.Controllers
 
         private bool IsDoubleJumpAllowed()
         {
-            return _inventory?.Has(CreatureModel.DoubleJumper) ?? false;
+            return _inventory?.Has(PlayerData.DoubleJumper) ?? false;
         }
 
         private bool IsInfiniteJumpAllowed()
         {
-            return _inventory?.Has(CreatureModel.InfiniteJumper) ?? false;
+            return _inventory?.Has(PlayerData.InfiniteJumper) ?? false;
         }
 
         public override void Die()

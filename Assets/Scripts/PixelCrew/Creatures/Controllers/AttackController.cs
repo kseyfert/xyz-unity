@@ -1,11 +1,9 @@
-using System;
 using PixelCrew.Components.Game;
 using PixelCrew.Components.Utils.Checks;
-using PixelCrew.Creatures.Model;
 using PixelCrew.Creatures.Model.Data;
+using PixelCrew.Model.Data;
 using PixelCrew.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace PixelCrew.Creatures.Controllers
 {
@@ -154,22 +152,22 @@ namespace PixelCrew.Creatures.Controllers
 
         public bool HasWeapon(int atLeast=1)
         {
-            return _inventory?.Has(CreatureModel.Weapons, atLeast) ?? false;
+            return _inventory?.Has(PlayerData.Weapons, atLeast) ?? false;
         }
 
         public int CountWeapon()
         {
-            return _inventory?.Count(CreatureModel.Weapons) ?? 0;
+            return _inventory?.Count(PlayerData.Weapons) ?? 0;
         }
 
         private void ApplyToInventory(int value)
         {
-            _inventory?.Apply(CreatureModel.Weapons, value);
+            _inventory?.Apply(PlayerData.Weapons, value);
         }
 
         private void OnInventoryChanged(string id)
         {
-            if (id != CreatureModel.Weapons) return;
+            if (id != PlayerData.Weapons) return;
             onWeaponsChanged?.Invoke();
         }
         

@@ -1,6 +1,5 @@
-﻿using System.Linq;
-using PixelCrew.Components.Game;
-using PixelCrew.Components.Singletons;
+﻿using PixelCrew.Components.Singletons;
+using PixelCrew.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +11,7 @@ namespace PixelCrew.Controllers
 
         private void Start()
         {
-            _gameSession = GameSessionSingleton.GetInstance();
+            _gameSession = SingletonMonoBehaviour.GetInstance<GameSessionSingleton>();
         }
         
         public void Reload()

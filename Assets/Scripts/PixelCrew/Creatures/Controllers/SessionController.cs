@@ -1,7 +1,7 @@
-using PixelCrew.Components.Game;
 using PixelCrew.Components.Singletons;
 using PixelCrew.Creatures.Model;
-using UnityEngine;
+using PixelCrew.Model.Data;
+using PixelCrew.Utils;
 
 namespace PixelCrew.Creatures.Controllers
 {
@@ -11,12 +11,12 @@ namespace PixelCrew.Creatures.Controllers
 
         private void Awake()
         {
-            _gameSession = GameSessionSingleton.GetInstance();
+            _gameSession = SingletonMonoBehaviour.GetInstance<GameSessionSingleton>();
         }
 
-        public CreatureModel GetModel()
+        public PlayerData GetModel()
         {
-            return _gameSession.GetCreatureModel(Creature.ID);
+            return _gameSession.Model;
         }
         
         public override void Die()

@@ -1,6 +1,7 @@
 using PixelCrew.Components.Game;
 using PixelCrew.Creatures.Model;
 using PixelCrew.Creatures.Model.Data;
+using PixelCrew.Model.Data;
 using PixelCrew.UI.Widgets;
 using UnityEngine;
 
@@ -54,9 +55,9 @@ namespace PixelCrew.Creatures.Controllers
         public void ApplyPotion()
         {
             if (_inventory == null) return;
-            if (!_inventory.Has(CreatureModel.Potions)) return;
+            if (!_inventory.Has(PlayerData.Potions)) return;
 
-            _inventory.Remove(CreatureModel.Potions, 1);
+            _inventory.Remove(PlayerData.Potions, 1);
             _healthComponent.ApplyHeal(potionPower);
         }
 

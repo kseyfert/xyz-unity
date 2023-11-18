@@ -1,8 +1,9 @@
-using PixelCrew.Components.Game;
 using PixelCrew.Components.Singletons;
 using PixelCrew.Creatures.Model.Definitions;
 using PixelCrew.UI.PauseMenu;
 using PixelCrew.UI.Widgets;
+using PixelCrew.Utils;
+using PixelCrew.Utils.Disposables;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,10 +17,12 @@ namespace PixelCrew.UI.Hud
         private PauseMenuWindow _activePauseMenu;
         private GameSessionSingleton _gameSession;
 
+        private readonly CompositeDisposable _trash = new CompositeDisposable();
+
         private void Start()
         {
-            _gameSession = GameSessionSingleton.GetInstance();
-            _gameSession.GetCreatureModel("captain").hp.OnChanged += OnHpChanged;
+            _gameSession = SingletonMonoBehaviour.GetInstance<GameSessionSingleton>();
+            _trash.Retain(_gameSession.Model.hp.SubscribeAndInvoke(OnHpChanged));
         }
 
         private void OnHpChanged(int oldValue, int newValue)
@@ -41,6 +44,11 @@ namespace PixelCrew.UI.Hud
 
             _activePauseMenu.onClosed += (window) => _activePauseMenu = null;
             AnimatedWindow.CloseAll();
+        }
+
+        private void OnDestroy()
+        {
+            _trash.Dispose();
         }
     }
 }

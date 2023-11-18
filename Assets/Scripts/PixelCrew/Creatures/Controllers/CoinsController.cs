@@ -1,7 +1,5 @@
-using System;
-using PixelCrew.Creatures.Model;
 using PixelCrew.Creatures.Model.Data;
-using UnityEngine;
+using PixelCrew.Model.Data;
 
 namespace PixelCrew.Creatures.Controllers
 {
@@ -19,7 +17,7 @@ namespace PixelCrew.Creatures.Controllers
         
         private int ApplyToInventory(int value)
         {
-            return _inventory?.Apply(CreatureModel.Coins, value) ?? 0;
+            return _inventory?.Apply(PlayerData.Coins, value) ?? 0;
         }
 
         public int AddAmount(int value)
@@ -39,7 +37,7 @@ namespace PixelCrew.Creatures.Controllers
 
         public int GetAmount()
         {
-            return _inventory.Count(CreatureModel.Coins);
+            return _inventory.Count(PlayerData.Coins);
         }
     }
 }

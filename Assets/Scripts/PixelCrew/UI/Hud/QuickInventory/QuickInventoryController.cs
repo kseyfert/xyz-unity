@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using PixelCrew.Components.Game;
 using PixelCrew.Components.Singletons;
 using PixelCrew.Creatures.Model.Data;
+using PixelCrew.Utils;
 using PixelCrew.Utils.Disposables;
 using UnityEngine;
 
@@ -20,14 +20,14 @@ namespace PixelCrew.UI.Hud.QuickInventory
 
         private void Start()
         {
-            _gameSession = GameSessionSingleton.GetInstance();
+            _gameSession = SingletonMonoBehaviour.GetInstance<GameSessionSingleton>();
             Rebuild();
         }
 
         [ContextMenu("Rebuild")]
         private void Rebuild()
         {
-            _inventory = _gameSession.GetCreatureModel("captain").inventory.GetAll();
+            _inventory = _gameSession.Model.inventory.GetAll();
             
             for (var i = _createdItems.Count; i < _inventory.Length; i++)
             {

@@ -3196,7 +3196,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910d9bcd688743df9ddb0cb5b819f0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creatures: []
+  singletonMain: 0
+  model:
+    inventory:
+      items: []
+    hp:
+      value: 100
+    lastPositions: []
 --- !u!4 &658676260
 Transform:
   m_ObjectHideFlags: 0

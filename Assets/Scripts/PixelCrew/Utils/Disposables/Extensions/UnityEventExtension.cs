@@ -1,7 +1,7 @@
 using System;
 using UnityEngine.Events;
 
-namespace PixelCrew.Utils.Disposables
+namespace PixelCrew.Utils.Disposables.Extensions
 {
     public static class UnityEventExtension
     {
