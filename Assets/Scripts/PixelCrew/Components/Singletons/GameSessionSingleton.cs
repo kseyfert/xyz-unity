@@ -4,9 +4,9 @@ using PixelCrew.Creatures.Model;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace PixelCrew.Components.Game
+namespace PixelCrew.Components.Singletons
 {
-    public class GameSessionComponent : MonoBehaviour
+    public class GameSessionSingleton : MonoBehaviour
     {
         [Serializable]
         public struct ModelItem
@@ -20,12 +20,12 @@ namespace PixelCrew.Components.Game
         
         private readonly List<string> _lastSave = new List<string>();
 
-        public static GameSessionComponent GetInstance()
+        public static GameSessionSingleton GetInstance()
         {
-            var gameSessions = FindObjectsOfType<GameSessionComponent>();
+            var gameSessions = FindObjectsOfType<GameSessionSingleton>();
             foreach (var gs in gameSessions) gs.Init();
             
-            return FindObjectOfType<GameSessionComponent>();
+            return FindObjectOfType<GameSessionSingleton>();
         }
         
         private void Awake()
@@ -59,10 +59,10 @@ namespace PixelCrew.Components.Game
             SceneManager.LoadScene("Hud", LoadSceneMode.Additive);
         }
 
-        private GameSessionComponent GetExistsSession()
+        private GameSessionSingleton GetExistsSession()
         {
-            var sessions = FindObjectsOfType<GameSessionComponent>();
-            foreach (GameSessionComponent gameSession in sessions)
+            var sessions = FindObjectsOfType<GameSessionSingleton>();
+            foreach (GameSessionSingleton gameSession in sessions)
             {
                 if (gameSession != this) return gameSession;
             }

@@ -1,4 +1,5 @@
 using PixelCrew.Components.Game;
+using PixelCrew.Components.Singletons;
 using PixelCrew.Creatures.Model.Definitions;
 using PixelCrew.UI.PauseMenu;
 using PixelCrew.UI.Widgets;
@@ -13,12 +14,12 @@ namespace PixelCrew.UI.Hud
         [SerializeField] private ProgressBarWidget healthBar;
         
         private PauseMenuWindow _activePauseMenu;
-        private GameSessionComponent _gameSessionComponent;
+        private GameSessionSingleton _gameSession;
 
         private void Start()
         {
-            _gameSessionComponent = GameSessionComponent.GetInstance();
-            _gameSessionComponent.GetCreatureModel("captain").hp.OnChanged += OnHpChanged;
+            _gameSession = GameSessionSingleton.GetInstance();
+            _gameSession.GetCreatureModel("captain").hp.OnChanged += OnHpChanged;
         }
 
         private void OnHpChanged(int oldValue, int newValue)

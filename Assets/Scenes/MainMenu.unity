@@ -128,6 +128,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1069474487769201439, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
+        type: 3}
+      propertyPath: singletonMain
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6133590667675502568, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
         type: 3}
       propertyPath: m_Name
@@ -221,12 +226,12 @@ PrefabInstance:
     - target: {fileID: 6133590668039369644, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 90.165054
+      value: 88.14873
       objectReference: {fileID: 0}
     - target: {fileID: 6133590668039369644, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.830841
+      value: 17.826458
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5bd4014a7cd5471db672c36c3bcfb7d, type: 3}
@@ -396,6 +401,7 @@ GameObject:
   - component: {fileID: 349184103}
   - component: {fileID: 349184102}
   - component: {fileID: 349184101}
+  - component: {fileID: 349184105}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -483,6 +489,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &349184105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349184100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99fa997a06d948ab9e729930956f6ccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  singletonMain: 1
 --- !u!1 &388851402
 GameObject:
   m_ObjectHideFlags: 0

@@ -134,6 +134,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 654720565}
     m_Modifications:
+    - target: {fileID: 587281054, guid: 6f0d43555853146918266df531242151, type: 3}
+      propertyPath: singletonMain
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2075410779756466680, guid: 6f0d43555853146918266df531242151,
         type: 3}
       propertyPath: m_Name
@@ -288,6 +292,11 @@ PrefabInstance:
       propertyPath: main
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1069474487769201439, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
+        type: 3}
+      propertyPath: singletonMain
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6133590667675502568, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
         type: 3}
       propertyPath: m_Name
@@ -406,12 +415,12 @@ PrefabInstance:
     - target: {fileID: 6133590668039369644, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.65258
+      value: -30.15321
       objectReference: {fileID: 0}
     - target: {fileID: 6133590668039369644, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.4086733
+      value: -4.44379
       objectReference: {fileID: 0}
     - target: {fileID: 6133590668039369644, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
         type: 3}
@@ -24710,6 +24719,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 654720565}
     m_Modifications:
+    - target: {fileID: 98419375, guid: 13719d4a5701e4847af47906a2023c37, type: 3}
+      propertyPath: singletonMain
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2075410779756466680, guid: 13719d4a5701e4847af47906a2023c37,
         type: 3}
       propertyPath: m_Name
@@ -25351,7 +25364,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creatures: []
-  _lastSave: []
 --- !u!4 &1608334149 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6558486402757801278, guid: 512ea429422bf4e4bba18d9b731729ca,
@@ -79165,6 +79177,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crabby
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879189563387457621, guid: 283b0d988c2554271b91d443888e3910,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 283b0d988c2554271b91d443888e3910, type: 3}

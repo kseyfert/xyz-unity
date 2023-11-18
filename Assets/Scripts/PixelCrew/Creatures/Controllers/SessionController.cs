@@ -1,4 +1,5 @@
 using PixelCrew.Components.Game;
+using PixelCrew.Components.Singletons;
 using PixelCrew.Creatures.Model;
 using UnityEngine;
 
@@ -6,16 +7,16 @@ namespace PixelCrew.Creatures.Controllers
 {
     public class SessionController : AController
     {
-        private GameSessionComponent _gameSessionComponent;
+        private GameSessionSingleton _gameSession;
 
         private void Awake()
         {
-            _gameSessionComponent = GameSessionComponent.GetInstance();
+            _gameSession = GameSessionSingleton.GetInstance();
         }
 
         public CreatureModel GetModel()
         {
-            return _gameSessionComponent.GetCreatureModel(Creature.ID);
+            return _gameSession.GetCreatureModel(Creature.ID);
         }
         
         public override void Die()

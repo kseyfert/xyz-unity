@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using PixelCrew.Components.Game;
+using PixelCrew.Components.Singletons;
 using PixelCrew.Creatures.Model.Data;
 using PixelCrew.Utils.Disposables;
 using UnityEngine;
@@ -13,13 +14,13 @@ namespace PixelCrew.UI.Hud.QuickInventory
 
         private readonly CompositeDisposable _trash = new CompositeDisposable();
 
-        private GameSessionComponent _gameSession;
+        private GameSessionSingleton _gameSession;
         private InventoryItemData[] _inventory;
         private List<QuickInventoryItemWidget> _createdItems = new List<QuickInventoryItemWidget>();
 
         private void Start()
         {
-            _gameSession = GameSessionComponent.GetInstance();
+            _gameSession = GameSessionSingleton.GetInstance();
             Rebuild();
         }
 

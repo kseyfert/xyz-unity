@@ -1,4 +1,6 @@
 using System;
+using PixelCrew.Components.Singletons;
+using PixelCrew.Utils;
 using UnityEngine;
 
 namespace PixelCrew.Components.Game
@@ -11,7 +13,7 @@ namespace PixelCrew.Components.Game
 
         private void Start()
         {
-            _source = SfxComponent.I.Source;
+            _source = SingletonMonoBehaviour.GetInstance<SfxSingleton>().Source;
         }
 
         public void Play(string id)

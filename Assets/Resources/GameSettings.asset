@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   musicVolume:
-    value: 0.30671602
+    value: 0.04
   sfxVolume:
-    value: 0.24701245
+    value: 0.23769182

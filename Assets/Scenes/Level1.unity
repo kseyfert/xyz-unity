@@ -671,6 +671,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 561064990}
     m_Modifications:
+    - target: {fileID: 98419375, guid: 13719d4a5701e4847af47906a2023c37, type: 3}
+      propertyPath: singletonMain
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2075410779756466680, guid: 13719d4a5701e4847af47906a2023c37,
         type: 3}
       propertyPath: m_Name
@@ -2814,6 +2818,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 561064990}
     m_Modifications:
+    - target: {fileID: 587281054, guid: 6f0d43555853146918266df531242151, type: 3}
+      propertyPath: singletonMain
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2075410779756466680, guid: 6f0d43555853146918266df531242151,
         type: 3}
       propertyPath: m_Name
@@ -3189,7 +3197,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creatures: []
-  _lastSave: []
 --- !u!4 &658676260
 Transform:
   m_ObjectHideFlags: 0
@@ -99821,6 +99828,11 @@ PrefabInstance:
     - target: {fileID: 1069474487769201439, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
         type: 3}
       propertyPath: main
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1069474487769201439, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
+        type: 3}
+      propertyPath: singletonMain
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6133590667675502568, guid: c5bd4014a7cd5471db672c36c3bcfb7d,

@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 349184102}
   - component: {fileID: 349184101}
   - component: {fileID: 349184105}
+  - component: {fileID: 349184106}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -309,6 +310,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 842466909}
+--- !u!114 &349184106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349184100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99fa997a06d948ab9e729930956f6ccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  singletonMain: 0
 --- !u!1 &391204994
 GameObject:
   m_ObjectHideFlags: 0
