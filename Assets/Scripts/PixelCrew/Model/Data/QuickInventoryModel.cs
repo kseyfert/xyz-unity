@@ -1,5 +1,6 @@
 using System;
 using PixelCrew.Model.Data.Properties.Observable;
+using PixelCrew.Model.Definitions;
 using PixelCrew.Utils.Disposables;
 using UnityEngine;
 
@@ -20,18 +21,16 @@ namespace PixelCrew.Model.Data
         {
             _data = data;
 
-            Inventory = _data.inventory.GetAll();
+            Inventory = _data.inventory.GetAll(ItemTag.Usable);
             _data.inventory.Subscribe(OnInventoryChanged);
         }
 
         private void OnInventoryChanged(string id)
         {
-            // Debug.Log($"INV CHANGED: {id}, {Inventory.Length}");
-            // var foundIndex = Array.FindIndex(Inventory, item => item.id == id);
-            // Debug.Log(foundIndex);
-            // if (foundIndex == -1) return;
-
-            Inventory = _data.inventory.GetAll();
+            var def = DefsFacade.I.Items.Get(id);
+            if (!def.HasTag(ItemTag.Usable)) return;
+            
+            Inventory = _data.inventory.GetAll(ItemTag.Usable);
             SelectedIndex.Value = Mathf.Clamp(SelectedIndex.Value, 0, Inventory.Length - 1);
             _onChanged?.Invoke();
         }
@@ -46,6 +45,11 @@ namespace PixelCrew.Model.Data
         {
             call?.Invoke();
             return Subscribe(call);
+        }
+
+        public void SetNextItem()
+        {
+            SelectedIndex.Value = (SelectedIndex.Value + 1) % Inventory.Length;
         }
     }
 }

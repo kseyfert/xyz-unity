@@ -1,5 +1,5 @@
 using PixelCrew.Components.Singletons;
-using PixelCrew.Creatures.Model.Definitions;
+using PixelCrew.Model.Definitions;
 using PixelCrew.UI.PauseMenu;
 using PixelCrew.UI.Widgets;
 using PixelCrew.Utils;

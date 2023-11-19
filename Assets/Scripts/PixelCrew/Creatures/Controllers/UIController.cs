@@ -1,25 +1,20 @@
 using PixelCrew.Components.Singletons;
-using PixelCrew.Model.Data;
 using PixelCrew.Utils;
 
 namespace PixelCrew.Creatures.Controllers
 {
-    public class SessionController : AController
+    public class UIController : AController
     {
         private GameSessionSingleton _gameSession;
 
-        private void Awake()
+        private void Start()
         {
             _gameSession = SingletonMonoBehaviour.GetInstance<GameSessionSingleton>();
         }
 
-        public PlayerData GetModel()
+        public void QuickInventoryNextItem()
         {
-            return _gameSession.Model;
-        }
-        
-        public override void Die()
-        {
+            _gameSession.QuickInventoryModel.SetNextItem();
         }
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using PixelCrew.Creatures.Model.Definitions;
+using PixelCrew.Model.Definitions;
 using PixelCrew.Utils.Disposables;
 using UnityEngine;
 
@@ -19,7 +19,10 @@ namespace PixelCrew.Model.Data
             if (!DefsFacade.I.IsExist(id)) return 0;
             if (value <= 0) return 0;
 
-            if (DefsFacade.I.IsStackable(id))
+            var itemDef = DefsFacade.I.Items.Get(id);
+            if (itemDef.IsVoid) return 0;
+            
+            if (itemDef.HasTag(ItemTag.Stackable))
             {
                 var item = GetOrCreateItem(id);
                 item.value += value;    
@@ -82,9 +85,13 @@ namespace PixelCrew.Model.Data
                 .Sum(item => item.value);
         }
 
-        public InventoryItemData[] GetAll()
+        public InventoryItemData[] GetAll(params ItemTag[] tags)
         {
-            return items.ToArray();
+            if (tags.Length == 0) return items.ToArray();
+
+            return items
+                .FindAll(item => tags.All(tag => DefsFacade.I.Items.Get(item.id).HasTag(tag)))
+                .ToArray();
         }
 
         private InventoryItemData CreateItem(string id, int value=0)

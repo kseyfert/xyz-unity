@@ -17,6 +17,7 @@ namespace PixelCrew.Controllers
         private InteractionController _interactionController;
         private AttackController _attackController;
         private HealthController _healthController;
+        private UIController _uiController;
 
         private readonly Cooldown _throwLongPress = new Cooldown();
 
@@ -26,6 +27,7 @@ namespace PixelCrew.Controllers
             _interactionController = creature.InteractionController;
             _attackController = creature.AttackController;
             _healthController = creature.HealthController;
+            _uiController = creature.UIController;
         }
 
         public void OnMovement(InputAction.CallbackContext context)
@@ -73,6 +75,11 @@ namespace PixelCrew.Controllers
             if (_healthController == null) return;
             
             if (context.canceled) _healthController.ApplyPotion();
+        }
+
+        public void OnNextItem(InputAction.CallbackContext context)
+        {
+            if (context.performed) _uiController.QuickInventoryNextItem();
         }
     }
 }

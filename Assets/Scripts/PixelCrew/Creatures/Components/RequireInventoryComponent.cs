@@ -1,5 +1,5 @@
 using System;
-using PixelCrew.Creatures.Model.Definitions;
+using PixelCrew.Model.Definitions;
 using UnityEngine;
 using UnityEngine.Events;
 

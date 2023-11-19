@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PixelCrew.Creatures.Model.Definitions
+namespace PixelCrew.Model.Definitions
 {
     public class InventoryIdAttribute : PropertyAttribute
     {

@@ -1,6 +1,6 @@
 using PixelCrew.Components.Singletons;
-using PixelCrew.Creatures.Model.Definitions;
 using PixelCrew.Model.Data;
+using PixelCrew.Model.Definitions;
 using PixelCrew.Utils;
 using PixelCrew.Utils.Disposables;
 using UnityEngine;
@@ -23,7 +23,7 @@ namespace PixelCrew.UI.Hud.QuickInventory
             _index = index;
             var def = DefsFacade.I.Items.Get(item.id);
             icon.sprite = def.Icon;
-            value.text = def.Stackable ? $"x{item.value}" : string.Empty;
+            value.text = def.HasTag(ItemTag.Stackable) ? $"x{item.value}" : string.Empty;
             
             var session = SingletonMonoBehaviour.GetInstance<GameSessionSingleton>();
             var quickInventoryModel = session.QuickInventoryModel;

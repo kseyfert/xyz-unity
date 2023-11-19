@@ -1,4 +1,3 @@
-using PixelCrew.Creatures.Model;
 using PixelCrew.Model.Data;
 using PixelCrew.Utils;
 using UnityEngine;

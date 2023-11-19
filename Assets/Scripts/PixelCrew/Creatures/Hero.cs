@@ -1,4 +1,3 @@
-using PixelCrew.Creatures.Model.Definitions;
 using UnityEngine;
 
 namespace PixelCrew.Creatures

@@ -1,7 +1,8 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
-namespace PixelCrew.Creatures.Model.Definitions
+namespace PixelCrew.Model.Definitions
 {
     [Serializable]
     [CreateAssetMenu(menuName = "Defs/InventoryItems", fileName = "InventoryItems")]
@@ -29,11 +30,16 @@ namespace PixelCrew.Creatures.Model.Definitions
     public struct ItemDef
     {
         [SerializeField] private string id;
-        [SerializeField] private bool stackable;
         [SerializeField] private Sprite icon;
+        [SerializeField] private ItemTag[] tags;
+        
         public string Id => id;
-        public bool Stackable => stackable;
         public Sprite Icon => icon;
         public bool IsVoid => string.IsNullOrEmpty(id);
+
+        public bool HasTag(ItemTag tag)
+        {
+            return tags != null && tags.Contains(tag);
+        }
     }
 }

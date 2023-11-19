@@ -1,28 +1,24 @@
 using UnityEngine;
 
-namespace PixelCrew.Creatures.Model.Definitions
+namespace PixelCrew.Model.Definitions
 {
     [CreateAssetMenu(menuName = "Defs/DefsFacade", fileName = "DefsFacade")]
     public class DefsFacade : ScriptableObject
     {
         [SerializeField] private InventoryItemsDef items;
         [SerializeField] private PlayerDef player;
+        [SerializeField] private PropsDef props;
 
         public InventoryItemsDef Items => items;
         public PlayerDef Player => player;
+        public PropsDef Props => props;
 
         public bool IsExist(string id)
         {
             var def = items.Get(id);
             return !def.IsVoid;
         }
-
-        public bool IsStackable(string id)
-        {
-            var def = items.Get(id);
-            return def.Stackable;
-        }
-
+        
         private static DefsFacade _instance;
         public static DefsFacade I => _instance == null ? LoadDefs() : _instance;
 

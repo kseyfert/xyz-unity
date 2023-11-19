@@ -1,6 +1,6 @@
 using PixelCrew.Components.Game;
-using PixelCrew.Creatures.Model;
 using PixelCrew.Model.Data;
+using PixelCrew.Model.Definitions;
 using PixelCrew.UI.Widgets;
 using UnityEngine;
 
@@ -15,7 +15,6 @@ namespace PixelCrew.Creatures.Controllers
         public HealthDelegate onHeal;
         public HealthDelegate onDie;
         
-        [SerializeField] private int potionPower;
         [SerializeField] private ProgressBarWidget widget;
 
         private SessionController _sessionController;
@@ -57,7 +56,7 @@ namespace PixelCrew.Creatures.Controllers
             if (!_inventory.Has(PlayerData.Potions)) return;
 
             _inventory.Remove(PlayerData.Potions, 1);
-            _healthComponent.ApplyHeal(potionPower);
+            _healthComponent.ApplyHeal(DefsFacade.I.Props.PotionPower);
         }
 
         public HealthComponent GetHealthComponent()

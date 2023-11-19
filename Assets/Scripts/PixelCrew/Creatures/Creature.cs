@@ -24,6 +24,7 @@ namespace PixelCrew.Creatures
         [SerializeField] private ParticlesController particlesController;
         [SerializeField] private CoinsController coinsController;
         [SerializeField] private SoundController soundController;
+        [SerializeField] private UIController uiController;
 
         [SerializeField] private DieEvent onDie;
 
@@ -36,6 +37,7 @@ namespace PixelCrew.Creatures
         public SessionController SessionController => sessionController;
         public CoinsController CoinsController => coinsController;
         public SoundController SoundController => soundController;
+        public UIController UIController => uiController;
 
         private Transform _transform;
         private Rigidbody2D _rigidbody2D;
