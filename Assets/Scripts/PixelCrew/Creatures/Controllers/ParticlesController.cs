@@ -40,9 +40,25 @@ namespace PixelCrew.Creatures.Controllers
             spawnItem.component.SpawnAt(position);
         }
 
+        public void SpawnCustom(string particleName, GameObject customPrefab)
+        {
+            var index = spawns.FindIndex(item => item.name == particleName);
+            if (index < 0) return;
+
+            SpawnItem spawnItem = spawns[index];
+            if (spawnItem.disabled) return;
+            
+            spawnItem.component.SpawnCustom(customPrefab);
+        }
+
         public void SpawnSeq(string particleName, int count, float timeout)
         {
             StartCoroutine(SpawnSeqCoroutine(particleName, count, timeout));
+        }
+        
+        public void SpawnSeqCustom(string particleName, int count, float timeout, GameObject customPrefab)
+        {
+            StartCoroutine(SpawnSeqCustomCoroutine(particleName, count, timeout, customPrefab));
         }
 
         public SpawnComponent GetSpawnComponent(string particleName)
@@ -56,6 +72,15 @@ namespace PixelCrew.Creatures.Controllers
             for (var i = 0; i < count; i++)
             {
                 Spawn(particleName);
+                yield return new WaitForSeconds(timeout);
+            }
+        }
+        
+        private IEnumerator SpawnSeqCustomCoroutine(string particleName, int count, float timeout, GameObject customPrefab)
+        {
+            for (var i = 0; i < count; i++)
+            {
+                SpawnCustom(particleName, customPrefab);
                 yield return new WaitForSeconds(timeout);
             }
         }

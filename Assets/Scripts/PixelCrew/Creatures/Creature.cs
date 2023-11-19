@@ -82,8 +82,8 @@ namespace PixelCrew.Creatures
                 attackController.onRangeRequested += () => animationController.SetTrigger(AnimationController.TriggerThrow);
                 attackController.onRangeMaxRequested += () => animationController.SetTrigger(AnimationController.TriggerThrowMax);
 
-                attackController.onWeaponsChanged += () => animationController.SetProfile(attackController.HasWeapon() ? "armed" : "unarmed");
-                animationController.SetProfile(attackController.HasWeapon() ? "armed" : "unarmed");
+                attackController.onWeaponsChanged += () => animationController.SetProfile(attackController.HasMeleeWeapon() ? "armed" : "unarmed");
+                animationController.SetProfile(attackController.HasMeleeWeapon() ? "armed" : "unarmed");
             }
 
             if (animationController != null)

@@ -16,6 +16,7 @@ namespace PixelCrew.Model.Data
         private Action _onChanged = () => { };
 
         public InventoryItemData SelectedItem => Inventory[SelectedIndex.Value];
+        public ItemDef SelectedItemDef => DefsFacade.I.Items.Get(SelectedItem.id);
 
         public QuickInventoryModel(PlayerData data)
         {

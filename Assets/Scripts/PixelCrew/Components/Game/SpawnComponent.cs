@@ -31,5 +31,15 @@ namespace PixelCrew.Components.Game
             if (parent != null) spawned.transform.SetParent(parent.transform);
         }
 
+        public void SpawnCustom(GameObject customPrefab)
+        {
+            if (customPrefab != null)
+            {
+                var spawned = Instantiate(customPrefab, target.position, target.rotation);
+                spawned.transform.localScale = target.lossyScale;
+                if (parent != null) spawned.transform.SetParent(parent.transform);
+            }
+            action?.Invoke();
+        }
     }
 }

@@ -1,6 +1,7 @@
 using PixelCrew.Components.Game;
 using PixelCrew.Components.Utils.Checks;
 using PixelCrew.Model.Data;
+using PixelCrew.Model.Definitions;
 using PixelCrew.Utils;
 using PixelCrew.Utils.Disposables;
 using UnityEngine;
@@ -9,8 +10,8 @@ namespace PixelCrew.Creatures.Controllers
 {
     public class AttackController : AController
     {
-        public static readonly string RangeParticle = "range-projectile";
-        
+        public const string RangeParticle = "range-projectile";
+
         public delegate void AttackEvent();
 
         public AttackEvent onMeleeRequested;
@@ -30,7 +31,6 @@ namespace PixelCrew.Creatures.Controllers
         [SerializeField] private float meleeTimeout = 0;
         
         [SerializeField] private float rangeTimeout = 1f;
-        [SerializeField] private bool allowRangeLast = false;
         
         [SerializeField] private int rangeMaxCount = 3;
         [SerializeField] private float rangeMaxDelay = 0.3f;
@@ -40,12 +40,13 @@ namespace PixelCrew.Creatures.Controllers
         [SerializeField] private bool alwaysCanRange = false;
         [SerializeField] private bool alwaysCanRangeMax = false;
 
-        private Cooldown _meleeCooldown = new Cooldown();
-        private Cooldown _rangeCooldown = new Cooldown();
-        private Cooldown _rangeMaxCooldown = new Cooldown();
+        private readonly Cooldown _meleeCooldown = new Cooldown();
+        private readonly Cooldown _rangeCooldown = new Cooldown();
+        private readonly Cooldown _rangeMaxCooldown = new Cooldown();
 
         private ParticlesController _particlesController;
         private InventoryData _inventory;
+        private QuickInventoryModel _quickInventory;
 
         private readonly CompositeDisposable _trash = new CompositeDisposable();
 
@@ -55,6 +56,7 @@ namespace PixelCrew.Creatures.Controllers
             
             var sessionController = Creature.SessionController;
             if (sessionController != null) _inventory = sessionController.GetModel().inventory;
+            if (sessionController != null) _quickInventory = sessionController.GetQuickInventory();
 
             if (_inventory != null) _trash.Retain(_inventory.Subscribe(OnInventoryChanged));
         }
@@ -63,7 +65,7 @@ namespace PixelCrew.Creatures.Controllers
         {
             if (!_meleeCooldown.IsReady) return false;
 
-            return alwaysCanMelee || HasWeapon();
+            return alwaysCanMelee || HasMeleeWeapon();
         }
         public void RequestMelee()
         {
@@ -99,9 +101,14 @@ namespace PixelCrew.Creatures.Controllers
         {
             if (!_rangeCooldown.IsReady) return false;
             if (alwaysCanRange) return true;
-            if (allowRangeLast && HasWeapon()) return true;
+            
+            if (_inventory == null) return false;
+            if (!InventoryIsSelectedThrowable()) return false;
 
-            return HasWeapon(2);
+            var throwableDef = DefsFacade.I.Throwable.Get(_quickInventory.SelectedItem.id);
+            if (throwableDef.AllowThrowLast) return true;
+
+            return _quickInventory.SelectedItem.value > 1;
         }
         public void RequestRange()
         {
@@ -113,8 +120,19 @@ namespace PixelCrew.Creatures.Controllers
 
         public void DoRange()
         {
-            ApplyToInventory(-1);
-            _particlesController.Spawn(AttackController.RangeParticle);
+            ThrowSelectedItem(1);
+            
+            if (_inventory == null)
+            {
+                _particlesController.Spawn(AttackController.RangeParticle);
+                onRangeApplied?.Invoke();
+                return;
+            }
+
+            var def = DefsFacade.I.Throwable.Get(_quickInventory.SelectedItem.id);
+            var projectile = def.Projectile;
+            if (projectile == null) _particlesController.Spawn(AttackController.RangeParticle);
+            else _particlesController.SpawnCustom(AttackController.RangeParticle, projectile);
             
             onRangeApplied?.Invoke();
         }
@@ -123,9 +141,14 @@ namespace PixelCrew.Creatures.Controllers
         {
             if (!_rangeMaxCooldown.IsReady) return false;
             if (alwaysCanRangeMax) return true;
-            if (allowRangeLast && HasWeapon(rangeMaxCount)) return true;
+            
+            if (_inventory == null) return false;
+            if (!InventoryIsSelectedThrowable()) return false;
 
-            return HasWeapon(rangeMaxCount + 1);
+            var throwableDef = DefsFacade.I.Throwable.Get(_quickInventory.SelectedItem.id);
+            if (throwableDef.AllowThrowLast) return _quickInventory.SelectedItem.value >= rangeMaxCount;
+
+            return _quickInventory.SelectedItem.value > rangeMaxCount;
         }
         public void RequestRangeMax()
         {
@@ -136,35 +159,43 @@ namespace PixelCrew.Creatures.Controllers
         }
         public void DoRangeMax()
         {
-            ThrowWeapon(-rangeMaxCount);
-            _particlesController.SpawnSeq(AttackController.RangeParticle, rangeMaxCount, rangeMaxDelay);
+            ThrowSelectedItem(rangeMaxCount);
+            
+            if (_inventory == null)
+            {
+                _particlesController.SpawnSeq(AttackController.RangeParticle, rangeMaxCount, rangeMaxDelay);
+                onRangeMaxApplied?.Invoke();
+                return;
+            }
+
+            var def = DefsFacade.I.Throwable.Get(_quickInventory.SelectedItem.id);
+            var projectile = def.Projectile;
+            if (projectile == null) _particlesController.SpawnSeq(AttackController.RangeParticle, rangeMaxCount, rangeMaxDelay);
+            else _particlesController.SpawnSeqCustom(AttackController.RangeParticle, rangeMaxCount, rangeMaxDelay, projectile);
             
             onRangeMaxApplied?.Invoke();
         }
 
-        public void TakeWeapon(int count = 1)
+        private void ThrowSelectedItem(int count = 1)
         {
-            ApplyToInventory(count);
+            InventoryApplyToSelected(-count);
         }
 
-        public void ThrowWeapon(int count = 1)
-        {
-            ApplyToInventory(-count);
-        }
-
-        public bool HasWeapon(int atLeast=1)
+        public bool HasMeleeWeapon(int atLeast=1)
         {
             return _inventory?.Has(PlayerData.Weapons, atLeast) ?? false;
         }
 
-        public int CountWeapon()
+        private void InventoryApplyToSelected(int value)
         {
-            return _inventory?.Count(PlayerData.Weapons) ?? 0;
+            _inventory?.Apply(_quickInventory.SelectedItem.id, value);
         }
 
-        private void ApplyToInventory(int value)
+        private bool InventoryIsSelectedThrowable()
         {
-            _inventory?.Apply(PlayerData.Weapons, value);
+            if (_inventory == null) return false;
+
+            return _quickInventory.SelectedItemDef.HasTag(ItemTag.Throwable);
         }
 
         private void OnInventoryChanged(string id)

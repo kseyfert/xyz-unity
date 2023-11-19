@@ -365,7 +365,7 @@ PrefabInstance:
     - target: {fileID: 6133590667817336546, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -38.78509
+      value: -38.785095
       objectReference: {fileID: 0}
     - target: {fileID: 6133590667817336546, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
         type: 3}
@@ -415,12 +415,12 @@ PrefabInstance:
     - target: {fileID: 6133590668039369644, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.15321
+      value: -30.091915
       objectReference: {fileID: 0}
     - target: {fileID: 6133590668039369644, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.44379
+      value: -4.444653
       objectReference: {fileID: 0}
     - target: {fileID: 6133590668039369644, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
         type: 3}
@@ -25363,7 +25363,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910d9bcd688743df9ddb0cb5b819f0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creatures: []
+  singletonMain: 0
+  model:
+    inventory:
+      items:
+      - id: Pearls
+        value: 5
+      - id: Weapons
+        value: 5
+      - id: Coins
+        value: 10
+    hp:
+      value: 100
+    lastPositions: []
 --- !u!4 &1608334149 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6558486402757801278, guid: 512ea429422bf4e4bba18d9b731729ca,

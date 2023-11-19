@@ -17,6 +17,11 @@ namespace PixelCrew.Creatures.Controllers
         {
             return _gameSession.Model;
         }
+
+        public QuickInventoryModel GetQuickInventory()
+        {
+            return _gameSession.QuickInventoryModel;
+        }
         
         public override void Die()
         {

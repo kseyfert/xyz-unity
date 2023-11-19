@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b76beb0e7494fff9447cbab626bf1b1, type: 3}
+  m_Name: ThrowableItemsDef
+  m_EditorClassIdentifier: 
+  items:
+  - id: Weapons
+    allowThrowLast: 0
+    projectile: {fileID: 8321940659698658823, guid: 2a885b92f3ae34cebb54416791b8bdda,
+      type: 3}
+  - id: Pearls
+    allowThrowLast: 1
+    projectile: {fileID: 1729530628518646617, guid: 6e728e78c447a43868a2b28f6a89194b,
+      type: 3}
