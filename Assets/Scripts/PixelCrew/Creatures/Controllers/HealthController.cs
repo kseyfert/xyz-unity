@@ -20,6 +20,7 @@ namespace PixelCrew.Creatures.Controllers
         private SessionController _sessionController;
         private HealthComponent _healthComponent;
         private InventoryData _inventory;
+        private QuickInventoryModel _quickInventory;
 
         private void Start()
         {
@@ -27,6 +28,7 @@ namespace PixelCrew.Creatures.Controllers
             _healthComponent = GetComponent<HealthComponent>();
             
             if (_sessionController != null) _inventory = _sessionController.GetModel().inventory;
+            if (_sessionController != null) _quickInventory = _sessionController.GetQuickInventory();
             
             _healthComponent.onChange += SaveToSession;
             
@@ -53,10 +55,16 @@ namespace PixelCrew.Creatures.Controllers
         public void ApplyPotion()
         {
             if (_inventory == null) return;
-            if (!_inventory.Has(PlayerData.Potions)) return;
 
-            _inventory.Remove(PlayerData.Potions, 1);
-            _healthComponent.ApplyHeal(DefsFacade.I.Props.PotionPower);
+            var selectedItem = _quickInventory.SelectedItem;
+
+            if (!DefsFacade.I.Potions.Has(selectedItem.id)) return;
+            
+            var potionDef = DefsFacade.I.Potions.Get(selectedItem.id);
+            if (potionDef.Type != PotionType.Health) return;
+            
+            _inventory.Apply(selectedItem.id, -1);
+            _healthComponent.ApplyHeal(potionDef.Power);
         }
 
         public HealthComponent GetHealthComponent()

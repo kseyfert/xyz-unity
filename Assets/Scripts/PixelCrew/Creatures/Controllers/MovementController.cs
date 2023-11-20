@@ -1,6 +1,7 @@
 ﻿using System;
 using PixelCrew.Components.Utils.Checks;
 using PixelCrew.Model.Data;
+using PixelCrew.Model.Definitions;
 using PixelCrew.Utils;
 using UnityEngine;
 
@@ -28,6 +29,7 @@ namespace PixelCrew.Creatures.Controllers
         [SerializeField] private float longFallFrozenTime = 0.3f;
 
         private InventoryData _inventory;
+        private QuickInventoryModel _quickInventory;
 
         private Rigidbody2D _rb;
         private Transform _transform;
@@ -60,6 +62,7 @@ namespace PixelCrew.Creatures.Controllers
             
             var sessionController = Creature.SessionController;
             if (sessionController != null) _inventory = sessionController.GetModel().inventory;
+            if (sessionController != null) _quickInventory = sessionController.GetQuickInventory();
 
             _initialScale = _transform.localScale;
         }
@@ -251,6 +254,24 @@ namespace PixelCrew.Creatures.Controllers
 
             _speeding = false;
             speed /= upperSpeedMultiplier;
+        }
+
+        public void ApplyPotion()
+        {
+            if (_inventory == null) return;
+
+            var selectedItem = _quickInventory.SelectedItem;
+
+            if (!DefsFacade.I.Potions.Has(selectedItem.id)) return;
+            
+            var potionDef = DefsFacade.I.Potions.Get(selectedItem.id);
+            if (potionDef.Type != PotionType.Speed) return;
+            
+            _inventory.Apply(selectedItem.id, -1);
+
+            var power = potionDef.Power;
+            speed *= power;
+            this.SetTimeout(() => speed /= power, 3f);
         }
 
         public void Inverse()

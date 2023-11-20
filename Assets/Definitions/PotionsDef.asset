@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb770bb2491c45ab9eebd80013cbfeab, type: 3}
+  m_Name: PotionsDef
+  m_EditorClassIdentifier: 
+  items:
+  - id: GreenPotions
+    type: 0
+    power: 10
+  - id: RedPotions
+    type: 0
+    power: 5
+  - id: BluePotions
+    type: 1
+    power: 3

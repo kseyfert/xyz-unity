@@ -8,12 +8,12 @@ namespace PixelCrew.Model.Definitions
         [SerializeField] private InventoryItemsDef items;
         [SerializeField] private ThrowableItemsDef throwable;
         [SerializeField] private PlayerDef player;
-        [SerializeField] private PropsDef props;
+        [SerializeField] private PotionsDef potions;
 
         public InventoryItemsDef Items => items;
         public ThrowableItemsDef Throwable => throwable;
         public PlayerDef Player => player;
-        public PropsDef Props => props;
+        public PotionsDef Potions => potions;
 
         public bool IsExist(string id)
         {

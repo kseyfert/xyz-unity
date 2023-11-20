@@ -15,4 +15,4 @@ MonoBehaviour:
   items: {fileID: 11400000, guid: 779c4aaf84a4e4dbfb9a3ec10c05e69b, type: 2}
   throwable: {fileID: 11400000, guid: 01ac410b24f49486899604f7c2e0aab7, type: 2}
   player: {fileID: 11400000, guid: cfcc9dfbbde4f40e2b7e38cb963d11c9, type: 2}
-  props: {fileID: 11400000, guid: 052108dcbc441445eb4d323686736321, type: 2}
+  potions: {fileID: 11400000, guid: b71ef802955d64385818921172ce977c, type: 2}

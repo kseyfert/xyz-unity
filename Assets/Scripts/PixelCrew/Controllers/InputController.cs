@@ -66,15 +66,8 @@ namespace PixelCrew.Controllers
 
             if (context.performed) _throwLongPress.Reset(longPress);
             
-            if (context.canceled && _throwLongPress.IsReady) _attackController.RequestRangeMax();
-            if (context.canceled && !_throwLongPress.IsReady) _attackController.RequestRange();
-        }
-
-        public void OnPotion(InputAction.CallbackContext context)
-        {
-            if (_healthController == null) return;
-            
-            if (context.canceled) _healthController.ApplyPotion();
+            if (context.canceled && _throwLongPress.IsReady) _uiController.UseMax();
+            if (context.canceled && !_throwLongPress.IsReady) _uiController.Use();
         }
 
         public void OnNextItem(InputAction.CallbackContext context)

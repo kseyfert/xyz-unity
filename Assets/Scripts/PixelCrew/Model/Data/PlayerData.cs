@@ -13,7 +13,6 @@ namespace PixelCrew.Model.Data
         public static readonly string DoubleJumper = "DoubleJumper";
         public static readonly string InfiniteJumper = "InfiniteJumper";
         public static readonly string Keys = "Keys";
-        public static readonly string Potions = "Potions";
 
         public InventoryData inventory = new InventoryData();
 
