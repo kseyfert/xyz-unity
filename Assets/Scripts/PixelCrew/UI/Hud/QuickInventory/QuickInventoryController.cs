@@ -3,12 +3,14 @@ using PixelCrew.Components.Singletons;
 using PixelCrew.Utils;
 using PixelCrew.Utils.Disposables;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace PixelCrew.UI.Hud.QuickInventory
 {
     public class QuickInventoryController : MonoBehaviour
     {
         [SerializeField] private Transform container;
+        [SerializeField] private Image containerImage;
         [SerializeField] private QuickInventoryItemWidget prefab;
 
         private readonly CompositeDisposable _trash = new CompositeDisposable();
@@ -43,6 +45,12 @@ namespace PixelCrew.UI.Hud.QuickInventory
             {
                 _createdItems[i].gameObject.SetActive(false);
             }
+
+            var containerRectTransform = containerImage.GetComponent<RectTransform>();
+            var currentSize = containerRectTransform.sizeDelta;
+            
+            var enabledItems = _createdItems.FindAll(item => item.gameObject.activeSelf);
+            containerRectTransform.sizeDelta = enabledItems.Count > 3 ? new Vector2(17 * enabledItems.Count, currentSize.y) : new Vector2(17 * 3, currentSize.y);
         }
 
         private void OnDestroy()
