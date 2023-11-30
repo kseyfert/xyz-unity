@@ -1,5 +1,7 @@
+using System;
 using PixelCrew.Model.Data;
 using PixelCrew.Utils;
+using PixelCrew.Utils.Disposables;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,18 +14,27 @@ namespace PixelCrew.Components.Singletons
         
         public QuickInventoryModel QuickInventoryModel { get; private set; }
 
+        private CompositeDisposable _trash = new CompositeDisposable();
         private string _lastSave;
 
+        private static bool hudLoaded = false;
+        
         private void Awake()
         {
             Load<GameSessionSingleton>();
-            
-            SceneManager.LoadScene("Hud", LoadSceneMode.Additive);
+
+            if (SceneManager.GetActiveScene().name != "Hud" && !hudLoaded)
+            {
+                SceneManager.LoadScene("Hud", LoadSceneMode.Additive);
+                hudLoaded = true;
+            }
 
             if (GetInstance<GameSessionSingleton>() != this) return;
             
             Save();
             QuickInventoryModel = new QuickInventoryModel(model);
+            _trash.Retain(QuickInventoryModel);
+            
             DontDestroyOnLoad(gameObject);
         }
 
@@ -37,6 +48,11 @@ namespace PixelCrew.Components.Singletons
             if (string.IsNullOrEmpty(_lastSave)) return;
 
             model = JsonUtility.FromJson<PlayerData>(_lastSave);
+        }
+
+        private void OnDestroy()
+        {
+            _trash.Dispose();
         }
     }
 }

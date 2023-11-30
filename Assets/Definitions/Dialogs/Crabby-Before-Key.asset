@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d9dcd61815434e995565e3bfc2c1f6, type: 3}
+  m_Name: Crabby-Before-Key
+  m_EditorClassIdentifier: 
+  data:
+    phrases:
+    - message: Hi, captain!
+      author: Crabby
+      avatar: {fileID: 21300000, guid: cb0525df4aed94996881a2d3986fc631, type: 3}
+    - message: Hi
+      author: Captain
+      avatar: {fileID: 21300000, guid: 47263db42170b4738b2ae5377bd056f9, type: 3}
+    - message: I'm looking for the key
+      author: "\u0421rabby"
+      avatar: {fileID: 21300000, guid: cb0525df4aed94996881a2d3986fc631, type: 3}
+    - message: Help me, find it and bring it to me
+      author: "\u0421rabby"
+      avatar: {fileID: 21300000, guid: cb0525df4aed94996881a2d3986fc631, type: 3}
+    - message: As a reward, I'll tell you something
+      author: "\u0421rabby"
+      avatar: {fileID: 21300000, guid: cb0525df4aed94996881a2d3986fc631, type: 3}
+    - message: ...
+      author: Captain
+      avatar: {fileID: 21300000, guid: 47263db42170b4738b2ae5377bd056f9, type: 3}

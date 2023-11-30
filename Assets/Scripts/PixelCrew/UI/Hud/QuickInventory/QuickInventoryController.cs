@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using PixelCrew.Components.Singletons;
 using PixelCrew.Utils;
@@ -50,7 +51,11 @@ namespace PixelCrew.UI.Hud.QuickInventory
             var currentSize = containerRectTransform.sizeDelta;
             
             var enabledItems = _createdItems.FindAll(item => item.gameObject.activeSelf);
-            containerRectTransform.sizeDelta = enabledItems.Count > 3 ? new Vector2(17 * enabledItems.Count, currentSize.y) : new Vector2(17 * 3, currentSize.y);
+            var count = Mathf.Max(enabledItems.Count, 3);
+            
+            // paddingLeft + paddingRight + spacing * count + width * count
+            var width = 4 + 2 + 2 * count + 13 * count;
+            containerRectTransform.sizeDelta = new Vector2(width, currentSize.y);
         }
 
         private void OnDestroy()

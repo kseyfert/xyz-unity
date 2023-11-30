@@ -425,7 +425,6 @@ MonoBehaviour:
   meleePower: 10
   meleeTimeout: 0
   rangeTimeout: 1
-  allowRangeLast: 0
   rangeMaxCount: 3
   rangeMaxDelay: 0.3
   rangeMaxTimeout: 1

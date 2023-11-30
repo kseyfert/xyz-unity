@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace PixelCrew.Model.Data
 {
-    public class QuickInventoryModel
+    public class QuickInventoryModel : IDisposable
     {
         private readonly PlayerData _data;
         
@@ -18,12 +18,14 @@ namespace PixelCrew.Model.Data
         public InventoryItemData SelectedItem => Inventory[SelectedIndex.Value];
         public ItemDef SelectedItemDef => DefsFacade.I.Items.Get(SelectedItem.id);
 
+        private CompositeDisposable _trash = new CompositeDisposable();
+
         public QuickInventoryModel(PlayerData data)
         {
             _data = data;
 
             Inventory = _data.inventory.GetAll(ItemTag.Usable);
-            _data.inventory.Subscribe(OnInventoryChanged);
+            _trash.Retain(_data.inventory.Subscribe(OnInventoryChanged));
         }
 
         private void OnInventoryChanged(string id)
@@ -51,6 +53,11 @@ namespace PixelCrew.Model.Data
         public void SetNextItem()
         {
             SelectedIndex.Value = (SelectedIndex.Value + 1) % Inventory.Length;
+        }
+
+        public void Dispose()
+        {
+            _trash.Dispose();
         }
     }
 }
