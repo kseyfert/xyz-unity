@@ -7,7 +7,6 @@ namespace PixelCrew.Model.Data.Properties.Persistent
     [Serializable]
     public abstract class APersistentProperty<TPropertyType>
     {
-        [Range(0f, 1f)]
         [SerializeField] private TPropertyType value;
         private TPropertyType _defaultValue;
         private TPropertyType _stored;
@@ -26,7 +25,7 @@ namespace PixelCrew.Model.Data.Properties.Persistent
             get => _stored;
             set
             {
-                var isEquals = _stored.Equals(value);
+                var isEquals =  _stored != null && _stored.Equals(value);
                 if (isEquals) return;
 
                 var oldValue = _stored;
@@ -44,12 +43,12 @@ namespace PixelCrew.Model.Data.Properties.Persistent
 
         protected void Init()
         {
-            value = Read(_defaultValue);
+            Value = Read(_defaultValue);
         }
 
         public void Validate()
         {
-            if (!_stored.Equals(value)) Value = value;
+            if (_stored == null || !_stored.Equals(value)) Value = value;
         }
         
         protected abstract void Write(TPropertyType value);

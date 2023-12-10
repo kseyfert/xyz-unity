@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be416e5118be438cacadbd86a1dab815, type: 3}
+  m_Name: ru
+  m_EditorClassIdentifier: 
+  url: https://docs.google.com/spreadsheets/d/e/2PACX-1vSo3l0JcCaZLuTQr6BCc32EN4SwdoxMorGkE0pEUoXkoUTQQBATQFEwv7S60bLCQYwP_Zfj3UMLzN1v/pub?gid=1919146577&single=true&output=tsv
+  items:
+  - key: menu_title
+    value: "\u041C\u0435\u043D\u044E"
+  - key: button_start
+    value: "\u0421\u0442\u0430\u0440\u0442"
+  - key: button_option
+    value: "\u041E\u043F\u0446\u0438\u0438"
+  - key: button_exit
+    value: "\u0412\u044B\u0445\u043E\u0434"
+  - key: selected_language
+    value: "\u0412\u044B\u0431\u0440\u0430\u043D \u044F\u0437\u044B\u043A {0}"
+  - key: menu_language_title
+    value: "\u042F\u0437\u044B\u043A"

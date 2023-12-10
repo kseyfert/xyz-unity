@@ -9,7 +9,7 @@ namespace PixelCrew.Components.Game
     [RequireComponent(typeof(AudioSource))]
     public class AudioSettingComponent : MonoBehaviour
     {
-        [SerializeField] private SoundSetting mode = SoundSetting.Music;
+        [SerializeField] private GameSettingsKeys mode = GameSettingsKeys.Music;
 
         private AudioSource _source;
         private FloatPersistentProperty _model;
@@ -38,8 +38,8 @@ namespace PixelCrew.Components.Game
         {
             switch (mode)
             {
-                case SoundSetting.Music: return GameSettings.I.MusicVolume;
-                case SoundSetting.Sfx: return GameSettings.I.SfxVolume;
+                case GameSettingsKeys.Music: return GameSettings.I.MusicVolume;
+                case GameSettingsKeys.Sfx: return GameSettings.I.SfxVolume;
                 default: return null;
             }
         }
