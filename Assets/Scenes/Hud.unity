@@ -428,6 +428,7 @@ GameObject:
   - component: {fileID: 288245173}
   - component: {fileID: 288245172}
   - component: {fileID: 288245174}
+  - component: {fileID: 288245175}
   m_Layer: 5
   m_Name: Continue
   m_TagString: Untagged
@@ -523,6 +524,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &288245175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288245170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e7a6d8164974960991066ac8bd02fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: button-continue
 --- !u!1 &349184100
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,7 +590,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 32
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 320, y: 160}
+  m_ReferenceResolution: {x: 320, y: 190}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
@@ -1179,6 +1193,7 @@ GameObject:
   - component: {fileID: 644397555}
   - component: {fileID: 644397554}
   - component: {fileID: 644397553}
+  - component: {fileID: 644397556}
   m_Layer: 5
   m_Name: Continue
   m_TagString: Untagged
@@ -1274,6 +1289,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644397551}
   m_CullTransparentMesh: 0
+--- !u!114 &644397556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644397551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e7a6d8164974960991066ac8bd02fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: button-continue
 --- !u!1001 &679999601
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1689,6 +1717,7 @@ GameObject:
   - component: {fileID: 840483495}
   - component: {fileID: 840483494}
   - component: {fileID: 840483493}
+  - component: {fileID: 840483496}
   m_Layer: 5
   m_Name: Continue
   m_TagString: Untagged
@@ -1784,6 +1813,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 840483491}
   m_CullTransparentMesh: 0
+--- !u!114 &840483496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840483491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e7a6d8164974960991066ac8bd02fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: button-continue
 --- !u!1 &842466905
 GameObject:
   m_ObjectHideFlags: 0

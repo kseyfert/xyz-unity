@@ -14,15 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   url: https://docs.google.com/spreadsheets/d/e/2PACX-1vSo3l0JcCaZLuTQr6BCc32EN4SwdoxMorGkE0pEUoXkoUTQQBATQFEwv7S60bLCQYwP_Zfj3UMLzN1v/pub?gid=0&single=true&output=tsv
   items:
-  - key: menu_title
-    value: Menu
-  - key: button_start
-    value: Start
-  - key: button_option
-    value: Options
-  - key: button_exit
-    value: Exit
-  - key: selected_language
-    value: Selected language is {0}
-  - key: menu_language_title
+  - key: title-main
+    value: Main Menu
+  - key: title-settings
+    value: Settings
+  - key: title-language
     value: Language
+  - key: title-pause
+    value: Pause
+  - key: title-music
+    value: Music
+  - key: title-sfx
+    value: SFX
+  - key: button-ok
+    value: Ok
+  - key: button-exit
+    value: Exit
+  - key: button-settings
+    value: Settings
+  - key: button-language
+    value: Language
+  - key: button-start
+    value: Start
+  - key: button-restart
+    value: Restart
+  - key: button-continue
+    value: Continue
+  - key: button-back
+    value: Back

@@ -13,6 +13,11 @@ namespace PixelCrew.UI.MainMenu
             Open("UI/SettingsWindow");
         }
 
+        public void OnLanguage()
+        {
+            Open("UI/LanguageWindow");
+        }
+
         public void OnStart()
         {
             _action = () => SceneManager.LoadScene("Level1");

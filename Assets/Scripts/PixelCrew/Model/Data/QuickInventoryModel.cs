@@ -15,7 +15,7 @@ namespace PixelCrew.Model.Data
 
         private Action _onChanged = () => { };
 
-        public InventoryItemData SelectedItem => Inventory[SelectedIndex.Value];
+        public InventoryItemData SelectedItem => Inventory.Length > 0 ? Inventory[SelectedIndex.Value] : null; 
         public ItemDef SelectedItemDef => DefsFacade.I.Items.Get(SelectedItem.id);
 
         private CompositeDisposable _trash = new CompositeDisposable();

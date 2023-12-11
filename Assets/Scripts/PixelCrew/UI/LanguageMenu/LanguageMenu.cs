@@ -41,7 +41,7 @@ namespace PixelCrew.UI.LanguageMenu
                 _trash.Retain(disposable);
             }
 
-            LocalizationManager.I.SubscribeAndInvoke(OnLocaleChanged);
+            _trash.Retain(LocalizationManager.I.SubscribeAndInvoke(OnLocaleChanged));
         }
 
         private void OnLocaleChanged()
