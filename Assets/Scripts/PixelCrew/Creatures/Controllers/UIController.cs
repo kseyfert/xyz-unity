@@ -20,7 +20,13 @@ namespace PixelCrew.Creatures.Controllers
 
         public void Use()
         {
-            if (_gameSession.QuickInventoryModel.SelectedItemDef.HasTag(ItemTag.Throwable)) Creature.AttackController.RequestRange();
+            var selectedItemDef = _gameSession.QuickInventoryModel.SelectedItemDef;
+            if (selectedItemDef.IsVoid) return;
+
+            if (selectedItemDef.HasTag(ItemTag.Throwable))
+            {
+                Creature.AttackController.RequestRange();
+            }
             else
             {
                 Creature.HealthController.ApplyPotion();

@@ -1,6 +1,7 @@
 using PixelCrew.Components.Singletons;
 using PixelCrew.Model.Data;
 using PixelCrew.Utils;
+using UnityEngine;
 
 namespace PixelCrew.Creatures.Controllers
 {
@@ -8,19 +9,21 @@ namespace PixelCrew.Creatures.Controllers
     {
         private GameSessionSingleton _gameSession;
 
-        private void Awake()
-        {
-            _gameSession = SingletonMonoBehaviour.GetInstance<GameSessionSingleton>();
-        }
-
         public PlayerData GetModel()
         {
-            return _gameSession.Model;
+            return GetGameSession().Model;
         }
 
         public QuickInventoryModel GetQuickInventory()
         {
-            return _gameSession.QuickInventoryModel;
+            return GetGameSession().QuickInventoryModel;
+        }
+
+        private GameSessionSingleton GetGameSession()
+        {
+            if (_gameSession != null) return _gameSession;
+            _gameSession = SingletonMonoBehaviour.GetInstance<GameSessionSingleton>();
+            return _gameSession;
         }
         
         public override void Die()

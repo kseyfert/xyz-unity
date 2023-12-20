@@ -6,9 +6,5 @@ namespace PixelCrew.Components.Singletons
     [RequireComponent(typeof(Canvas))]
     public class CanvasSingleton : SingletonMonoBehaviour
     {
-        private void Start()
-        {
-            Load<CanvasSingleton>();
-        }
     }
 }

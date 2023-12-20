@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using PixelCrew.Components.Game;
+using PixelCrew.Creatures;
 using PixelCrew.Model.Data;
 using PixelCrew.Utils;
 using PixelCrew.Utils.Disposables;
@@ -10,28 +13,24 @@ namespace PixelCrew.Components.Singletons
     public class GameSessionSingleton : SingletonMonoBehaviour
     {
         [SerializeField] private PlayerData model;
-        public PlayerData Model => model;
+        [SerializeField] private List<string> checkpoints = new List<string>();
         
+        public PlayerData Model => model;
         public QuickInventoryModel QuickInventoryModel { get; private set; }
 
-        private CompositeDisposable _trash = new CompositeDisposable();
-        private string _lastSave;
+        private readonly CompositeDisposable _trash = new CompositeDisposable();
+        [SerializeField] private string _lastSave;
 
-        private static bool hudLoaded = false;
-        
-        private void Awake()
+        protected override void Awake()
         {
-            Load<GameSessionSingleton>();
-
-            if (SceneManager.GetActiveScene().name != "Hud" && !hudLoaded)
-            {
-                SceneManager.LoadScene("Hud", LoadSceneMode.Additive);
-                hudLoaded = true;
-            }
-
-            if (GetInstance<GameSessionSingleton>() != this) return;
+            base.Awake();
             
-            Save();
+            PixelCrew.Utils.Utils.AddScene("Hud");
+            
+            var mainGameSession = GetInstance<GameSessionSingleton>();
+            mainGameSession.SpawnHero();
+            if (mainGameSession != this) return;
+            
             QuickInventoryModel = new QuickInventoryModel(model);
             _trash.Retain(QuickInventoryModel);
             
@@ -46,13 +45,74 @@ namespace PixelCrew.Components.Singletons
         public void Load()
         {
             if (string.IsNullOrEmpty(_lastSave)) return;
-
-            model = JsonUtility.FromJson<PlayerData>(_lastSave);
+            
+            model.UpdateFromJson(_lastSave);
         }
 
         private void OnDestroy()
         {
             _trash.Dispose();
+        }
+
+        public void SetCheckpoint(string checkpointID, bool value)
+        {
+            var scene = SceneManager.GetActiveScene().name;
+            var id = $"{scene}/{checkpointID}";
+
+            if (!value)
+            {
+                checkpoints.Remove(id);
+                return;
+            }
+
+            Save();
+            if (!checkpoints.Contains(id)) checkpoints.Add(id);
+        }
+
+        public bool IsCheckpointChecked(string checkpointID)
+        {
+            var scene = SceneManager.GetActiveScene().name;
+            var id = $"{scene}/{checkpointID}";
+            
+            return checkpoints.Contains(id);
+        }
+
+        private void SpawnHero()
+        {
+            var scene = SceneManager.GetActiveScene().name;
+            
+            var existHero = FindObjectOfType<Hero>();
+            if (existHero != null) return;
+            
+            var cps = FindObjectsOfType<CheckpointComponent>();
+            if (cps.Length == 0) return;
+            
+            CheckpointComponent chosenCheckpoint = null;
+
+            if (checkpoints.Count > 0)
+            {
+                var lastIndex = checkpoints.FindLastIndex(item => item.StartsWith(scene));
+                if (lastIndex >= 0)
+                {
+                    var checkpointId = checkpoints[lastIndex].Split('/')[1];
+                    var cpIndex = Array.FindIndex(cps, item => item.Id == checkpointId);
+                    if (cpIndex >= 0) chosenCheckpoint = cps[cpIndex];
+                }
+            }
+
+            if (chosenCheckpoint == null)
+            {
+                var defaultIndex = Array.FindIndex(cps, item => item.IsDefault);
+                if (defaultIndex >= 0) chosenCheckpoint = cps[defaultIndex];
+            }
+
+            if (chosenCheckpoint == null)
+            {
+                chosenCheckpoint = cps[0];
+            }
+
+            Load();
+            chosenCheckpoint.SpawnHero();
         }
     }
 }

@@ -10,48 +10,6 @@ namespace PixelCrew.Creatures.Controllers
     {
         [SerializeField] private CircleOverlapCheckComponent interactionChecker;
         
-        private SessionController _sessionController;
-        private string _currentLevel;
-
-        private void Start()
-        {
-            _currentLevel = SceneManager.GetActiveScene().name;
-
-            _sessionController = Creature.SessionController;
-            if (_sessionController == null) return;
-            
-            var lps = _sessionController.GetModel().lastPositions;
-            var index = lps.FindIndex(item => item.levelName == _currentLevel);
-            if (index < 0)
-            {
-                PlayerData.LevelPosition levelPosition;
-                levelPosition.levelName = _currentLevel;
-                levelPosition.levelPosition = Creature.Transform.position;
-                lps.Add(levelPosition);
-            }
-
-            LoadFromSession();
-        }
-
-        private void LoadFromSession()
-        {
-            if (_sessionController == null) return;
-            
-            var lp = _sessionController.GetModel().lastPositions.Find(item => item.levelName == _currentLevel);
-            Creature.Transform.position = lp.levelPosition;
-        }
-
-        private void SaveToSession()
-        {
-            if (_sessionController == null) return;
-            
-            var index = _sessionController.GetModel().lastPositions.FindIndex(item => item.levelName == _currentLevel);
-            PlayerData.LevelPosition lp;
-            lp.levelName = _currentLevel;
-            lp.levelPosition = Creature.Transform.position;
-            _sessionController.GetModel().lastPositions[index] = lp;
-        }
-        
         public void Interact()
         {
             if (interactionChecker == null) return;
@@ -61,8 +19,6 @@ namespace PixelCrew.Creatures.Controllers
             {
                 var interactable = item.GetComponent<InteractableComponent>();
                 if (interactable == null) continue;
-                
-                SaveToSession();
                 
                 interactable.Interact(Creature.gameObject);
             }

@@ -1,4 +1,5 @@
-using UnityEngine;
+using PixelCrew.Components.Singletons;
+using PixelCrew.Utils;
 
 namespace PixelCrew.Creatures
 {
@@ -8,8 +9,8 @@ namespace PixelCrew.Creatures
         {
             base.Init();
 
-            // var hc = HealthController.GetHealthComponent();
-            // hc.SetMaxHealth(DefsFacade.I.Player.MaxHealth);
+            var cameraSingleton = SingletonMonoBehaviour.GetInstance<CameraSingleton>();
+            cameraSingleton.SetFollow(Transform);
         }
     }
 }

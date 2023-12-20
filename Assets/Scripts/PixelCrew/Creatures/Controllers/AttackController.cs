@@ -58,7 +58,7 @@ namespace PixelCrew.Creatures.Controllers
             if (sessionController != null) _inventory = sessionController.GetModel().inventory;
             if (sessionController != null) _quickInventory = sessionController.GetQuickInventory();
 
-            if (_inventory != null) _trash.Retain(_inventory.Subscribe(OnInventoryChanged));
+            if (_inventory != null) _trash.Retain(_inventory.SubscribeAndInvoke(OnInventoryChanged));
         }
 
         public bool CanMelee()
@@ -200,10 +200,10 @@ namespace PixelCrew.Creatures.Controllers
 
         private void OnInventoryChanged(string id)
         {
-            if (id != PlayerData.Weapons) return;
+            if (!string.IsNullOrEmpty(id) && id != PlayerData.Weapons) return;
             onWeaponsChanged?.Invoke();
         }
-        
+
         public override void Die()
         {
             _trash.Dispose();

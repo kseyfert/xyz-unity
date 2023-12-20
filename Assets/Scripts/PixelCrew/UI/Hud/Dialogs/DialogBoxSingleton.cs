@@ -30,9 +30,9 @@ namespace PixelCrew.UI.Hud.Dialogs
         private Action _onClose;
         private int _currentPhraseIndex = -1;
 
-        private void Awake()
+        protected override void Awake()
         {
-            Load<DialogBoxSingleton>();
+            base.Awake();
             
             _playSoundComponent = GetComponent<PlaySoundComponent>();
             _animator = GetComponent<Animator>();

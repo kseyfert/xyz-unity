@@ -16,7 +16,7 @@ namespace PixelCrew.Controllers
         
         public void Reload()
         {
-            if (_gameSession != null) _gameSession.Load();
+            // if (_gameSession != null) _gameSession.Load();
             
             var scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.name);

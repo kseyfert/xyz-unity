@@ -7,50 +7,70 @@ namespace PixelCrew.Utils
 {
     public class SingletonMonoBehaviour : MonoBehaviour
     {
-        private static readonly List<Type> InstancesTypes = new List<Type>();
-        private static readonly List<SingletonMonoBehaviour> Instances = new List<SingletonMonoBehaviour>();
+        private static readonly Dictionary<Type, SingletonMonoBehaviour> Instances =
+            new Dictionary<Type, SingletonMonoBehaviour>();
+
+        private static readonly Dictionary<Type, List<SingletonMonoBehaviour>> Candidates =
+            new Dictionary<Type, List<SingletonMonoBehaviour>>();
 
         public static TType GetInstance<TType>() where TType : SingletonMonoBehaviour
         {
-            return LoadAndGet<TType>();
+            var t = typeof(TType);
+
+            Load<TType>();
+            DestroyCandidates<TType>();
+
+            return (TType)Instances[t];
         }
 
-        public static void Load<TType>() where TType : SingletonMonoBehaviour
+        private static void Load<TType>() where TType : SingletonMonoBehaviour
         {
-            LoadAndGet<TType>();
+            var t = typeof(TType);
+
+            if (!Instances.ContainsKey(t)) Instances[t] = null;
+            if (!Candidates.ContainsKey(t)) Candidates[t] = new List<SingletonMonoBehaviour>();
+            if (Candidates[t].Count == 0) return;
+
+            if (Instances[t] != null) return;
+
+            var foundIndex = Candidates[t].FindIndex(item => item.singletonMain);
+            if (foundIndex >= 0) Instances[t] = Candidates[t][foundIndex];
+            else Instances[t] = Candidates[t][0];
         }
 
-        private static TType LoadAndGet<TType>() where TType : SingletonMonoBehaviour
+        private static void DestroyCandidates<TType>() where TType : SingletonMonoBehaviour
         {
-            var foundIndex = InstancesTypes.FindIndex(typeItem => typeItem == typeof(TType));
-            var foundInstance = foundIndex >= 0 ? Instances[foundIndex] : null;
+            var t = typeof(TType);
+            
+            if (!Instances.ContainsKey(t)) Instances[t] = null;
+            if (!Candidates.ContainsKey(t)) Candidates[t] = new List<SingletonMonoBehaviour>();
+            
+            Candidates[t]
+                .FindAll(item => item != Instances[t])
+                .ForEach(item => Destroy(item.gameObject));
+            
+            Candidates[t].Clear();
+        }
 
-            if (foundInstance != null && foundInstance.gameObject.activeSelf) return (TType)foundInstance;
+        private static void AddCandidate(SingletonMonoBehaviour obj)
+        {
+            var t = obj.GetType();
 
-            if (foundInstance != null && !foundInstance.gameObject.activeSelf)
+            if (Instances.ContainsKey(t) && Instances[t] != null)
             {
-                InstancesTypes.RemoveAt(foundIndex);
-                Instances.RemoveAt(foundIndex);
+                Destroy(obj.gameObject);
+                return;
             }
-
-            var allObjects = new List<TType>(FindObjectsOfType<TType>())
-                .FindAll(item => item.gameObject.activeSelf);
             
-            var newInstance = allObjects.Find(obj => obj.singletonMain);
-
-            if (newInstance == null) newInstance = allObjects.First();
-            if (newInstance == null) return null;
-            
-            allObjects
-                .FindAll(obj => obj != newInstance)
-                .ForEach(obj => Destroy(obj.gameObject));
-            
-            InstancesTypes.Add(typeof(TType));
-            Instances.Add(newInstance);
-
-            return (TType)Instances.Last();
+            if (!Candidates.ContainsKey(t)) Candidates[t] = new List<SingletonMonoBehaviour>();
+            Candidates[t].Add(obj);
         }
-
+        
         [SerializeField] private bool singletonMain = false;
+
+        protected virtual void Awake()
+        {
+            AddCandidate(this);
+        }
     }
 }

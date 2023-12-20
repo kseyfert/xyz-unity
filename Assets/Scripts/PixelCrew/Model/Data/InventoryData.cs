@@ -124,6 +124,25 @@ namespace PixelCrew.Model.Data
             call?.Invoke("");
             return Subscribe(call);
         }
+
+        public void Update(InventoryData other)
+        {
+            var myIds = items.ConvertAll(item => item.id);
+            var otherIds = other.items.ConvertAll(item => item.id);
+            
+            var ids = myIds
+                .Concat(otherIds)
+                .Distinct();
+            
+            foreach (var id in ids)
+            {
+                var myValue = Count(id);
+                var otherValue = other.Count(id);
+                var delta = otherValue - myValue;
+                
+                Apply(id, delta);
+            }
+        }
     }
 
     [Serializable]

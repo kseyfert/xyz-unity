@@ -15,16 +15,19 @@ namespace PixelCrew.Model.Data
         public static readonly string Keys = "Keys";
 
         public InventoryData inventory = new InventoryData();
-
-        public IntObservableProperty hp = new IntObservableProperty();
         
-        public List<LevelPosition> lastPositions = new List<LevelPosition>();
-    
-        [Serializable]
-        public struct LevelPosition
+        public IntObservableProperty hp = new IntObservableProperty();
+
+        public void Update(PlayerData other)
         {
-            public string levelName;
-            public Vector3 levelPosition;
+            inventory.Update(other.inventory);
+            hp.Value = other.hp.Value;
+        }
+
+        public void UpdateFromJson(string json)
+        {
+            var other = JsonUtility.FromJson<PlayerData>(json);
+            Update(other);
         }
     }
 }

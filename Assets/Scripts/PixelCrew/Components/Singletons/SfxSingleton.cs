@@ -1,4 +1,3 @@
-using System;
 using PixelCrew.Utils;
 using UnityEngine;
 
@@ -10,14 +9,11 @@ namespace PixelCrew.Components.Singletons
         private AudioSource _source;
         public AudioSource Source => _source;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+            
             _source = GetComponent<AudioSource>();
-        }
-
-        private void Start()
-        {
-            Load<SfxSingleton>();
         }
     }
 }
