@@ -44,6 +44,8 @@ namespace PixelCrew.Utils
             
             if (!Instances.ContainsKey(t)) Instances[t] = null;
             if (!Candidates.ContainsKey(t)) Candidates[t] = new List<SingletonMonoBehaviour>();
+
+            if (Instances[t] == null) return;
             
             Candidates[t]
                 .FindAll(item => item != Instances[t])
@@ -71,6 +73,14 @@ namespace PixelCrew.Utils
         protected virtual void Awake()
         {
             AddCandidate(this);
+        }
+
+        protected virtual void OnDestroy()
+        {
+            var t = this.GetType();
+
+            if (Instances.ContainsKey(t) && Instances[t] == this) Instances[t] = null;
+            if (Candidates.ContainsKey(t)) Candidates[t].Remove(this);
         }
     }
 }

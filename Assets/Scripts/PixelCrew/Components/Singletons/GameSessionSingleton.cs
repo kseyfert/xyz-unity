@@ -49,8 +49,10 @@ namespace PixelCrew.Components.Singletons
             model.UpdateFromJson(_lastSave);
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
+            
             _trash.Dispose();
         }
 
