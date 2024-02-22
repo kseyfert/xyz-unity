@@ -2,6 +2,7 @@ using PixelCrew.Model.Data.Properties.Persistent;
 using PixelCrew.Utils.Disposables;
 using PixelCrew.Utils.Disposables.Extensions;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace PixelCrew.UI.Widgets
@@ -17,7 +18,7 @@ namespace PixelCrew.UI.Widgets
 
         private void Start()
         {
-            _trash.Retain(slider.onValueChanged.Subscribe(OnSliderValueChanged));
+            _trash.Retain(slider.onValueChanged.Subscribe((UnityAction<float>)OnSliderValueChanged));
         }
 
         public void SetModel(FloatPersistentProperty model)

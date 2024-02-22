@@ -52,8 +52,10 @@ namespace PixelCrew.UI.LanguageMenu
             _items[index].Select();
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
+            
             _trash.Dispose();
         }
     }

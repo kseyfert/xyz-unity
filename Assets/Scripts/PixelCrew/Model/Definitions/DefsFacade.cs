@@ -1,4 +1,6 @@
+using PixelCrew.Model.Definitions.Repositories;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace PixelCrew.Model.Definitions
 {
@@ -10,10 +12,13 @@ namespace PixelCrew.Model.Definitions
         [SerializeField] private PlayerDef player;
         [SerializeField] private PotionsDef potions;
 
+        [SerializeField] private PerksRepository perks;
+
         public InventoryItemsDef Items => items;
         public ThrowableItemsDef Throwable => throwable;
         public PlayerDef Player => player;
         public PotionsDef Potions => potions;
+        public PerksRepository Perks => perks;
 
         public bool IsExist(string id)
         {

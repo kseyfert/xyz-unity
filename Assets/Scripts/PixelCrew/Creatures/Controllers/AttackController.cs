@@ -47,6 +47,7 @@ namespace PixelCrew.Creatures.Controllers
         private ParticlesController _particlesController;
         private InventoryData _inventory;
         private QuickInventoryModel _quickInventory;
+        private PerksModel _perksModel;
 
         private readonly CompositeDisposable _trash = new CompositeDisposable();
 
@@ -57,6 +58,7 @@ namespace PixelCrew.Creatures.Controllers
             var sessionController = Creature.SessionController;
             if (sessionController != null) _inventory = sessionController.GetModel().inventory;
             if (sessionController != null) _quickInventory = sessionController.GetQuickInventory();
+            if (sessionController != null) _perksModel = sessionController.GetPerksModel();
 
             if (_inventory != null) _trash.Retain(_inventory.SubscribeAndInvoke(OnInventoryChanged));
         }
@@ -144,6 +146,8 @@ namespace PixelCrew.Creatures.Controllers
             
             if (_inventory == null) return false;
             if (!InventoryIsSelectedThrowable()) return false;
+
+            if (!_perksModel.IsUsed(PerksModel.PerkRangeMax)) return false;
 
             var throwableDef = DefsFacade.I.Throwable.Get(_quickInventory.SelectedItem.id);
             if (throwableDef.AllowThrowLast) return _quickInventory.SelectedItem.value >= rangeMaxCount;

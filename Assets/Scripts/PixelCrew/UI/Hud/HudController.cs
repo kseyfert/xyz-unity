@@ -12,7 +12,10 @@ namespace PixelCrew.UI.Hud
     [RequireComponent(typeof(Canvas))]
     public class HudController : MonoBehaviour
     {
+        private const string Coins = "Coins";
+        
         [SerializeField] private ProgressBarWidget healthBar;
+        [SerializeField] private ItemWidget balance;
         
         private PauseMenuWindow _activePauseMenu;
         private GameSessionSingleton _gameSession;
@@ -23,6 +26,7 @@ namespace PixelCrew.UI.Hud
         {
             _gameSession = SingletonMonoBehaviour.GetInstance<GameSessionSingleton>();
             _trash.Retain(_gameSession.Model.hp.SubscribeAndInvoke(OnHpChanged));
+            _trash.Retain(_gameSession.Model.inventory.SubscribeAndInvoke(OnInventoryChanged));
         }
 
         private void OnHpChanged(int oldValue, int newValue)
@@ -30,6 +34,12 @@ namespace PixelCrew.UI.Hud
             var maxHealth = DefsFacade.I.Player.MaxHealth;
             var value = (float)newValue / maxHealth;
             healthBar.SetProgress(value);
+        }
+
+        private void OnInventoryChanged(string id)
+        {
+            var value = _gameSession.Model.inventory.Count(Coins);
+            balance.Set(Coins, value);
         }
 
         public void OnPauseRequested(InputAction.CallbackContext context)

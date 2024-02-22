@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using PixelCrew.Model.Definitions;
+using PixelCrew.Model.Definitions.Repositories;
 using PixelCrew.Utils.Disposables;
 using UnityEngine;
 
@@ -76,6 +77,18 @@ namespace PixelCrew.Model.Data
         public bool Has(string id, int atLeast=1)
         {
             return Count(id) >= atLeast;
+        }
+
+        public bool Has(params ItemWithCount[] items)
+        {
+            var dict = new Dictionary<string, int>();
+            foreach (var item in items)
+            {
+                if (!dict.ContainsKey(item.Id)) dict.Add(item.Id, 0);
+                dict[item.Id] += item.Count;
+            }
+
+            return dict.All(pair => Has(pair.Key, pair.Value));
         }
 
         public int Count(string id)

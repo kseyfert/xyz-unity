@@ -19,6 +19,11 @@ namespace PixelCrew.Creatures.Controllers
             return GetGameSession().QuickInventoryModel;
         }
 
+        public PerksModel GetPerksModel()
+        {
+            return GetGameSession().PerksModel;
+        }
+
         private GameSessionSingleton GetGameSession()
         {
             if (_gameSession != null) return _gameSession;

@@ -41,8 +41,10 @@ namespace PixelCrew.UI.PauseMenu
             base.AnimationEventClose();
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
+            
             Time.timeScale = _defaultTimeScale;
         }
     }

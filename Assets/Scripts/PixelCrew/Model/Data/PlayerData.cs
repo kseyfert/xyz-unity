@@ -15,6 +15,7 @@ namespace PixelCrew.Model.Data
         public static readonly string Keys = "Keys";
 
         public InventoryData inventory = new InventoryData();
+        public PerksData perks = new PerksData();
         
         public IntObservableProperty hp = new IntObservableProperty();
 

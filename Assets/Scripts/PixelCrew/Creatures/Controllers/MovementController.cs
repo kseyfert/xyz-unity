@@ -30,6 +30,7 @@ namespace PixelCrew.Creatures.Controllers
 
         private InventoryData _inventory;
         private QuickInventoryModel _quickInventory;
+        private PerksModel _perksModel;
 
         private Rigidbody2D _rb;
         private Transform _transform;
@@ -63,6 +64,7 @@ namespace PixelCrew.Creatures.Controllers
             var sessionController = Creature.SessionController;
             if (sessionController != null) _inventory = sessionController.GetModel().inventory;
             if (sessionController != null) _quickInventory = sessionController.GetQuickInventory();
+            if (sessionController != null) _perksModel = sessionController.GetPerksModel();
 
             _initialScale = _transform.localScale;
         }
@@ -292,7 +294,9 @@ namespace PixelCrew.Creatures.Controllers
 
         private bool IsDoubleJumpAllowed()
         {
-            return _inventory?.Has(PlayerData.DoubleJumper) ?? false;
+            if (_inventory != null && _inventory.Has(PlayerData.DoubleJumper)) return true;
+            
+            return _perksModel != null && _perksModel.IsUsed(PerksModel.PerkDoubleJump);
         }
 
         private bool IsInfiniteJumpAllowed()
