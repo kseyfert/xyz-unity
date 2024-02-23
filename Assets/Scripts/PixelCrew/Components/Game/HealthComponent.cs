@@ -46,12 +46,13 @@ namespace PixelCrew.Components.Game
             if (value < 0) onDamage?.Invoke();
         }
 
-        public void SetCurrentHealth(int value)
+        public void SetCurrentHealth(int value, bool quiet=true)
         {
             if (IsDead()) return;
-            
+
             currentHealth = value;
             AdjustCurrent();
+            onChange?.Invoke();
         }
 
         public int GetCurrentHealth()

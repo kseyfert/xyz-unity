@@ -13,3 +13,40 @@ MonoBehaviour:
   m_Name: PlayerDef
   m_EditorClassIdentifier: 
   maxHealth: 100
+  stats:
+  - id: 0
+    name: Health
+    icon: {fileID: 21300000, guid: 334cd6dfe8af74e088a3e16a1d695dcc, type: 3}
+    levels:
+    - value: 50
+      price:
+        id: Coins
+        count: 0
+    - value: 70
+      price:
+        id: Coins
+        count: 5
+    - value: 90
+      price:
+        id: Coins
+        count: 10
+    - value: 100
+      price:
+        id: Coins
+        count: 20
+  - id: 1
+    name: Speed
+    icon: {fileID: 21300000, guid: 24cff992dcdd840668b86ea7b3ca810f, type: 3}
+    levels:
+    - value: 5
+      price:
+        id: Coins
+        count: 0
+    - value: 7
+      price:
+        id: Coins
+        count: 3
+    - value: 12
+      price:
+        id: Coins
+        count: 4

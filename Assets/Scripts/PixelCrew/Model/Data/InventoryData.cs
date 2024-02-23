@@ -63,7 +63,7 @@ namespace PixelCrew.Model.Data
 
             return removed;
         }
-
+        
         public int Apply(string id, int value)
         {
             return value >= 0 ? Add(id, value) : Remove(id, -value);

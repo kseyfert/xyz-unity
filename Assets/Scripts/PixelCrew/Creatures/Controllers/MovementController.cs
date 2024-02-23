@@ -2,6 +2,7 @@
 using PixelCrew.Components.Utils.Checks;
 using PixelCrew.Model.Data;
 using PixelCrew.Model.Definitions;
+using PixelCrew.Model.Definitions.Player;
 using PixelCrew.Utils;
 using UnityEngine;
 
@@ -31,6 +32,7 @@ namespace PixelCrew.Creatures.Controllers
         private InventoryData _inventory;
         private QuickInventoryModel _quickInventory;
         private PerksModel _perksModel;
+        private StatsModel _statsModel;
 
         private Rigidbody2D _rb;
         private Transform _transform;
@@ -48,7 +50,7 @@ namespace PixelCrew.Creatures.Controllers
         private bool _isKickbackRequested = false;
         private bool _isKickbackNow = false;
 
-        private bool _speeding = false;
+        private float _speedingC = 1f;
 
         private readonly Cooldown _cooldown = new Cooldown();
 
@@ -65,8 +67,11 @@ namespace PixelCrew.Creatures.Controllers
             if (sessionController != null) _inventory = sessionController.GetModel().inventory;
             if (sessionController != null) _quickInventory = sessionController.GetQuickInventory();
             if (sessionController != null) _perksModel = sessionController.GetPerksModel();
+            if (sessionController != null) _statsModel = sessionController.GetStatsModel();
 
             _initialScale = _transform.localScale;
+
+            _statsModel?.SubscribeAndInvoke(() => speed = _statsModel.GetValue(StatId.Speed));
         }
 
         private void FixedUpdate()
@@ -209,7 +214,7 @@ namespace PixelCrew.Creatures.Controllers
             {
                 return -1 * _lookingSide * kickbackPower;
             }
-            return _direction.x * speed;
+            return _direction.x * CalculateSpeed();
         }
 
         public bool IsGrounded()
@@ -244,18 +249,23 @@ namespace PixelCrew.Creatures.Controllers
 
         public void SpeedUp()
         {
-            if (_speeding) return;
+            if (_speedingC > 1) return;
             
-            _speeding = true;
-            speed *= upperSpeedMultiplier;
+            _speedingC = upperSpeedMultiplier;
+        }
+
+        public void SpeedUp(float value)
+        {
+            if (_speedingC > 1) return;
+
+            _speedingC = value;
         }
 
         public void SpeedDown()
         {
-            if (!_speeding) return;
+            if (_speedingC < 1.01f) return;
 
-            _speeding = false;
-            speed /= upperSpeedMultiplier;
+            _speedingC = 1f;
         }
 
         public void ApplyPotion()
@@ -272,8 +282,8 @@ namespace PixelCrew.Creatures.Controllers
             _inventory.Apply(selectedItem.id, -1);
 
             var power = potionDef.Power;
-            speed *= power;
-            this.SetTimeout(() => speed /= power, 3f);
+            SpeedUp(power);
+            this.SetTimeout(SpeedDown, 3f);
         }
 
         public void Inverse()
@@ -302,6 +312,11 @@ namespace PixelCrew.Creatures.Controllers
         private bool IsInfiniteJumpAllowed()
         {
             return _inventory?.Has(PlayerData.InfiniteJumper) ?? false;
+        }
+
+        private float CalculateSpeed()
+        {
+            return speed * _speedingC;
         }
 
         public override void Die()

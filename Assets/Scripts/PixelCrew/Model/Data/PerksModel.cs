@@ -5,10 +5,10 @@ namespace PixelCrew.Model.Data
 {
     public class PerksModel : IDisposable
     {
-        private readonly PlayerData _data;
-
         public const string PerkDoubleJump = "double-jump";
         public const string PerkRangeMax = "sword-range-max";
+        
+        private readonly PlayerData _data;
 
         public PerksModel(PlayerData data)
         {

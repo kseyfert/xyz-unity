@@ -18,6 +18,7 @@ namespace PixelCrew.Components.Singletons
         public PlayerData Model => model;
         public QuickInventoryModel QuickInventoryModel { get; private set; }
         public PerksModel PerksModel { get; private set; }
+        public StatsModel StatsModel { get; private set; }
 
         private readonly CompositeDisposable _trash = new CompositeDisposable();
         [SerializeField] private string _lastSave;
@@ -37,6 +38,9 @@ namespace PixelCrew.Components.Singletons
 
             PerksModel = new PerksModel(model);
             _trash.Retain(PerksModel);
+
+            StatsModel = new StatsModel(model);
+            _trash.Retain(StatsModel);
             
             DontDestroyOnLoad(gameObject);
         }

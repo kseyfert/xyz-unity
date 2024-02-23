@@ -24,6 +24,11 @@ namespace PixelCrew.Creatures.Controllers
             return GetGameSession().PerksModel;
         }
 
+        public StatsModel GetStatsModel()
+        {
+            return GetGameSession().StatsModel;
+        }
+
         private GameSessionSingleton GetGameSession()
         {
             if (_gameSession != null) return _gameSession;

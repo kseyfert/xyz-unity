@@ -1,6 +1,8 @@
+using System;
 using PixelCrew.Components.Game;
 using PixelCrew.Model.Data;
 using PixelCrew.Model.Definitions;
+using PixelCrew.Model.Definitions.Player;
 using PixelCrew.UI.Widgets;
 using UnityEngine;
 
@@ -44,6 +46,18 @@ namespace PixelCrew.Creatures.Controllers
                 _healthComponent.onDamage.AddListener(UpdateWidget);
                 _healthComponent.onHeal.AddListener(UpdateWidget);
             }
+
+            if (_sessionController == null) return;
+            
+            var statsModel = _sessionController.GetStatsModel();
+            statsModel?.SubscribeAndInvoke(() =>
+            {
+                var maxHealth = _sessionController.GetStatsModel().GetValue(StatId.Hp);
+                if (Math.Abs(maxHealth - _healthComponent.GetMaxHealth()) < 0.1f) return;
+                
+                _healthComponent.SetMaxHealth((int) maxHealth);
+                _healthComponent.SetCurrentHealth((int) maxHealth, false);
+            });    
         }
 
         private void UpdateWidget()

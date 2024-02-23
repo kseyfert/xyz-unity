@@ -3334,6 +3334,8 @@ MonoBehaviour:
       used:
         value: 
       unlocked: []
+    levels:
+      progress: []
     hp:
       value: 100
   checkpoints: []

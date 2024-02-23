@@ -1,3 +1,4 @@
+using PixelCrew.Model.Definitions.Player;
 using PixelCrew.Model.Definitions.Repositories;
 using UnityEngine;
 using UnityEngine.Serialization;

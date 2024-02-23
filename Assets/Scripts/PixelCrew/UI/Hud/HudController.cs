@@ -1,5 +1,6 @@
 using PixelCrew.Components.Singletons;
 using PixelCrew.Model.Definitions;
+using PixelCrew.Model.Definitions.Player;
 using PixelCrew.UI.PauseMenu;
 using PixelCrew.UI.Widgets;
 using PixelCrew.Utils;
@@ -31,7 +32,9 @@ namespace PixelCrew.UI.Hud
 
         private void OnHpChanged(int oldValue, int newValue)
         {
-            var maxHealth = DefsFacade.I.Player.MaxHealth;
+            var hpLevels = DefsFacade.I.Player.GetStat(StatId.Hp).Levels;
+            var maxHealth = hpLevels[hpLevels.Length - 1].Value;
+            
             var value = (float)newValue / maxHealth;
             healthBar.SetProgress(value);
         }
