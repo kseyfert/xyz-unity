@@ -49,7 +49,6 @@ MonoBehaviour:
   meleePower: 10
   meleeTimeout: 0
   rangeTimeout: 1
-  allowRangeLast: 0
   rangeMaxCount: 3
   rangeMaxDelay: 0.3
   rangeMaxTimeout: 1
@@ -335,7 +334,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -457,6 +456,7 @@ MonoBehaviour:
   particlesController: {fileID: 4645422250584365584}
   coinsController: {fileID: 0}
   soundController: {fileID: 526736130823350511}
+  uiController: {fileID: 0}
   onDie:
     m_PersistentCalls:
       m_Calls: []
@@ -586,7 +586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creature: {fileID: 4645422250799026843}
-  potionPower: 0
+  widget: {fileID: 0}
 --- !u!1 &4645422251648682484
 GameObject:
   m_ObjectHideFlags: 0

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 1
   bound:
-    sentences: []
+    phrases: []
   external: {fileID: 11400000, guid: e3096f282e9cf41e1bc25e2b9504eb32, type: 2}
   onFinish:
     m_PersistentCalls:
@@ -117,7 +117,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -328,7 +328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 1
   bound:
-    sentences: []
+    phrases: []
   external: {fileID: 11400000, guid: 47e85d40e7d474b04a9b0fb5cd858c48, type: 2}
   onFinish:
     m_PersistentCalls:

@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -285,6 +285,9 @@ MonoBehaviour:
   target: {fileID: 8024588121389797108}
   prefab: {fileID: 4326254534063083246, guid: f738823967cd04ce287f1ae04d56d41d, type: 3}
   parent: {fileID: 7780168409293953590}
+  action:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3826798323674329310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5106,7 +5109,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5179,3 +5182,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 8024588121389797108}
   isAbsolute: 0
+  followScale: 0
