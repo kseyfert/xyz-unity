@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -525,26 +525,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6133590667817336545, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
-        type: 3}
-      propertyPath: m_Follow
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6133590667817336546, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -38.78509
-      objectReference: {fileID: 0}
-    - target: {fileID: 6133590667817336546, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.322503
-      objectReference: {fileID: 0}
-    - target: {fileID: 6133590667817336546, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 46.180984
-      objectReference: {fileID: 0}
     - target: {fileID: 6133590667842804687, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
         type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size
@@ -580,40 +560,20 @@ PrefabInstance:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].y
       value: -42.013542
       objectReference: {fileID: 0}
-    - target: {fileID: 6133590668039369555, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
-        type: 3}
-      propertyPath: m_NormalizedViewPortRect.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6133590668039369555, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
-        type: 3}
-      propertyPath: m_NormalizedViewPortRect.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6133590668039369555, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
-        type: 3}
-      propertyPath: m_NormalizedViewPortRect.width
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6133590668039369555, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
-        type: 3}
-      propertyPath: m_NormalizedViewPortRect.height
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6133590668039369644, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -35.050064
+      value: 90.16506
       objectReference: {fileID: 0}
     - target: {fileID: 6133590668039369644, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.3749866
+      value: 17.83084
       objectReference: {fileID: 0}
     - target: {fileID: 6133590668039369644, guid: c5bd4014a7cd5471db672c36c3bcfb7d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 46.180984
+      value: 18.090492
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5bd4014a7cd5471db672c36c3bcfb7d, type: 3}
