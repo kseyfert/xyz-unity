@@ -1,4 +1,5 @@
 ﻿using PixelCrew.Components.Singletons;
+using PixelCrew.UI.LevelLoader;
 using PixelCrew.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,24 +8,22 @@ namespace PixelCrew.Controllers
 {
     public class SceneController : MonoBehaviour
     {
-        private GameSessionSingleton _gameSession;
+        private LevelLoaderSingleton _levelLoader;
 
         private void Start()
         {
-            _gameSession = SingletonMonoBehaviour.GetInstance<GameSessionSingleton>();
+            _levelLoader = SingletonMonoBehaviour.GetInstance<LevelLoaderSingleton>();
         }
         
         public void Reload()
         {
-            // if (_gameSession != null) _gameSession.Load();
-            
             var scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.name);
+            _levelLoader.Show(scene.name);
         }
 
         public void LoadScene(string sceneName)
         {
-            SceneManager.LoadScene(sceneName);
+            _levelLoader.Show(sceneName);
         }
     }
 }

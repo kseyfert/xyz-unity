@@ -1,4 +1,6 @@
 using System;
+using PixelCrew.UI.LevelLoader;
+using PixelCrew.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,8 +8,16 @@ namespace PixelCrew.UI.MainMenu
 {
     public class MainMenuWindow : AnimatedWindow
     {
+        private LevelLoaderSingleton _levelLoader;
         private Action _action;
-        
+
+        protected override void Start()
+        {
+            base.Start();
+
+            _levelLoader = SingletonMonoBehaviour.GetInstance<LevelLoaderSingleton>();
+        }
+
         public void OnSettings()
         {
             Open("UI/SettingsWindow");
@@ -20,7 +30,7 @@ namespace PixelCrew.UI.MainMenu
 
         public void OnStart()
         {
-            _action = () => SceneManager.LoadScene("Level1");
+            _action = () => _levelLoader.Show("Level1");
             Close();
         }
 

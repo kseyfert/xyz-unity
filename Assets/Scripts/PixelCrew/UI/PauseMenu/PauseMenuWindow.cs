@@ -1,4 +1,6 @@
 using System;
+using PixelCrew.UI.LevelLoader;
+using PixelCrew.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +8,7 @@ namespace PixelCrew.UI.PauseMenu
 {
     public class PauseMenuWindow : AnimatedWindow
     {
+        private LevelLoaderSingleton _levelLoader;
         private Action _action;
 
         private float _defaultTimeScale;
@@ -13,8 +16,11 @@ namespace PixelCrew.UI.PauseMenu
         protected override void Start()
         {
             base.Start();
+            
             _defaultTimeScale = Time.timeScale;
             Time.timeScale = 0;
+            
+            _levelLoader = SingletonMonoBehaviour.GetInstance<LevelLoaderSingleton>();
         }
 
         public void OnSettings()
@@ -25,13 +31,13 @@ namespace PixelCrew.UI.PauseMenu
         public void OnRestart()
         {
             var scene = SceneManager.GetActiveScene();
-            _action = () => SceneManager.LoadScene(scene.name);
+            _action = () => _levelLoader.Show(scene.name);
             Close();
         }
 
         public void OnExit()
         {
-            _action = () => SceneManager.LoadScene("Scenes/MainMenu");
+            _action = () => _levelLoader.Show("Scenes/MainMenu");
             Close();
         }
 
