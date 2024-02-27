@@ -11,6 +11,9 @@ namespace PixelCrew.Creatures
 
             var cameraSingleton = SingletonMonoBehaviour.GetInstance<CameraSingleton>();
             cameraSingleton.SetFollow(Transform);
+            
+            if (HealthController == null) return;
+            HealthController.onDamage += () => cameraSingleton.Shake();
         }
     }
 }
