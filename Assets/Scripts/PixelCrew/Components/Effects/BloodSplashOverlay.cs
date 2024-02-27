@@ -23,8 +23,12 @@ namespace PixelCrew.Components.Effects
         {
             _animator = GetComponent<Animator>();
             _initialScale = overlay.localScale - Vector3.one;
+            
+            overlay.gameObject.SetActive(false);
 
             _gameSession = SingletonMonoBehaviour.GetInstance<GameSessionSingleton>();
+            if (_gameSession == null) return;
+            
             _trash.Retain(_gameSession.Model.hp.SubscribeAndInvoke(OnHpChanged));
         }
 
@@ -36,6 +40,8 @@ namespace PixelCrew.Components.Effects
 
             var overlayModifier = Mathf.Max(hpNormalized - 0.3f, 0f);
             overlay.localScale = Vector3.one + _initialScale * overlayModifier;
+            
+            overlay.gameObject.SetActive(true);
         }
 
         private void OnDestroy()
