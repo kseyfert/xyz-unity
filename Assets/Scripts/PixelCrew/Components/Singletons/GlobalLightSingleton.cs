@@ -22,5 +22,25 @@ namespace PixelCrew.Components.Singletons
         {
             return _light2D.intensity <= Min;
         }
+
+        public float GetIntensity()
+        {
+            return _light2D.intensity;
+        }
+
+        public void SetIntensity(float value)
+        {
+            _light2D.intensity = value;
+        }
+
+        public Color GetColor()
+        {
+            return _light2D.color;
+        }
+
+        public void SetColor(Color value)
+        {
+            _light2D.color = value;
+        }
     }
 }

@@ -52,6 +52,8 @@ namespace PixelCrew.Model.Data
 
         public void SetNextItem()
         {
+            if (Inventory.Length == 0) return;
+            
             SelectedIndex.Value = (SelectedIndex.Value + 1) % Inventory.Length;
         }
 

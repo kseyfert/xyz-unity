@@ -29,6 +29,7 @@ namespace PixelCrew.UI.Hud.Dialogs
         private DialogData _data;
         private Action _onClose;
         private int _currentPhraseIndex = -1;
+        private float _defaultTimeScale;
 
         protected override void Awake()
         {
@@ -44,6 +45,8 @@ namespace PixelCrew.UI.Hud.Dialogs
         {
             _data = data;
             _currentPhraseIndex = -1;
+            
+            FreezeTime();
 
             container.Activate(data.IsPersonalized());
             container.SetEmpty();
@@ -51,6 +54,17 @@ namespace PixelCrew.UI.Hud.Dialogs
 
             _playSoundComponent.Play(SoundOpen);
             _animator.SetBool(AnimationIsOpen, true);
+        }
+
+        private void FreezeTime()
+        {
+            _defaultTimeScale = Time.timeScale;
+            Time.timeScale = 0;
+        }
+
+        private void UnfreezeTime()
+        {
+            Time.timeScale = _defaultTimeScale;
         }
 
         public void ShowDialog(DialogData data, Action onClose)
@@ -63,6 +77,7 @@ namespace PixelCrew.UI.Hud.Dialogs
         {
             _playSoundComponent.Play(SoundClose);
             _animator.SetBool(AnimationIsOpen, false);
+            UnfreezeTime();
         }
 
         private void AnimationEventShowed()
@@ -132,7 +147,7 @@ namespace PixelCrew.UI.Hud.Dialogs
                 msg += ch;
                 container.SetMessage(msg);
                 
-                yield return new WaitForSeconds(textSpeed);
+                yield return new WaitForSecondsRealtime(textSpeed);
             }
 
             _typingCoroutine = null;

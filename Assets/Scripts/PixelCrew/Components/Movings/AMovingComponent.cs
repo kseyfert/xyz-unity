@@ -16,6 +16,7 @@ namespace PixelCrew.Components.Movings
         private int _direction = 0;
         private Vector2 _original;
         private float _time = 0;
+        private bool _stopped = false;
         
         protected virtual void Start()
         {
@@ -29,9 +30,14 @@ namespace PixelCrew.Components.Movings
         {
             if (_direction == 0) _direction = Math.Sign(_transform.lossyScale.x);
 
-            _rigidbody2D.MovePosition(CalcNewPosition());
+            if (!_stopped) _rigidbody2D.MovePosition(CalcNewPosition());
             
             _time += Time.fixedDeltaTime;
+        }
+
+        public virtual void StopMoving()
+        {
+            _stopped = true;
         }
 
         protected Vector2 GetOriginal()
@@ -57,6 +63,11 @@ namespace PixelCrew.Components.Movings
         protected float GetTime()
         {
             return _time;
+        }
+
+        protected bool IsStopped()
+        {
+            return _stopped;
         }
 
         protected abstract Vector2 CalcNewPosition();

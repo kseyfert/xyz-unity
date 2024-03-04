@@ -4,6 +4,7 @@ using PixelCrew.Model.Data;
 using PixelCrew.Model.Definitions;
 using PixelCrew.Model.Definitions.Player;
 using PixelCrew.UI.Widgets;
+using PixelCrew.Utils.Disposables;
 using UnityEngine;
 
 namespace PixelCrew.Creatures.Controllers
@@ -24,6 +25,8 @@ namespace PixelCrew.Creatures.Controllers
         private InventoryData _inventory;
         private QuickInventoryModel _quickInventory;
 
+        private readonly CompositeDisposable _trash = new CompositeDisposable();
+
         private void Start()
         {
             _sessionController = Creature.SessionController;
@@ -31,8 +34,8 @@ namespace PixelCrew.Creatures.Controllers
             
             if (_sessionController != null) _inventory = _sessionController.GetModel().inventory;
             if (_sessionController != null) _quickInventory = _sessionController.GetQuickInventory();
-            
-            _healthComponent.onChange += SaveToSession;
+
+            _trash.Retain(_healthComponent.Subscribe(SaveToSession));
             
             LoadFromSession();
             if (_healthComponent.GetCurrentHealth() == 0) _healthComponent.SetCurrentHealth(_healthComponent.GetMaxHealth());
@@ -105,6 +108,8 @@ namespace PixelCrew.Creatures.Controllers
             onDamage = delegate {};
             onHeal = delegate {};
             onDie = delegate {};
+            
+            _trash.Dispose();
             
             base.Die();
         }

@@ -5,13 +5,13 @@ namespace PixelCrew.Components.Game
 {
     public class SpawnComponent : MonoBehaviour
     {
-        [SerializeField] private Transform target;
-        [SerializeField] private GameObject prefab;
-        [SerializeField] private GameObject parent;
-        [SerializeField] private UnityEvent action;
+        [SerializeField] protected Transform target;
+        [SerializeField] protected GameObject prefab;
+        [SerializeField] protected GameObject parent;
+        [SerializeField] protected UnityEvent action;
 
         [ContextMenu("Spawn")]
-        public void Spawn()
+        public virtual void Spawn()
         {
             if (prefab != null)
             {
@@ -22,7 +22,7 @@ namespace PixelCrew.Components.Game
             action?.Invoke();
         }
 
-        public void SpawnAt(Vector3 position)
+        public virtual void SpawnAt(Vector3 position)
         {
             if (prefab == null) return;
 
@@ -31,7 +31,7 @@ namespace PixelCrew.Components.Game
             if (parent != null) spawned.transform.SetParent(parent.transform);
         }
 
-        public void SpawnCustom(GameObject customPrefab)
+        public virtual void SpawnCustom(GameObject customPrefab)
         {
             if (customPrefab != null)
             {

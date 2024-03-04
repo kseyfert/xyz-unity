@@ -1,4 +1,5 @@
 using System;
+using PixelCrew.Utils.Disposables;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,8 +7,7 @@ namespace PixelCrew.Components.Game
 {
     public class HealthComponent : MonoBehaviour
     {
-        public delegate void HcDelegate();
-        public HcDelegate onChange;
+        private Action _onChange = () => { };
         
         [SerializeField] private int maxHealth = 100;
         [SerializeField] private int currentHealth;
@@ -34,7 +34,7 @@ namespace PixelCrew.Components.Game
             currentHealth += value;
             AdjustCurrent();
             
-            onChange?.Invoke();
+            _onChange?.Invoke();
 
             if (currentHealth == 0)
             {
@@ -52,7 +52,7 @@ namespace PixelCrew.Components.Game
 
             currentHealth = value;
             AdjustCurrent();
-            onChange?.Invoke();
+            _onChange?.Invoke();
         }
 
         public int GetCurrentHealth()
@@ -79,6 +79,18 @@ namespace PixelCrew.Components.Game
         public bool IsDead()
         {
             return currentHealth <= 0;
+        }
+        
+        public ActionDisposable Subscribe(Action call)
+        {
+            _onChange += call;
+            return new ActionDisposable(() => _onChange -= call);
+        }
+
+        public ActionDisposable SubscribeAndInvoke(Action call)
+        {
+            call?.Invoke();
+            return Subscribe(call);
         }
     }
 }
