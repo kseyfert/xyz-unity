@@ -376,6 +376,7 @@ MonoBehaviour:
   action:
     m_PersistentCalls:
       m_Calls: []
+  usePool: 0
 --- !u!1 &118745399172124514
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,6 +895,7 @@ MonoBehaviour:
   action:
     m_PersistentCalls:
       m_Calls: []
+  usePool: 0
 --- !u!1 &118745399958086883
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,6 +1025,7 @@ MonoBehaviour:
   action:
     m_PersistentCalls:
       m_Calls: []
+  usePool: 0
 --- !u!1 &118745400020443617
 GameObject:
   m_ObjectHideFlags: 0
@@ -6029,6 +6032,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  usePool: 0
 --- !u!114 &4360310113575770242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6094,6 +6098,7 @@ MonoBehaviour:
   action:
     m_PersistentCalls:
       m_Calls: []
+  usePool: 0
 --- !u!1 &2613365423917677621
 GameObject:
   m_ObjectHideFlags: 0
@@ -6211,6 +6216,7 @@ MonoBehaviour:
   action:
     m_PersistentCalls:
       m_Calls: []
+  usePool: 0
 --- !u!1 &6893382575723662693
 GameObject:
   m_ObjectHideFlags: 0
@@ -6445,6 +6451,7 @@ MonoBehaviour:
   action:
     m_PersistentCalls:
       m_Calls: []
+  usePool: 0
 --- !u!1 &7961238227648052578
 GameObject:
   m_ObjectHideFlags: 0

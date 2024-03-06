@@ -5,6 +5,7 @@ using PixelCrew.Model.Definitions;
 using PixelCrew.Utils;
 using PixelCrew.Utils.Disposables;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 namespace PixelCrew.Creatures.Controllers
 {

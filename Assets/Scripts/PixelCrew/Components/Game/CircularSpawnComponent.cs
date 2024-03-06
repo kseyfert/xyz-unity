@@ -60,10 +60,15 @@ namespace PixelCrew.Components.Game
                 var direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 
                 var position = center + direction * profile.radius;
-                
-                var spawned = Instantiate(go, position, target.rotation);
+
+                var spawned = CreateObject(
+                    go,
+                    position,
+                    target.rotation,
+                    Vector3.one,
+                    parent
+                );
                 spawned.transform.AdjustScale(target);
-                if (parent != null) spawned.transform.SetParent(parent.transform);
                 spawned.GetComponent<DirectionalProjectile>().SetDirection(direction);
 
                 yield return new WaitForSeconds(profile.delay);

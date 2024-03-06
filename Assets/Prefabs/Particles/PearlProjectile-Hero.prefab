@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 1729530628518646618}
   - component: {fileID: 1729530628518646620}
   - component: {fileID: 8342977490013046934}
-  - component: {fileID: 5606950631825820406}
   - component: {fileID: 6495537772151746073}
   - component: {fileID: 895280267166415925}
   - component: {fileID: 3370579372913981122}
   - component: {fileID: 7142842604203603104}
+  - component: {fileID: 5321099695116120267}
   m_Layer: 0
   m_Name: PearlProjectile-Hero
   m_TagString: Untagged
@@ -157,8 +157,8 @@ MonoBehaviour:
     onFinish:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 5606950631825820406}
-          m_MethodName: DoDestroy
+        - m_Target: {fileID: 5321099695116120267}
+          m_MethodName: Release
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -172,19 +172,6 @@ MonoBehaviour:
   onComplete:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5606950631825820406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1729530628518646617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14c59b6771d5c4db3aa6a0fb59345790, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1729530628518646617}
 --- !u!114 &6495537772151746073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,9 +229,9 @@ MonoBehaviour:
           m_StringArgument: destroy
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1729530628518646618}
-        m_MethodName: set_enabled
-        m_Mode: 6
+      - m_Target: {fileID: 7142842604203603104}
+        m_MethodName: StopMoving
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -294,9 +281,9 @@ MonoBehaviour:
           m_StringArgument: destroy
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1729530628518646618}
-        m_MethodName: set_enabled
-        m_Mode: 6
+      - m_Target: {fileID: 7142842604203603104}
+        m_MethodName: StopMoving
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -332,3 +319,40 @@ MonoBehaviour:
   amplitude: 0.15
   frequency: 20
   randomized: 0
+--- !u!114 &5321099695116120267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729530628518646617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3531a1385e7d492f9073e1a9ade20097, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onRestart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7142842604203603104}
+        m_MethodName: Restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8342977490013046934}
+        m_MethodName: SetClip
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: idle
+          m_BoolArgument: 0
+        m_CallState: 2

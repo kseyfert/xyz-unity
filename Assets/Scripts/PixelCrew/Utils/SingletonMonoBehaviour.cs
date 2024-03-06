@@ -23,6 +23,22 @@ namespace PixelCrew.Utils
             return (TType)Instances[t];
         }
 
+        public static TType GetOrCreateInstance<TType>() where TType : SingletonMonoBehaviour
+        {
+            var found = GetInstance<TType>();
+            if (found != null) return found;
+
+            var t = typeof(TType);
+
+            var fullName = t.ToString().Split('.');
+            var name = fullName[fullName.Length - 1];
+            var go = new GameObject(name);
+            go.AddComponent<TType>();
+
+            Instances[t] = go.GetComponent<TType>();
+            return (TType)Instances[t];
+        }
+
         private static void Load<TType>() where TType : SingletonMonoBehaviour
         {
             var t = typeof(TType);

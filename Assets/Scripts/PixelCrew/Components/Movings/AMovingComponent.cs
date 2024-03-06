@@ -40,6 +40,20 @@ namespace PixelCrew.Components.Movings
             _stopped = true;
         }
 
+        public virtual void ResumeMoving()
+        {
+            _stopped = false;
+        }
+
+        public virtual void Restart()
+        {
+            _time = 0;
+            _direction = 0;
+            _original = _transform.position;
+            
+            ResumeMoving();
+        }
+
         protected Vector2 GetOriginal()
         {
             return _original;
