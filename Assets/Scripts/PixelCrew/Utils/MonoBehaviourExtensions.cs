@@ -6,9 +6,9 @@ namespace PixelCrew.Utils
 {
     public static class MonoBehaviourExtensions
     {
-        public static void SetTimeout(this MonoBehaviour monoBehaviour, Action action, float timeout)
+        public static Coroutine SetTimeout(this MonoBehaviour monoBehaviour, Action action, float timeout)
         {
-            monoBehaviour.StartCoroutine(TimeoutCoroutine(action, timeout));
+            return monoBehaviour.StartCoroutine(TimeoutCoroutine(action, timeout));
         }
         
         private static IEnumerator TimeoutCoroutine(Action action, float timeout)
