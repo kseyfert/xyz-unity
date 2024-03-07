@@ -1,5 +1,4 @@
 using System;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -114,6 +113,7 @@ namespace PixelCrew.Components.Utils.Checks
             _lastTimeInside = 0;
         }
 
+#if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
             if (!_started)
@@ -129,9 +129,10 @@ namespace PixelCrew.Components.Utils.Checks
             var rect = new Rect(x, y, w, h);
          
             var color = new Color(1, 0, 0, 0.2f);
-            Handles.color = color;
-            Handles.DrawSolidRectangleWithOutline(rect, color, color);
+            UnityEditor.Handles.color = color;
+            UnityEditor.Handles.DrawSolidRectangleWithOutline(rect, color, color);
         }
+#endif
 
         [Serializable]
         private class AreaEvent : UnityEvent<GameObject> {}

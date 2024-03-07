@@ -93,9 +93,9 @@ namespace PixelCrew.Model.Data
 
         public int Count(string id)
         {
-            return items
-                .FindAll(item => item.id == id)
-                .Sum(item => item.value);
+            var sum = 0;
+            foreach (var item in items) if (item.id == id) sum += item.value;
+            return sum;
         }
 
         public InventoryItemData[] GetAll(params ItemTag[] tags)

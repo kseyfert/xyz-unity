@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 namespace PixelCrew.Components.Utils.Checks
@@ -23,10 +22,13 @@ namespace PixelCrew.Components.Utils.Checks
             return overlaps.ToArray();
         }
 
+#if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
-            Handles.color = new Color(1, 0, 0, 0.3f);
-            Handles.DrawSolidDisc(transform.position, Vector3.forward, radius);
+            UnityEditor.Handles.color = new Color(1, 0, 0, 0.3f);
+            UnityEditor.Handles.DrawSolidDisc(transform.position, Vector3.forward, radius);
         }
+#endif
+
     }
 }

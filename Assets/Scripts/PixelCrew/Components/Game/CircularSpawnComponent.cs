@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using PixelCrew.Creatures.Weapons;
 using PixelCrew.Utils;
-using UnityEditor;
 using UnityEngine;
 
 namespace PixelCrew.Components.Game
@@ -75,12 +74,14 @@ namespace PixelCrew.Components.Game
             }
         }
         
+#if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
             var radius = profiles[currentProfile].radius;
-            Handles.color = new Color(1, 0, 0, 0.3f);
-            Handles.DrawSolidDisc(target.position, Vector3.forward, radius);
+            UnityEditor.Handles.color = new Color(1, 0, 0, 0.3f);
+            UnityEditor.Handles.DrawSolidDisc(target.position, Vector3.forward, radius);
         }
+#endif
 
         public void Interrupt()
         {

@@ -1,6 +1,4 @@
 using PixelCrew.Model.Data.Properties.Persistent;
-using PixelCrew.Model.Definitions.Localization;
-using UnityEditor;
 using UnityEngine;
 
 namespace PixelCrew.Model.Data
@@ -35,7 +33,7 @@ namespace PixelCrew.Model.Data
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            EditorApplication.delayCall += () =>
+            UnityEditor.EditorApplication.delayCall += () =>
             {
                 musicVolume.Validate();
                 sfxVolume.Validate();
